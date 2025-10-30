@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaHome, FaMapMarkedAlt, FaImages, FaLightbulb, FaEnvelope, FaInstagram, FaFacebookF, FaTwitter, FaUserCircle } from 'react-icons/fa';
 
 
+
 type NavItem = {
   name: string;
   href: string;
@@ -11,11 +12,12 @@ type NavItem = {
 
 const navigation: NavItem[] = [
   { name: 'Inicio', href: '/', icon: <FaHome /> },
-  { name: 'Sobre Nosotros', href: '/about', icon: <FaMapMarkedAlt /> },
-  { name: 'Experiencia Educativa', href: '/experience', icon: <FaImages /> },
-  { name: 'Aula Virtual', href: '/virtual', icon: <FaLightbulb /> },
-  { name: 'Trámites y Comunicados', href: '/tramites', icon: <FaEnvelope /> },
+  { name: 'Destinos', href: '/destinations', icon: <FaMapMarkedAlt /> },
+  { name: 'Galería', href: '/gallery', icon: <FaImages /> },
+  { name: 'Tips', href: '/tips', icon: <FaLightbulb /> },
+  { name: 'Contacto', href: '/contact', icon: <FaEnvelope /> },
 ];
+
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,9 +25,9 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <>
-      {/* Top Bar profesional */}
-      <div className="w-full bg-blue-900 text-white text-xs md:text-sm py-2 px-4 flex flex-col md:flex-row justify-between items-center gap-2 font-semibold shadow z-50 sticky top-0 border-b border-blue-950 animate-fade-in">
+    <header className="w-full sticky top-0 z-50">
+      {/* Barra superior informativa */}
+      <div className="w-full bg-blue-900 text-white text-xs md:text-sm py-2 px-4 flex flex-col md:flex-row justify-between items-center gap-2 font-semibold shadow border-b border-blue-950 animate-fade-in">
         <div className="flex items-center gap-6">
           <span className="flex items-center gap-2">
             <FaMapMarkedAlt className="inline-block text-blue-200" aria-hidden="true" />
@@ -52,16 +54,22 @@ const Navbar: React.FC = () => {
           </a>
         </div>
       </div>
-      {/* Navbar principal */}
-      <nav className="bg-white/95 backdrop-blur-md shadow-xl sticky top-[40px] z-40 border-b border-gray-200" role="navigation" aria-label="Main Navigation">
+      {/* Navegación principal */}
+      <nav className="bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-200" role="navigation" aria-label="Main Navigation">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            {/* Logo */}
+            {/* Logo y nombre */}
             <div className="flex items-center gap-4">
-              <img src="/images/logo.png" alt="Logo IE URIEL GARCIA" className="h-10 w-auto" />
-              <span className="text-xl md:text-2xl font-extrabold text-blue-900 tracking-tight">I.E URIEL GARCIA</span>
+              <Link to="/" className="flex items-center gap-2 group">
+                <div className="bg-white rounded-full shadow-lg p-1 border border-blue-200 transition-transform duration-200 group-hover:scale-105">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVkuVOTVubZ2tPnUYTjz6GeReN63BQvdb15w&s" alt="Logo IE URIEL GARCIA" className="h-10 w-10 object-contain" />
+                </div>
+                <span className="text-xl md:text-2xl font-extrabold text-blue-900 tracking-tight group-hover:text-blue-700 transition-colors duration-200">
+                  Explorando la Convención
+                </span>
+              </Link>
             </div>
-            {/* Menú principal */}
+            {/* Menú principal desktop */}
             <div className="hidden md:flex items-center space-x-2">
               {navigation.map((item) => (
                 <Link
@@ -79,7 +87,7 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
             </div>
-            {/* Menú móvil y botón */}
+            {/* Botón menú móvil */}
             <div className="md:hidden flex items-center">
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -120,7 +128,7 @@ const Navbar: React.FC = () => {
           </div>
         )}
       </nav>
-    </>
+    </header>
   );
 };
 
