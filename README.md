@@ -1,7 +1,7 @@
 
 
 <div align="center">
-	<img src="public/images/logo.png" alt="Logo Explorando la Convención" width="160" style="margin-bottom: 2rem;" />
+	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz1aVtEMOQvqJA7AGqSltXVq6QW9eyGMKNIA&s" alt="Logo Explorando la Convención" width="160" style="margin-bottom: 2rem;" />
 	<h1 style="font-size:3.5rem; color:#1e293b; font-family:Inter,Arial,sans-serif; margin-bottom:1rem; letter-spacing:1px;">Explorando la Convención</h1>
 	<p style="font-size:1.5rem; color:#2563eb; font-weight:600; margin-bottom:1.5rem;">Turismo, cultura y naturaleza en La Convención - Cusco, Perú</p>
 	<span style="font-size:1.1rem; color:#475569; font-weight:500;">Desarrollado por <b>Ezer Zuniga</b></span>
