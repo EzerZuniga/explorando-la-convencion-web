@@ -1,22 +1,40 @@
 import React, { useState, useEffect } from 'react';
+import { Sun, Moon } from 'lucide-react';
 
-const ThemeToggle: React.FC = () => {
+interface ThemeToggleProps {
+  scrolled?: boolean;
+}
+
+const ThemeToggle: React.FC<ThemeToggleProps> = ({ scrolled = false }) => {
   const [darkMode, setDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
+  // Evitar hidratación incorrecta en SSR
   useEffect(() => {
-    const isDark = localStorage.getItem('darkMode') === 'true';
+    setMounted(true);
+    
+    // Verificar preferencia guardada o preferencia del sistema
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
     setDarkMode(isDark);
     
     if (isDark) {
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 
-  const toggleDarkMode = () => {
+  const toggleTheme = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
-    localStorage.setItem('darkMode', newDarkMode.toString());
     
+    // Guardar preferencia
+    localStorage.setItem('theme', newDarkMode ? 'dark' : 'light');
+    
+    // Aplicar clase al documento
     if (newDarkMode) {
       document.documentElement.classList.add('dark');
     } else {
@@ -24,13 +42,33 @@ const ThemeToggle: React.FC = () => {
     }
   };
 
+  // No renderizar hasta que esté montado (evita flash de contenido)
+  if (!mounted) {
+    return (
+      <div className={`p-2 w-9 h-9 rounded-full animate-pulse ${
+        scrolled 
+          ? 'bg-slate-200' 
+          : 'bg-slate-700'
+      }`} />
+    );
+  }
+
   return (
     <button
-      onClick={toggleDarkMode}
-      className="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors"
-      aria-label="Toggle dark mode"
+      onClick={toggleTheme}
+      className={`p-2 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 ${
+        scrolled 
+          ? 'bg-slate-200 hover:bg-slate-300 text-slate-800' 
+          : 'bg-slate-700 hover:bg-slate-600 text-white'
+      }`}
+      aria-label={darkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+      title={darkMode ? 'Modo claro' : 'Modo oscuro'}
     >
-      {darkMode ? '☀️' : '🌙'}
+      {darkMode ? (
+        <Sun className="w-5 h-5" strokeWidth={2} />
+      ) : (
+        <Moon className="w-5 h-5" strokeWidth={2} />
+      )}
     </button>
   );
 };
