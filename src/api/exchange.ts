@@ -1,4 +1,4 @@
-import { apiClient } from './client';
+import { apiClient } from './httpClient';
 import type { ExchangeRateResponse, ExchangeRateData } from './types';
 
 // ExchangeRate API — Free tier, no key needed

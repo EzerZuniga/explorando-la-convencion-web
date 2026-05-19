@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Calendar, User, Search } from 'lucide-react';
-import SEOHead from '@/components/features/seo';
-import { SITE_CONFIG } from '@/config/site';
+import SEOHead from '@/features/seo';
+import { EMAIL_REGEX, SITE_CONFIG } from '@/constants';
 import { blogPosts, blogCategories } from '@/data/gastronomia';
-import { SectionHeader } from '@/components/ui';
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { SectionHeader } from '@/components';
 
 const Blog: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
@@ -74,12 +72,12 @@ const Blog: React.FC = () => {
       </section>
 
       {/* Buscador y Filtros */}
-      <section className="wp-section bg-white/80 dark:bg-primary-900/80 backdrop-blur-sm border-b border-[var(--color-border)] dark:border-primary-700">
+      <section className="wp-section bg-white/80 dark:bg-brand-text/80 backdrop-blur-sm border-b border-[var(--color-border)] dark:border-brand-primary">
         <div className="wp-container">
           <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
             {/* Buscador */}
             <div className="relative w-full md:w-96">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-ink-400 dark:text-slate-500 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-brand-text/45 dark:text-slate-500 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Buscar artículos..."
@@ -100,8 +98,8 @@ const Blog: React.FC = () => {
                   onClick={() => setSelectedCategory(category)}
                   className={`wp-btn px-4 py-2 text-sm ${
                     selectedCategory === category
-                      ? 'bg-accent-600 text-white dark:bg-accent-500'
-                      : 'bg-earth-100 dark:bg-primary-800 text-ink-900 dark:text-white hover:bg-earth-200 dark:hover:bg-primary-700'
+                      ? 'bg-brand-primary text-white dark:bg-brand-primary'
+                      : 'bg-brand-background dark:bg-brand-text/90 text-brand-text dark:text-white hover:bg-brand-primary/20 dark:hover:bg-brand-primary'
                   }`}
                 >
                   {category}
@@ -122,12 +120,12 @@ const Blog: React.FC = () => {
           />
           {filteredPosts.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-xl text-ink-600 dark:text-slate-300">No se encontraron artículos que coincidan con tu búsqueda.</p>
+              <p className="text-xl text-brand-text/75 dark:text-slate-300">No se encontraron artículos que coincidan con tu búsqueda.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map(post => (
-                <article key={post.id} className="wp-card wp-card-interactive overflow-hidden border-t-4 border-accent-700">
+                <article key={post.id} className="wp-card wp-card-interactive overflow-hidden border-t-4 border-brand-primary">
                   <div className="relative h-48">
                     <img 
                       src={post.image} 
@@ -136,18 +134,18 @@ const Blog: React.FC = () => {
                       decoding="async"
                       className="w-full h-full object-cover"
                     />
-                    <span className="absolute top-4 left-4 bg-ink-900 dark:bg-white text-white dark:text-ink-900 px-3 py-1 rounded-full text-sm font-semibold">
+                    <span className="absolute top-4 left-4 bg-brand-text dark:bg-white text-white dark:text-brand-text px-3 py-1 rounded-full text-sm font-semibold">
                       {post.category}
                     </span>
                   </div>
                   <div className="p-6">
-                    <h3 className="font-heading text-2xl font-bold text-ink-900 dark:text-white mb-3 hover:text-accent-700 dark:hover:text-accent-300 transition-colors cursor-pointer">
+                    <h3 className="font-heading text-2xl font-bold text-brand-text dark:text-white mb-3 hover:text-brand-primary dark:hover:text-brand-primary/70 transition-colors cursor-pointer">
                       {post.title}
                     </h3>
-                    <p className="text-ink-600 dark:text-slate-300 mb-4 line-clamp-3">
+                    <p className="text-brand-text/75 dark:text-slate-300 mb-4 line-clamp-3">
                       {post.excerpt}
                     </p>
-                    <div className="flex items-center justify-between text-sm text-ink-600 dark:text-slate-300 border-t border-earth-200 dark:border-primary-700 pt-4">
+                    <div className="flex items-center justify-between text-sm text-brand-text/75 dark:text-slate-300 border-t border-brand-primary/20 dark:border-brand-primary pt-4">
                       <div className="flex items-center gap-4">
                         <span className="flex items-center gap-1">
                           <User className="w-4 h-4" />
@@ -158,7 +156,7 @@ const Blog: React.FC = () => {
                           {post.date}
                         </span>
                       </div>
-                      <span className="text-ink-900 dark:text-white font-medium">{post.readTime}</span>
+                      <span className="text-brand-text dark:text-white font-medium">{post.readTime}</span>
                     </div>
                   </div>
                 </article>
@@ -169,7 +167,7 @@ const Blog: React.FC = () => {
       </section>
 
       {/* Newsletter */}
-      <section className="wp-section bg-gradient-to-r from-primary-900 via-primary-800 to-accent-700 text-white">
+      <section className="wp-section bg-gradient-to-r from-brand-text via-brand-text/90 to-brand-primary text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Suscríbete a Nuestro Newsletter</h2>
           <p className="text-lg mb-8 text-white/90">Recibe las últimas noticias, consejos y artículos directamente en tu correo</p>
@@ -200,7 +198,7 @@ const Blog: React.FC = () => {
               <p
                 className={`text-sm ${
                   newsletterStatus.type === 'success'
-                    ? 'text-accent-200'
+                    ? 'text-brand-primary/25'
                     : 'text-red-200'
                 }`}
                 role={newsletterStatus.type === 'error' ? 'alert' : undefined}

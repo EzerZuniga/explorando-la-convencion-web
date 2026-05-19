@@ -1,4 +1,4 @@
-import { apiClient } from './client';
+import { apiClient } from './httpClient';
 import type { QuoteData } from './types';
 
 // DummyJSON Quotes API — Free, no API key needed, always available

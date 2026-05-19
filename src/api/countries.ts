@@ -1,4 +1,4 @@
-import { apiClient } from './client';
+import { apiClient } from './httpClient';
 import type { CountryInfo } from './types';
 
 // REST Countries API — Free, no API key needed

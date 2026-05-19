@@ -1,22 +1,18 @@
-// Layout components
-export { MainLayout, Navbar, Footer } from './layout';
-
-// Feature components
-export {
-  LoginModal,
-  PostCard,
-  SEOHead,
-  ThemeToggle,
-  WeatherWidget,
-  ExchangeWidget,
-  QuoteWidget,
-} from './features';
-
-// UI components
+export { MainLayout, Navbar, Footer } from './layoutComponents';
 export {
   LoadingSpinner,
   ErrorMessage,
   ErrorBoundary,
   SectionHeader,
   Card,
-} from './ui';
+  ScrollToTop,
+  PageLoader,
+} from './uiComponents';
+export type {
+  LoadingSpinnerProps,
+  ErrorMessageProps,
+  ErrorBoundaryProps,
+  SectionHeaderProps,
+  CardProps,
+  PageLoaderProps,
+} from './uiComponents';

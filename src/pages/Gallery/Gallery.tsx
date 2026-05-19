@@ -1,9 +1,9 @@
 import React from 'react';
 import { MapPin } from 'lucide-react';
-import SEOHead from '@/components/features/seo';
-import { SITE_CONFIG } from '@/config/site';
+import SEOHead from '@/features/seo';
+import { SITE_CONFIG } from '@/constants';
 import { galleryImages } from '@/data/gallery';
-import { SectionHeader } from '@/components/ui';
+import { SectionHeader } from '@/components';
 
 const Gallery: React.FC = () => {
   return (
@@ -25,7 +25,7 @@ const Gallery: React.FC = () => {
           {/* Gallery Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryImages.map((image) => (
-              <div key={image.id} className="wp-card wp-card-interactive overflow-hidden group border-2 border-transparent hover:border-accent-500">
+              <div key={image.id} className="wp-card wp-card-interactive overflow-hidden group border-2 border-transparent hover:border-brand-primary">
                 <div className="relative overflow-hidden">
                   <img 
                     src={image.src} 
@@ -34,15 +34,15 @@ const Gallery: React.FC = () => {
                     decoding="async"
                     className="h-64 w-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-primary-950/0 group-hover:bg-primary-950/35 transition-all duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-brand-text/0 group-hover:bg-brand-text/35 transition-all duration-300 flex items-center justify-center">
                     <div className="text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center">
                       <span className="text-lg font-semibold">Ver más</span>
                     </div>
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-heading text-xl font-semibold text-ink-900 dark:text-white mb-1">{image.title}</h3>
-                  <p className="text-ink-600 dark:text-slate-300 text-sm flex items-center gap-1">
+                  <h3 className="font-heading text-xl font-semibold text-brand-text dark:text-white mb-1">{image.title}</h3>
+                  <p className="text-brand-text/75 dark:text-slate-300 text-sm flex items-center gap-1">
                     <MapPin className="w-3 h-3" />
                     {image.location}
                   </p>
@@ -53,7 +53,7 @@ const Gallery: React.FC = () => {
 
           {/* Call to Action */}
           <div className="text-center mt-12">
-            <p className="text-ink-600 dark:text-slate-300 mb-4">
+            <p className="text-brand-text/75 dark:text-slate-300 mb-4">
               ¿Quieres ver más fotos de nuestros viajes?
             </p>
             <a

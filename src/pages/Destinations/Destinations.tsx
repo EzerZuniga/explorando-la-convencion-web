@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import PostCard from '@/components/features/blog';
-import { SectionHeader } from '@/components/ui';
+import PostCard from '@/features/blog';
+import { SectionHeader } from '@/components';
 import { posts, categories } from '@/data/posts';
-import SEOHead from '@/components/features/seo';
-import { SITE_CONFIG } from '@/config/site';
+import SEOHead from '@/features/seo';
+import { SITE_CONFIG } from '@/constants';
 
 const Destinations: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
@@ -36,8 +36,8 @@ const Destinations: React.FC = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`wp-btn ${
                   selectedCategory === category
-                    ? 'bg-accent-600 text-white dark:bg-accent-500'
-                    : 'bg-white dark:bg-primary-900 text-ink-900 dark:text-white border border-[var(--color-border)] dark:border-primary-700 hover:bg-primary-50 dark:hover:bg-primary-800'
+                    ? 'bg-brand-primary text-white dark:bg-brand-primary'
+                    : 'bg-white dark:bg-brand-text text-brand-text dark:text-white border border-[var(--color-border)] dark:border-brand-primary hover:bg-brand-background dark:hover:bg-brand-text/90'
                 }`}
               >
                 {category}
@@ -54,7 +54,7 @@ const Destinations: React.FC = () => {
 
           {filteredPosts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-ink-600 dark:text-slate-300 text-lg">
+              <p className="text-brand-text/75 dark:text-slate-300 text-lg">
                 No hay artículos en esta categoría.
               </p>
             </div>

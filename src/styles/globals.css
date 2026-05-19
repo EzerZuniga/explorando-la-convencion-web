@@ -6,27 +6,27 @@
   :root {
     --font-body: 'Inter', system-ui, -apple-system, sans-serif;
     --font-heading: 'Playfair Display', Georgia, serif;
-    --color-primary: #1A2F28;
-    --color-accent: #00A86B;
-    --color-background: #F9FBFA;
+    --color-primary: #4BB543;
+    --color-accent: #4BB543;
+    --color-background: #F5F9F6;
     --color-surface: #FFFFFF;
     --color-surface-muted: #F3F7F5;
-    --color-border: #E2E8F0;
-    --color-text: #314C42;
-    --color-muted-text: #567A6B;
-    --color-heading: #1A2F28;
-    --color-link: #00A86B;
+    --color-border: #E6ECEA;
+    --color-text: #365348;
+    --color-muted-text: #5B7D70;
+    --color-heading: #1B4332;
+    --color-link: #4BB543;
   }
 
   .dark {
     --color-background: #0F1D18;
     --color-surface: #13261F;
-    --color-surface-muted: #1A2F28;
-    --color-border: #2B4A3E;
+    --color-surface-muted: #163F32;
+    --color-border: #2F6B56;
     --color-text: #DFEAE5;
     --color-muted-text: #9FB9AD;
-    --color-heading: #F9FBFA;
-    --color-link: #52D49B;
+    --color-heading: #F5F9F6;
+    --color-link: #72DDB7;
   }
 
   html {
@@ -81,18 +81,18 @@
   }
 
   a:hover {
-    color: #00965F;
+    color: #3FA33A;
   }
 
   ::selection {
     background-color: rgba(0, 168, 107, 0.22);
-    color: #1A2F28;
+    color: #1B4332;
   }
 }
 
 @layer components {
   .skip-link {
-    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:px-4 focus:py-2 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2;
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:px-4 focus:py-2 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
     background-color: var(--color-surface);
     color: var(--color-heading);
   }
@@ -116,7 +116,7 @@
   }
 
   .wp-card {
-    @apply rounded-2xl border shadow-sm transition-all duration-300;
+    @apply rounded-none border shadow-sm transition-all duration-300;
     background-color: var(--color-surface);
     border-color: var(--color-border);
   }
@@ -142,34 +142,34 @@
   }
 
   .wp-link:hover {
-    color: #00965F;
+    color: #3FA33A;
   }
 
   .wp-btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-300 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
   }
 
   .wp-btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-accent-300 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
     background-color: var(--color-accent);
   }
 
   .wp-btn-primary:hover {
-    background-color: #00965F;
+    background-color: #3FA33A;
   }
 
   .wp-btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 border text-primary-900 focus:outline-none focus:ring-2 focus:ring-accent-300 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold transition-all duration-200 border text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
     background-color: var(--color-surface);
     border-color: var(--color-border);
   }
 
   .wp-btn-secondary:hover {
-    background-color: #EEF2F5;
+    background-color: #F5F9F6;
   }
 
   .wp-btn-light {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 border border-white/60 bg-white/15 text-white backdrop-blur-sm;
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 border border-white/60 bg-white/15 text-white backdrop-blur-sm;
   }
 
   .wp-btn-light:hover {
@@ -179,7 +179,7 @@
   .wp-input,
   .wp-select,
   .wp-textarea {
-    @apply w-full rounded-lg border px-4 py-3 text-sm text-primary-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-300;
+    @apply w-full rounded-none border px-4 py-3 text-sm text-brand-text transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary;
     background-color: var(--color-surface);
     border-color: var(--color-border);
   }
@@ -202,30 +202,30 @@
   }
 
   .btn-primary {
-    @apply bg-accent-500 hover:bg-accent-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-300;
+    @apply bg-brand-primary hover:bg-brand-primary text-white font-semibold py-2 px-5 rounded-none shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary;
   }
 
   .btn-secondary {
-    @apply bg-white hover:bg-earth-100 text-primary-900 font-medium py-2 px-5 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-earth-300 border border-earth-200;
+    @apply bg-white hover:bg-brand-background text-brand-text font-medium py-2 px-5 rounded-none shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary border border-brand-primary;
   }
 
   .card {
-    @apply rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border;
+    @apply rounded-none shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border;
     background-color: var(--color-surface);
     border-color: var(--color-border);
   }
 
   .card-header {
-    @apply px-6 py-4 bg-primary-50 border-b font-bold text-primary-900 text-lg;
+    @apply px-6 py-4 bg-brand-background border-b font-bold text-brand-text text-lg;
     border-color: var(--color-border);
   }
 
   .card-body {
-    @apply px-6 py-4 text-ink-700;
+    @apply px-6 py-4 text-brand-text;
   }
 
   .card-footer {
-    @apply px-6 py-4 bg-earth-100 border-t text-right;
+    @apply px-6 py-4 bg-brand-background border-t text-right;
     border-color: var(--color-border);
   }
 
@@ -234,14 +234,14 @@
   }
 
   .title {
-    @apply font-heading text-3xl md:text-4xl font-extrabold text-primary-900 dark:text-white mb-4;
+    @apply font-heading text-3xl md:text-4xl font-extrabold text-brand-text dark:text-white mb-4;
   }
 
   .subtitle {
-    @apply text-lg md:text-xl text-ink-600 dark:text-slate-300 mb-2;
+    @apply text-lg md:text-xl text-brand-text dark:text-slate-300 mb-2;
   }
 
   .divider {
-    @apply w-16 h-1 bg-accent-500 rounded-full mx-auto my-6;
+    @apply w-16 h-1 bg-brand-primary rounded-none mx-auto my-6;
   }
 }

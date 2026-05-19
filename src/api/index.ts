@@ -1,4 +1,4 @@
-export { apiClient, ApiError } from './client';
+export { apiClient, ApiError } from './httpClient';
 export { getWeather } from './weather';
 export { getCountryInfo, getCountriesByRegion } from './countries';
 export { getRandomQuote, getQuotesByTag } from './quotes';
