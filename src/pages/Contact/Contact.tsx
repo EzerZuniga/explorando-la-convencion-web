@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Globe } from 'lucide-react';
 import SEOHead from '@/features/seo';
 import { EMAIL_REGEX, SITE_CONFIG } from '@/constants';
 import { SectionHeader } from '@/components';
+import { useLanguage } from '@/features/i18n';
 
 type ContactFormData = {
   name: string;
@@ -20,29 +21,39 @@ const INITIAL_FORM: ContactFormData = {
   message: '',
 };
 
-const validateForm = (values: ContactFormData): ContactFormErrors => {
+const validateForm = (
+  values: ContactFormData,
+  messages: {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+  },
+): ContactFormErrors => {
   const errors: ContactFormErrors = {};
 
   if (values.name.trim().length < 2) {
-    errors.name = 'Ingresa un nombre válido (mínimo 2 caracteres).';
+    errors.name = messages.name;
   }
 
   if (!EMAIL_REGEX.test(values.email.trim())) {
-    errors.email = 'Ingresa un correo electrónico válido.';
+    errors.email = messages.email;
   }
 
   if (!values.subject) {
-    errors.subject = 'Selecciona un asunto.';
+    errors.subject = messages.subject;
   }
 
   if (values.message.trim().length < 20) {
-    errors.message = 'El mensaje debe tener al menos 20 caracteres.';
+    errors.message = messages.message;
   }
 
   return errors;
 };
 
 const Contact: React.FC = () => {
+  const { content } = useLanguage();
+  const page = content.pages.contact;
   const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM);
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -75,13 +86,13 @@ const Contact: React.FC = () => {
       message: formData.message.trim(),
     };
 
-    const nextErrors = validateForm(normalizedData);
+    const nextErrors = validateForm(normalizedData, page.validation);
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) {
       setSubmitMessage({
         type: 'error',
-        text: 'Revisa los campos marcados antes de enviar.',
+        text: page.validation.review,
       });
       return;
     }
@@ -97,12 +108,12 @@ const Contact: React.FC = () => {
       setErrors({});
       setSubmitMessage({
         type: 'success',
-        text: '¡Mensaje enviado! Gracias por contactarnos. Te responderemos pronto.',
+        text: page.validation.success,
       });
     } catch {
       setSubmitMessage({
         type: 'error',
-        text: 'No pudimos enviar tu mensaje en este momento. Inténtalo nuevamente.',
+        text: page.validation.failure,
       });
     } finally {
       setIsSubmitting(false);
@@ -112,17 +123,17 @@ const Contact: React.FC = () => {
   return (
     <div className="wp-shell">
       <SEOHead 
-        title="Contáctanos - Explorando la Convención"
-        description="¿Tienes preguntas o quieres colaborar? Contáctanos por email, teléfono o visítanos en Quillabamba, La Convención."
-        keywords="contacto explorando la convención, contactar, email, teléfono, Quillabamba"
+        title={page.seoTitle}
+        description={page.seoDescription}
+        keywords={page.seoKeywords}
         url={`${SITE_CONFIG.url}/contact`}
       />
       <div className="wp-section">
         <div className="wp-container">
           {/* Header */}
           <SectionHeader
-            title="Contáctanos"
-            subtitle="¿Tienes preguntas, sugerencias o quieres colaborar con nosotros? Estamos aquí para ayudarte."
+            title={page.title}
+            subtitle={page.subtitle}
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -130,7 +141,7 @@ const Contact: React.FC = () => {
             <div className="lg:col-span-1">
               <div className="wp-card p-8 border-l-4 border-brand-primary">
                 <h2 className="font-heading text-3xl font-bold text-brand-text dark:text-white mb-6 tracking-tight">
-                  Información de Contacto
+                  {page.infoTitle}
                 </h2>
                 
                 <div className="space-y-6">
@@ -149,7 +160,7 @@ const Contact: React.FC = () => {
                       <Phone className="w-5 h-5 text-brand-primary dark:text-brand-primary/70" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-brand-text dark:text-white">Teléfono</h3>
+                      <h3 className="font-semibold text-brand-text dark:text-white">{page.labels.phone}</h3>
                       <p className="text-brand-text/75 dark:text-slate-300">{SITE_CONFIG.contact.phone}</p>
                     </div>
                   </div>
@@ -159,7 +170,7 @@ const Contact: React.FC = () => {
                       <MapPin className="w-5 h-5 text-brand-primary dark:text-brand-primary/70" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-brand-text dark:text-white">Oficina</h3>
+                      <h3 className="font-semibold text-brand-text dark:text-white">{page.labels.office}</h3>
                       <p className="text-brand-text/75 dark:text-slate-300">{SITE_CONFIG.contact.address}</p>
                     </div>
                   </div>
@@ -169,15 +180,15 @@ const Contact: React.FC = () => {
                       <Globe className="w-5 h-5 text-brand-primary dark:text-brand-primary/70" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-brand-text dark:text-white">Redes Sociales</h3>
+                      <h3 className="font-semibold text-brand-text dark:text-white">{page.labels.social}</h3>
                       <div className="flex space-x-4 mt-2">
-                        <a href={SITE_CONFIG.social.facebook} target="_blank" rel="noopener noreferrer" className="wp-link" aria-label="Visitar Facebook de Explorando la Convención">
+                        <a href={SITE_CONFIG.social.facebook} target="_blank" rel="noopener noreferrer" className="wp-link" aria-label={page.socialLabels.facebook}>
                           Facebook
                         </a>
-                        <a href={SITE_CONFIG.social.instagram} target="_blank" rel="noopener noreferrer" className="wp-link" aria-label="Visitar Instagram de Explorando la Convención">
+                        <a href={SITE_CONFIG.social.instagram} target="_blank" rel="noopener noreferrer" className="wp-link" aria-label={page.socialLabels.instagram}>
                           Instagram
                         </a>
-                        <a href={SITE_CONFIG.social.youtube} target="_blank" rel="noopener noreferrer" className="wp-link" aria-label="Visitar YouTube de Explorando la Convención">
+                        <a href={SITE_CONFIG.social.youtube} target="_blank" rel="noopener noreferrer" className="wp-link" aria-label={page.socialLabels.youtube}>
                           YouTube
                         </a>
                       </div>
@@ -191,12 +202,12 @@ const Contact: React.FC = () => {
             <div className="lg:col-span-2">
               <div className="wp-card p-8 border-t-4 border-brand-primary">
                 <h2 className="font-heading text-3xl font-bold text-brand-text dark:text-white mb-6">
-                  Envíanos un Mensaje
+                  {page.formTitle}
                 </h2>
                 
                 <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                   <p className="text-sm text-brand-text/75 dark:text-slate-300">
-                    Los campos marcados con <span className="text-brand-primary">*</span> son obligatorios.
+                    {page.requiredNote.split('*')[0]}<span className="text-brand-primary">*</span>{page.requiredNote.split('*').slice(1).join('*')}
                   </p>
 
                   <div className="min-h-[1.75rem]" aria-live="polite">
@@ -217,7 +228,7 @@ const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-brand-text dark:text-white mb-2">
-                        Nombre Completo *
+                        {page.labels.name}
                       </label>
                       <input
                         type="text"
@@ -228,7 +239,7 @@ const Contact: React.FC = () => {
                         required
                         autoComplete="name"
                         className={`wp-input ${errors.name ? 'border-red-400 focus:border-red-500 focus:ring-red-300' : ''}`}
-                        placeholder="Tu nombre"
+                        placeholder={page.placeholders.name}
                         maxLength={80}
                         aria-invalid={Boolean(errors.name)}
                         aria-describedby={errors.name ? 'name-error' : undefined}
@@ -242,7 +253,7 @@ const Contact: React.FC = () => {
                     
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-brand-text dark:text-white mb-2">
-                        Email *
+                        {page.labels.email}
                       </label>
                       <input
                         type="email"
@@ -253,7 +264,7 @@ const Contact: React.FC = () => {
                         required
                         autoComplete="email"
                         className={`wp-input ${errors.email ? 'border-red-400 focus:border-red-500 focus:ring-red-300' : ''}`}
-                        placeholder="tu@email.com"
+                        placeholder={page.placeholders.email}
                         maxLength={120}
                         aria-invalid={Boolean(errors.email)}
                         aria-describedby={errors.email ? 'email-error' : undefined}
@@ -268,7 +279,7 @@ const Contact: React.FC = () => {
                   
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-brand-text dark:text-white mb-2">
-                      Asunto *
+                      {page.labels.subject}
                     </label>
                     <select
                       id="subject"
@@ -280,12 +291,10 @@ const Contact: React.FC = () => {
                       aria-invalid={Boolean(errors.subject)}
                       aria-describedby={errors.subject ? 'subject-error' : undefined}
                     >
-                      <option value="">Selecciona un asunto</option>
-                      <option value="colaboracion">Colaboración</option>
-                      <option value="pregunta">Pregunta General</option>
-                      <option value="sugerencia">Sugerencia</option>
-                      <option value="publicidad">Publicidad</option>
-                      <option value="otro">Otro</option>
+                      <option value="">{page.placeholders.subject}</option>
+                      {page.subjects.map((subject) => (
+                        <option key={subject.id} value={subject.id}>{subject.label}</option>
+                      ))}
                     </select>
                     {errors.subject && (
                       <p id="subject-error" className="mt-2 text-sm text-red-700 dark:text-red-400">
@@ -296,7 +305,7 @@ const Contact: React.FC = () => {
                   
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-brand-text dark:text-white mb-2">
-                      Mensaje *
+                      {page.labels.message}
                     </label>
                     <textarea
                       id="message"
@@ -306,7 +315,7 @@ const Contact: React.FC = () => {
                       required
                       rows={6}
                       className={`wp-textarea ${errors.message ? 'border-red-400 focus:border-red-500 focus:ring-red-300' : ''}`}
-                      placeholder="Escribe tu mensaje aquí..."
+                      placeholder={page.placeholders.message}
                       maxLength={1200}
                       aria-invalid={Boolean(errors.message)}
                       aria-describedby={errors.message ? 'message-error' : 'message-help'}
@@ -318,7 +327,7 @@ const Contact: React.FC = () => {
                         </p>
                       ) : (
                         <p id="message-help" className="text-xs text-brand-text/60 dark:text-slate-400">
-                          Cuéntanos el contexto para ayudarte mejor.
+                          {page.helper}
                         </p>
                       )}
                       <p className="text-xs text-brand-text/60 dark:text-slate-400">
@@ -333,7 +342,7 @@ const Contact: React.FC = () => {
                     disabled={isSubmitting}
                     aria-busy={isSubmitting}
                   >
-                    {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+                    {isSubmitting ? page.submitting : page.submit}
                   </button>
                 </form>
               </div>

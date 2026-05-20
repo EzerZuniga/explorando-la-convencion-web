@@ -35,7 +35,7 @@ export const teamMembers: TeamMember[] = [
       'Estudiante de Ingeniería Informática y apasionado por la tecnología aplicada al turismo local. Creó esta plataforma para mostrar al mundo la riqueza cultural y natural de La Convención a través de soluciones digitales innovadoras. Quillabambino de nacimiento y corazón.',
     initials: 'EZ',
     color: '#1B4332',
-    image: '/images/destinos/andes-trekking.jpg',
+    image: '/images/equipo/EzerB.jpg',
     skills: ['Desarrollo Web', 'Diseño UI/UX', 'SEO', 'Soluciones Digitales'],
   },
   {
@@ -45,7 +45,7 @@ export const teamMembers: TeamMember[] = [
       'Estudiante de Administración y Negocios Internacionales. Lidera la gestión estratégica y creación de guías que dan vida al portal, aplicando su visión empresarial para posicionar nuestra cultura en el mercado global. Orgullosamente quillabambina.',
     initials: 'KM',
     color: '#4BB543',
-    image: '/images/destinos/pueblo-magico.jpg',
+    image: '/images/equipo/keyla.jpg',
     skills: ['Gestión Estratégica', 'Redacción', 'Negocios Internacionales'],
   },
   {
@@ -55,7 +55,7 @@ export const teamMembers: TeamMember[] = [
       'Estudiante de Arquitectura con un ojo artístico único. Captura la esencia de La Convención a través de imágenes que resaltan la armonía entre el paisaje natural y la identidad urbana de nuestra región. Quillabambino de raíces y pasión.',
     initials: 'DT',
     color: '#4BB543',
-    image: '/images/galeria/fotografia.jpg',
+    image: '/images/equipo/diego.jpg',
     skills: ['Fotografía', 'Edición de Video', 'Arquitectura'],
   },
   {
@@ -65,7 +65,7 @@ export const teamMembers: TeamMember[] = [
       'Estudiante de Derecho y guía oficial certificada. Combina su formación legal con su amor por la tierra para promover un turismo responsable, seguro y profundamente respetuoso con nuestro patrimonio. Natural de Quillabamba.',
     initials: 'LQ',
     color: '#4BB543',
-    image: '/images/galeria/comida-asiatica.jpg',
+    image: '/images/equipo/lucia.jpg',
     skills: ['Guiado Turístico', 'Derecho', 'Turismo Responsable'],
   },
   {
@@ -75,7 +75,7 @@ export const teamMembers: TeamMember[] = [
       'Estudiante de Ingeniería de Sistemas. Se encarga de la conectividad y el crecimiento digital del proyecto, optimizando nuestras plataformas para que la voz de La Convención llegue a cada rincón del mundo. Quillabambino digital.',
     initials: 'RA',
     color: '#35594D',
-    image: '/images/viajes/tren-europa.jpg',
+    image: '/images/equipo/rodrigo.jpg',
     skills: ['Ingeniería de Sistemas', 'Redes Sociales', 'Optimización Digital'],
   },
 ];

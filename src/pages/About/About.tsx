@@ -1,16 +1,29 @@
 import React from 'react';
 import {
-  Target, Heart, MapPin, Users,
-  Leaf, Star, Lightbulb, ArrowRight, Mail,
+  ArrowRight,
+  Heart,
+  Leaf,
+  Lightbulb,
+  Mail,
+  MapPin,
+  Star,
+  Target,
+  Users,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEOHead from '@/features/seo';
 import { SITE_CONFIG } from '@/constants';
+import { useLanguage } from '@/features/i18n';
 import { useCounterAnimation } from '@/hooks';
-import { teamMembers, values, stats } from '@/data/about';
 
 const ICON_MAP: Record<string, React.ElementType> = {
-  MapPin, Users, Heart, Target, Leaf, Star, Lightbulb,
+  MapPin,
+  Users,
+  Heart,
+  Target,
+  Leaf,
+  Star,
+  Lightbulb,
 };
 
 const toRgba = (hex: string, alpha: number): string => {
@@ -23,293 +36,347 @@ const toRgba = (hex: string, alpha: number): string => {
 };
 
 type SectionHeaderProps = {
+  eyebrow?: string;
   title: string;
   subtitle?: string;
+  align?: 'left' | 'center';
 };
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle }) => (
-  <div className="text-center mb-12 animate-fade-in-up">
-    <h2 className="font-heading text-3xl sm:text-4xl font-bold text-brand-text dark:text-white mb-4">
-      {title}
-    </h2>
-    {subtitle && (
-      <p className="text-brand-text/75 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-light">
-        {subtitle}
-      </p>
-    )}
-    <div className="w-16 h-1 bg-gradient-to-r from-brand-text/90 via-brand-text/55 to-brand-secondary mx-auto rounded-full mt-5" />
-  </div>
-);
+const SectionHeader: React.FC<SectionHeaderProps> = ({
+  eyebrow,
+  title,
+  subtitle,
+  align = 'center',
+}) => {
+  const alignment = align === 'left' ? 'text-left items-start' : 'text-center items-center';
+
+  return (
+    <div className={`mb-10 flex flex-col ${alignment} animate-reveal-up`}>
+      {eyebrow && (
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-primary">
+          {eyebrow}
+        </p>
+      )}
+      <h2 className="mb-0 max-w-3xl font-heading text-3xl font-bold leading-tight text-brand-text dark:text-white sm:text-4xl">
+        {title}
+      </h2>
+      <div className="mt-5 h-1 w-20 rounded bg-gradient-to-r from-brand-text via-brand-primary to-brand-secondary" />
+      {subtitle && (
+        <p className="mt-5 max-w-2xl text-base leading-8 text-brand-text/75 dark:text-slate-300">
+          {subtitle}
+        </p>
+      )}
+    </div>
+  );
+};
+
+const navItems = [
+  { href: '#proposito', label: 'Propósito' },
+  { href: '#historia', label: 'Historia' },
+  { href: '#valores', label: 'Valores' },
+  { href: '#equipo', label: 'Equipo' },
+];
+
+const TEAM_CARD_ACCENT = '#1B4332';
 
 const About: React.FC = () => {
-  // Hooks de contadores — deben llamarse en el nivel superior (reglas de hooks)
-  const c0 = useCounterAnimation(stats[0].value, 1500);
-  const c1 = useCounterAnimation(stats[1].value, 2000);
-  const c2 = useCounterAnimation(stats[2].value, 2500);
-  const c3 = useCounterAnimation(stats[3].value, 1200);
+  const { content } = useLanguage();
+  const page = content.pages.about;
+  const c0 = useCounterAnimation(page.stats[0].value, 1500);
+  const c1 = useCounterAnimation(page.stats[1].value, 2000);
+  const c2 = useCounterAnimation(page.stats[2].value, 2500);
+  const c3 = useCounterAnimation(page.stats[3].value, 1200);
   const counters = [c0, c1, c2, c3];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-brand-background via-brand-background to-brand-secondary/15 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div className="min-h-screen bg-brand-background text-brand-text dark:bg-slate-950 dark:text-slate-100">
       <SEOHead
-        title="Nuestro Equipo - Explorando la Convención"
-        description="Conoce al equipo detrás de Explorando la Convención: cinco quillabambinos apasionados por su tierra, su cultura y el turismo responsable."
-        keywords="equipo explorando la convención, Quillabamba, turismo La Convención, misión, visión, sobre nosotros"
+        title={page.seoTitle}
+        description={page.seoDescription}
+        keywords={page.seoKeywords}
         url={`${SITE_CONFIG.url}/about`}
       />
 
-      {/* ── Hero ── */}
-      <section className="relative isolate min-h-[24rem] sm:min-h-[31rem] flex items-center justify-center text-white overflow-hidden">
+      <section className="relative isolate overflow-hidden bg-brand-text text-white">
         <img
           src="/images/fondohero.jpg"
-          alt="La Convención, Cusco"
-          className="absolute inset-0 w-full h-full object-cover"
+          alt="Mural turístico de La Convención"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F1D18]/75 via-brand-text/55 to-brand-text/75" />
-        <div className="absolute -left-24 -top-24 w-72 h-72 bg-brand-secondary/20 rounded-full blur-3xl" />
-        <div className="absolute -right-16 bottom-0 w-80 h-80 bg-brand-primary/25 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F1D18]/95 via-brand-text/82 to-brand-text/52" />
 
-        <div className="relative z-10 text-center px-4 animate-fade-in-up max-w-3xl">
-          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] text-brand-secondary/25 mb-3">
-            Quiénes somos
-          </p>
-          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg leading-tight">
-            Nuestro Equipo
-          </h1>
-          <p className="text-base sm:text-lg lg:text-xl max-w-2xl mx-auto font-light text-white/90 leading-relaxed">
-            Somos locales que aman su tierra y trabajan cada día para que el mundo descubra
-            la esencia natural y cultural de La Convención.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Estadísticas ── */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-brand-text via-brand-text to-brand-text/80 text-white py-12 sm:py-14">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(244,180,0,0.18),transparent_40%)]" />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map((stat, i) => (
-              <div
-                key={stat.label}
-                ref={counters[i].counterRef}
-                className="animate-fade-in-up rounded-2xl border border-white/20 bg-white/10 p-4 sm:p-5 backdrop-blur-md shadow-lg transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:bg-white/15"
-                style={{ animationDelay: `${i * 90}ms`, animationFillMode: 'both' }}
-              >
-                <div className="font-heading text-3xl sm:text-4xl font-bold text-white">
-                  {counters[i].count}
-                  <span className="text-brand-secondary/45">{stat.suffix}</span>
-                </div>
-                <div className="text-xs sm:text-sm text-white/85 mt-1.5 font-light leading-snug">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Misión & Visión ── */}
-      <section className="py-16 sm:py-20 bg-white/80 dark:bg-slate-900/70 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader title="Lo que nos mueve cada día" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
-            <div className="animate-fade-in-up bg-white dark:bg-slate-900 rounded-2xl p-8 border border-brand-primary/15 dark:border-slate-700 shadow-sm transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl">
-              <div className="w-11 h-11 bg-brand-text/10 dark:bg-brand-text/30 rounded-xl flex items-center justify-center mb-5 ring-1 ring-brand-text/20 dark:ring-brand-primary/30">
-                <Target className="w-5 h-5 text-brand-text/90 dark:text-brand-primary/25" strokeWidth={1.9} />
-              </div>
-              <h3 className="font-heading text-2xl font-bold text-brand-text dark:text-white mb-3">
-                Nuestra Misión
-              </h3>
-              <p className="text-brand-text/75 dark:text-slate-300 leading-relaxed font-light">
-                Impulsar el turismo sostenible y la difusión cultural en la provincia de La Convención,
-                brindando información auténtica, actualizada y de calidad para que cada viajero descubra
-                la riqueza natural, histórica y gastronómica de nuestra región.
-              </p>
-            </div>
-            <div
-              className="animate-fade-in-up bg-white dark:bg-slate-900 rounded-2xl p-8 border border-brand-primary/15 dark:border-slate-700 shadow-sm transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl"
-              style={{ animationDelay: '120ms', animationFillMode: 'both' }}
-            >
-              <div className="w-11 h-11 bg-brand-text/10 dark:bg-brand-text/30 rounded-xl flex items-center justify-center mb-5 ring-1 ring-brand-text/20 dark:ring-brand-primary/30">
-                <Heart className="w-5 h-5 text-brand-text/90 dark:text-brand-primary/25" strokeWidth={1.9} />
-              </div>
-              <h3 className="font-heading text-2xl font-bold text-brand-text dark:text-white mb-3">
-                Nuestra Visión
-              </h3>
-              <p className="text-brand-text/75 dark:text-slate-300 leading-relaxed font-light">
-                Ser el referente principal de turismo y cultura en La Convención, reconocidos por nuestro
-                contenido auténtico, nuestro compromiso con la comunidad local y la promoción responsable
-                del patrimonio natural y cultural de Quillabamba y sus alrededores.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Historia ── */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-brand-background to-brand-background dark:from-slate-900 dark:to-slate-950">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader title="Nuestra Historia" />
-          <div
-            className="animate-fade-in-up relative rounded-2xl border border-brand-background dark:border-slate-700 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-lg space-y-5 text-brand-text/90 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-light"
-            style={{ animationDelay: '120ms', animationFillMode: 'both' }}
-          >
-            <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-brand-text/40 via-brand-text/70 to-brand-primary rounded-l-2xl" />
-            <p>
-              <strong className="text-brand-text dark:text-white font-semibold">
-                Explorando la Convención
-              </strong>{' '}
-              nació de una pregunta simple: ¿por qué tan pocas personas conocen la maravilla que es
-              Quillabamba? Nuestra provincia tiene selva, montañas, ríos cristalinos, una gastronomía
-              única y una historia rica… pero muy poca presencia digital.
+        <div className="relative mx-auto grid min-h-[34rem] max-w-7xl grid-cols-1 items-end gap-10 px-4 pb-10 pt-28 sm:px-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:px-8 lg:pb-14">
+          <div className="max-w-3xl animate-fade-in-up">
+            <p className="mb-4 inline-flex border-l-4 border-brand-secondary bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur">
+              {page.heroEyebrow}
             </p>
-            <p>
-              En 2022, un grupo de jóvenes quillabambinos decidió cambiar eso. Armados de cámaras,
-              libretas y mucho amor por su tierra, comenzaron a documentar cada rincón de La Convención:
-              sus sabores, sus paisajes, sus festividades y su gente.
-            </p>
-            <p>
-              Hoy somos cinco personas comprometidas con mostrarle al mundo que La Convención no es solo
-              un destino más en el mapa, sino un lugar donde la naturaleza y la cultura se funden en una
-              experiencia verdaderamente inolvidable.
+            <h1 className="mb-5 font-heading text-4xl font-bold leading-[1.05] text-white drop-shadow sm:text-6xl lg:text-7xl">
+              {page.heroTitle}
+            </h1>
+            <p className="max-w-2xl text-lg leading-8 text-white/92 sm:text-xl">
+              {page.heroDescription}
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* ── Valores ── */}
-      <section className="py-16 sm:py-20 bg-white/85 dark:bg-slate-900/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Nuestros Valores"
-            subtitle="Los principios que guían cada decisión, cada publicación y cada experiencia que compartimos."
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {values.map((value, index) => {
-              const IconComponent = ICON_MAP[value.icon];
-              return (
-                <div
-                  key={value.title}
-                  className="group animate-fade-in-up flex gap-4 p-6 bg-white dark:bg-slate-900 rounded-xl border border-brand-primary/15 dark:border-slate-700 shadow-sm transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-lg"
-                  style={{ animationDelay: `${index * 70}ms`, animationFillMode: 'both' }}
+          <aside className="animate-fade-in-up border border-white/20 bg-white/12 p-5 backdrop-blur-md lg:justify-self-end">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-secondary">
+              Guía rápida
+            </p>
+            <nav className="mt-4 grid grid-cols-2 gap-2" aria-label="Secciones de Nuestro Equipo">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="group flex items-center justify-between border border-white/20 bg-white/10 px-3 py-3 text-sm font-semibold text-white transition duration-300 hover:border-brand-secondary hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-brand-secondary"
                 >
-                  <div className="w-10 h-10 bg-brand-text/10 dark:bg-brand-text/30 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 ring-1 ring-brand-text/15 dark:ring-brand-primary/20">
-                    {IconComponent && (
-                      <IconComponent
-                        className="w-5 h-5 text-brand-text/90 dark:text-brand-primary/25 transition-colors duration-300"
-                        strokeWidth={1.9}
-                      />
-                    )}
+                  {item.label}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 motion-safe:group-hover:translate-x-1" />
+                </a>
+              ))}
+            </nav>
+          </aside>
+        </div>
+      </section>
+
+      <section className="border-y border-brand-text/10 bg-brand-text text-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-y divide-white/12 px-4 sm:px-6 md:grid-cols-4 md:divide-y-0 lg:px-8">
+          {page.stats.map((stat, i) => (
+            <div
+              key={stat.label}
+              ref={counters[i].counterRef}
+              className="animate-reveal-up px-3 py-7 text-center sm:px-5"
+              style={{ animationDelay: `${i * 80}ms`, animationFillMode: 'both' }}
+            >
+              <div className="font-heading text-4xl font-bold leading-none text-white sm:text-5xl">
+                {counters[i].count}
+                <span className="text-brand-secondary">{stat.suffix}</span>
+              </div>
+              <p className="mx-auto mt-3 max-w-36 text-sm leading-5 text-white/82">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="proposito" className="scroll-mt-24 bg-white py-16 dark:bg-slate-950 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader title={page.missionVisionTitle} />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {[
+              {
+                icon: Target,
+                title: page.missionTitle,
+                description: page.missionDescription,
+              },
+              {
+                icon: Heart,
+                title: page.visionTitle,
+                description: page.visionDescription,
+              },
+            ].map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <article
+                  key={item.title}
+                  className="group animate-reveal-up border border-brand-text/12 bg-brand-background/45 p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-primary/45 hover:bg-white hover:shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-900 sm:p-8"
+                  style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'both' }}
+                >
+                  <div className="mb-6 flex h-12 w-12 items-center justify-center border border-brand-text/15 bg-white text-brand-text transition duration-300 group-hover:border-brand-primary group-hover:text-brand-primary dark:border-slate-700 dark:bg-slate-950 dark:text-brand-primary">
+                    <Icon className="h-5 w-5" strokeWidth={2} />
                   </div>
-                  <div>
-                    <h3 className="font-heading text-xl font-bold text-brand-text dark:text-white mb-1">
-                      {value.title}
-                    </h3>
-                    <p className="text-sm text-brand-text/75 dark:text-slate-300 font-light leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                </div>
+                  <h3 className="mb-3 font-heading text-2xl font-bold text-brand-text dark:text-white">
+                    {item.title}
+                  </h3>
+                  <p className="text-base leading-8 text-brand-text/76 dark:text-slate-300">
+                    {item.description}
+                  </p>
+                </article>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* ── Equipo ── */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-brand-background to-brand-secondary/15 dark:from-slate-900 dark:to-slate-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Las personas detrás del portal"
-            subtitle="Cinco quillabambinos con distintas habilidades y un solo objetivo: poner a La Convención en el mapa."
-          />
+      <section id="historia" className="scroll-mt-24 border-y border-brand-text/10 bg-brand-background py-16 dark:border-slate-800 dark:bg-slate-900 sm:py-20">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-[0.78fr_1.22fr] lg:px-8">
+          <SectionHeader title={page.historyTitle} align="left" />
+          <article className="animate-reveal-up border-l-4 border-brand-primary bg-white p-6 shadow-lg shadow-brand-text/8 dark:bg-slate-950 sm:p-9">
+            <div className="space-y-6 text-base leading-8 text-brand-text/78 dark:text-slate-300 sm:text-lg">
+              {page.historyParagraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </article>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {teamMembers.map((member, index) => (
-              <div
-                key={member.name}
-                className="group animate-fade-in-up bg-white dark:bg-slate-900 border border-brand-primary/15 dark:border-slate-700 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col motion-safe:hover:-translate-y-1"
-                style={{
-                  animationDelay: `${index * 80}ms`,
-                  animationFillMode: 'both',
-                  boxShadow: `0 22px 35px -30px ${toRgba(member.color, 0.9)}`,
-                }}
-              >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={`Foto representativa de ${member.name}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                  <div
-                    className="absolute left-4 bottom-4 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-base shadow-md border-2 border-white/85"
-                    style={{ backgroundColor: member.color }}
-                    aria-hidden="true"
-                  >
-                    {member.initials}
+      <section id="valores" className="scroll-mt-24 bg-white py-16 dark:bg-slate-950 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader title={page.valuesTitle} subtitle={page.valuesSubtitle} />
+          <div className="grid grid-cols-1 gap-px overflow-hidden border border-brand-text/10 bg-brand-text/10 dark:border-slate-700 dark:bg-slate-700 sm:grid-cols-2 lg:grid-cols-3">
+            {page.values.map((value, index) => {
+              const IconComponent = ICON_MAP[value.icon];
+              return (
+                <article
+                  key={value.title}
+                  className="group animate-reveal-up bg-white p-6 transition duration-300 hover:bg-brand-background dark:bg-slate-900 dark:hover:bg-slate-800 sm:p-7"
+                  style={{ animationDelay: `${index * 60}ms`, animationFillMode: 'both' }}
+                >
+                  <div className="mb-5 flex h-11 w-11 items-center justify-center border border-brand-text/15 bg-brand-background text-brand-text transition duration-300 group-hover:border-brand-primary group-hover:bg-white group-hover:text-brand-primary dark:border-slate-700 dark:bg-slate-950 dark:text-brand-primary">
+                    {IconComponent && <IconComponent className="h-5 w-5" strokeWidth={2} />}
                   </div>
-                </div>
-
-                <div className="bg-white dark:bg-slate-900 px-5 pt-5 pb-4 flex flex-col h-full">
-                  <h3 className="text-center font-heading text-xl font-bold text-brand-text dark:text-white leading-snug">
-                    {member.name}
+                  <h3 className="mb-2 font-heading text-xl font-bold text-brand-text dark:text-white">
+                    {value.title}
                   </h3>
-
-                  <div
-                    className="border-t mt-4 pt-3"
-                    style={{ borderColor: toRgba(member.color, 0.25) }}
-                  >
-                    <p className="text-sm text-brand-text/75 dark:text-slate-300">Rol:</p>
-                    <p className="text-sm font-semibold uppercase tracking-wide text-brand-text dark:text-white">
-                      {member.role}
-                    </p>
-                  </div>
-
-                  <p className="text-sm text-brand-text/75 dark:text-slate-300 leading-relaxed mt-4">
-                    {member.description}
+                  <p className="text-sm leading-7 text-brand-text/72 dark:text-slate-300">
+                    {value.description}
                   </p>
-
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {member.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="text-xs px-2.5 py-1 rounded-full border"
-                        style={{
-                          color: member.color,
-                          backgroundColor: toRgba(member.color, 0.08),
-                          borderColor: toRgba(member.color, 0.24),
-                        }}
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="relative overflow-hidden py-16 sm:py-20 bg-gradient-to-r from-brand-text via-brand-text/90 to-brand-text/80 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(244,180,0,0.28),transparent_42%)]" />
-        <div className="max-w-2xl mx-auto text-center px-4 animate-fade-in-up">
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold mb-4">¿Quieres ser parte del equipo?</h2>
-          <p className="text-white/90 font-light text-base sm:text-lg mb-8 leading-relaxed">
-            Si amas La Convención y tienes algo que aportar —ya sea redactando, fotografiando, guiando
-            o difundiendo— siempre estamos buscando personas apasionadas por nuestra región.
-          </p>
-          <Link
-            to="/contact"
-            className="group inline-flex items-center gap-2 bg-white text-brand-text font-semibold px-8 py-4 rounded-lg hover:bg-brand-secondary/15 transition-all duration-300 motion-safe:hover:-translate-y-0.5 shadow-lg shadow-black/10"
-          >
-            <Mail className="w-5 h-5" />
-            Contáctanos
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 motion-safe:group-hover:translate-x-1" />
-          </Link>
+      <section id="equipo" className="scroll-mt-24 bg-gradient-to-b from-brand-background via-white to-[#FFF3E3] py-16 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader title={page.teamTitle} subtitle={page.teamSubtitle} />
+
+          <div className="relative mx-auto max-w-6xl">
+            <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-brand-text/16 to-transparent lg:block" />
+
+            <div className="space-y-10 sm:space-y-12">
+              {page.teamMembers.map((member, index) => {
+                const isReversed = index % 2 === 1;
+
+                return (
+                  <article
+                    key={member.name}
+                    className="group relative animate-reveal-up"
+                    style={{
+                      animationDelay: `${index * 90}ms`,
+                      animationFillMode: 'both',
+                    }}
+                  >
+                    <div
+                      className={`relative grid items-center gap-6 overflow-hidden border bg-white p-5 backdrop-blur-sm dark:bg-slate-900 sm:p-7 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-10 lg:p-8 ${
+                        isReversed ? 'lg:grid-cols-[minmax(0,1fr)_17rem]' : ''
+                      }`}
+                      style={{
+                        borderColor: toRgba(TEAM_CARD_ACCENT, 0.32),
+                        boxShadow: `0 -28px 68px -34px ${toRgba(TEAM_CARD_ACCENT, 0.5)}, 0 34px 82px -32px ${toRgba(TEAM_CARD_ACCENT, 0.62)}, 0 10px 28px -18px rgba(15, 29, 24, 0.35)`,
+                      }}
+                    >
+                      <div
+                        className="absolute inset-x-0 top-0 h-1"
+                        style={{ backgroundColor: TEAM_CARD_ACCENT }}
+                        aria-hidden="true"
+                      />
+                      <div className={`${isReversed ? 'lg:order-2' : ''} flex justify-center lg:justify-start`}>
+                        <div className="relative h-56 w-56 shrink-0 sm:h-64 sm:w-64 lg:h-60 lg:w-60">
+                          <div
+                            className="absolute inset-0 rounded-full opacity-30 blur-2xl"
+                            style={{ backgroundColor: TEAM_CARD_ACCENT }}
+                            aria-hidden="true"
+                          />
+                          <div
+                            className="relative h-full w-full overflow-hidden rounded-full border-4 bg-brand-background p-1 shadow-[0_-16px_38px_-24px_rgba(27,67,50,0.55),0_24px_46px_-24px_rgba(27,67,50,0.65)]"
+                            style={{ borderColor: TEAM_CARD_ACCENT }}
+                          >
+                            <img
+                              src={member.image}
+                              alt={`Foto de ${member.name}`}
+                              className="h-full w-full rounded-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                          <span
+                            className="absolute bottom-4 right-2 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white text-sm font-bold text-white shadow-2xl dark:border-slate-900"
+                            style={{ backgroundColor: TEAM_CARD_ACCENT }}
+                            aria-hidden="true"
+                          >
+                            {member.initials}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className={`${isReversed ? 'lg:order-1 lg:text-right' : ''}`}>
+                        <div className={`mb-5 flex flex-col ${isReversed ? 'lg:items-end' : ''}`}>
+                          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-primary">
+                            Equipo local
+                          </p>
+                          <h3 className="mb-2 max-w-2xl font-heading text-2xl font-bold leading-tight text-brand-text dark:text-white sm:text-3xl">
+                            {member.name}
+                          </h3>
+                          <p className="text-sm font-bold uppercase tracking-[0.08em] text-brand-text/80 dark:text-slate-200">
+                            {member.role}
+                          </p>
+                        </div>
+
+                        <p className="max-w-3xl text-[0.96rem] leading-8 text-brand-text/84 dark:text-slate-200 sm:text-base">
+                          {member.description}
+                        </p>
+
+                        <div className={`mt-6 flex flex-wrap gap-2 ${isReversed ? 'lg:justify-end' : ''}`}>
+                          {member.skills.map((skill) => (
+                            <span
+                              key={skill}
+                              className="border px-3 py-1.5 text-xs font-semibold"
+                              style={{
+                                color: TEAM_CARD_ACCENT,
+                                backgroundColor: toRgba(TEAM_CARD_ACCENT, 0.1),
+                                borderColor: toRgba(TEAM_CARD_ACCENT, 0.34),
+                              }}
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                  </article>
+                );
+              })}
+            </div>
+
+            <div className="mt-12 border-l-4 border-brand-primary bg-white/80 p-5 shadow-sm dark:bg-slate-900 sm:p-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-primary">
+                    Trabajo colaborativo
+                  </p>
+                  <p className="mt-2 max-w-3xl text-sm leading-7 text-brand-text/74 dark:text-slate-300">
+                    Cada perfil aporta una mirada distinta: tecnología, contenido, fotografía, guía local y difusión digital al servicio de La Convención.
+                  </p>
+                </div>
+                <Users className="h-10 w-10 shrink-0 text-brand-text/40 dark:text-brand-primary" strokeWidth={1.8} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-brand-text py-16 text-white sm:py-20">
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary" />
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+          <div className="animate-reveal-up">
+            <h2 className="mb-4 font-heading text-3xl font-bold text-white sm:text-4xl">
+              {page.ctaTitle}
+            </h2>
+            <p className="mx-auto mb-8 max-w-2xl text-base leading-8 text-white/86 sm:text-lg">
+              {page.ctaDescription}
+            </p>
+            <Link
+              to="/contact"
+              className="group inline-flex items-center justify-center gap-3 bg-white px-7 py-4 text-sm font-bold text-brand-text shadow-lg shadow-black/20 transition duration-300 hover:-translate-y-0.5 hover:bg-brand-secondary/95 hover:text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:ring-offset-2 focus:ring-offset-brand-text"
+            >
+              <Mail className="h-5 w-5" />
+              {page.ctaAction}
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 motion-safe:group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>
@@ -317,6 +384,3 @@ const About: React.FC = () => {
 };
 
 export default About;
-
-
-

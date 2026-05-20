@@ -21,7 +21,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ scrolled = false }) => {
       className={`h-10 w-10 sm:h-9 sm:w-9 inline-flex items-center justify-center transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/80 focus-visible:ring-offset-2 ${
         scrolled
           ? 'text-brand-text dark:text-white hover:text-brand-primary dark:hover:text-brand-primary/70 focus-visible:ring-offset-white dark:focus-visible:ring-offset-brand-text'
-          : 'text-white hover:text-brand-primary/25 focus-visible:ring-offset-transparent'
+          : 'text-white hover:text-brand-primary focus-visible:ring-offset-transparent'
       }`}
       aria-label={darkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
       title={darkMode ? 'Modo claro' : 'Modo oscuro'}

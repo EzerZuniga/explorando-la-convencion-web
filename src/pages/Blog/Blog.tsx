@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Calendar, User, Search } from 'lucide-react';
 import SEOHead from '@/features/seo';
 import { EMAIL_REGEX, SITE_CONFIG } from '@/constants';
-import { blogPosts, blogCategories } from '@/data/gastronomia';
 import { SectionHeader } from '@/components';
+import { useLanguage } from '@/features/i18n';
 
 const Blog: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Todos");
+  const { content } = useLanguage();
+  const page = content.pages.blog;
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState("");
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -19,7 +21,7 @@ const Blog: React.FC = () => {
     if (!EMAIL_REGEX.test(normalizedEmail)) {
       setNewsletterStatus({
         type: 'error',
-        text: 'Ingresa un correo válido para suscribirte.',
+        text: page.invalidEmail,
       });
       return;
     }
@@ -32,15 +34,16 @@ const Blog: React.FC = () => {
       setNewsletterEmail('');
       setNewsletterStatus({
         type: 'success',
-        text: '¡Listo! Te suscribiste al newsletter.',
+        text: page.success,
       });
     } finally {
       setIsSubmittingNewsletter(false);
     }
   };
 
-  const filteredPosts = blogPosts.filter(post => {
-    const matchesCategory = selectedCategory === "Todos" || post.category === selectedCategory;
+  const filteredPosts = page.posts.filter(post => {
+    const selectedCategoryLabel = page.categories.find((category) => category.id === selectedCategory)?.label;
+    const matchesCategory = selectedCategory === 'all' || post.category === selectedCategoryLabel;
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
@@ -49,9 +52,9 @@ const Blog: React.FC = () => {
   return (
     <div className="wp-shell">
       <SEOHead 
-        title="Blog de Viajes - Explorando la Convención | Artículos y Consejos de Turismo"
-        description="Lee nuestros últimos artículos sobre viajes, destinos turísticos de La Convención y Cusco, consejos prácticos y experiencias de viaje en Perú."
-        keywords="blog de viajes, artículos de turismo, consejos de viaje, destinos Perú, La Convención, blog turismo"
+        title={page.seoTitle}
+        description={page.seoDescription}
+        keywords={page.seoKeywords}
         url={`${SITE_CONFIG.url}/blog`}
         type="blog"
       />
@@ -64,9 +67,9 @@ const Blog: React.FC = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
         <div className="relative z-10 text-center animate-reveal-up">
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg tracking-tight">Blog</h1>
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg tracking-tight">{page.heroTitle}</h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto px-4 font-light text-white/90">
-            Historias, consejos y descubrimientos de La Convención
+            {page.heroSubtitle}
           </p>
         </div>
       </section>
@@ -80,10 +83,10 @@ const Blog: React.FC = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-brand-text/45 dark:text-slate-500 w-5 h-5" />
               <input
                 type="text"
-                placeholder="Buscar artículos..."
+                placeholder={content.common.searchArticles}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                aria-label="Buscar artículos en el blog"
+                aria-label={content.common.searchArticles}
                 autoComplete="off"
                 className="wp-input pl-10"
               />
@@ -91,18 +94,18 @@ const Blog: React.FC = () => {
             
             {/* Filtros por categoría */}
             <div className="flex flex-wrap gap-2">
-              {blogCategories.map(category => (
+              {page.categories.map(category => (
                 <button
-                  key={category}
+                  key={category.id}
                   type="button"
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => setSelectedCategory(category.id)}
                   className={`wp-btn px-4 py-2 text-sm ${
-                    selectedCategory === category
+                    selectedCategory === category.id
                       ? 'bg-brand-primary text-white dark:bg-brand-primary'
                       : 'bg-brand-background dark:bg-brand-text/90 text-brand-text dark:text-white hover:bg-brand-primary/20 dark:hover:bg-brand-primary'
                   }`}
                 >
-                  {category}
+                  {category.label}
                 </button>
               ))}
             </div>
@@ -114,13 +117,13 @@ const Blog: React.FC = () => {
       <section className="wp-section">
         <div className="wp-container">
           <SectionHeader
-            title="Publicaciones"
-            subtitle="Artículos recientes sobre cultura, viajes y experiencias auténticas en La Convención."
+            title={page.postsTitle}
+            subtitle={page.postsSubtitle}
             className="mb-10"
           />
           {filteredPosts.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-xl text-brand-text/75 dark:text-slate-300">No se encontraron artículos que coincidan con tu búsqueda.</p>
+              <p className="text-xl text-brand-text/75 dark:text-slate-300">{content.common.noSearchResults}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -169,12 +172,12 @@ const Blog: React.FC = () => {
       {/* Newsletter */}
       <section className="wp-section bg-gradient-to-r from-brand-text via-brand-text/90 to-brand-primary text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Suscríbete a Nuestro Newsletter</h2>
-          <p className="text-lg mb-8 text-white/90">Recibe las últimas noticias, consejos y artículos directamente en tu correo</p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">{page.newsletterTitle}</h2>
+          <p className="text-lg mb-8 text-white/90">{page.newsletterDescription}</p>
           <form onSubmit={handleNewsletterSubmit} className="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
             <input
               type="email"
-              placeholder="Tu correo electrónico"
+              placeholder={page.emailPlaceholder}
               value={newsletterEmail}
               onChange={(e) => {
                 setNewsletterEmail(e.target.value);
@@ -190,7 +193,7 @@ const Blog: React.FC = () => {
               disabled={isSubmittingNewsletter}
               aria-busy={isSubmittingNewsletter}
             >
-              {isSubmittingNewsletter ? 'Suscribiendo...' : 'Suscribirme'}
+              {isSubmittingNewsletter ? page.subscribing : page.subscribe}
             </button>
           </form>
           <div className="min-h-[1.75rem] mt-3" aria-live="polite">

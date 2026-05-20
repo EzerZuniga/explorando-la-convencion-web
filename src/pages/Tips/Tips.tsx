@@ -1,29 +1,33 @@
 import React from 'react';
 import SEOHead from '@/features/seo';
 import { SITE_CONFIG } from '@/constants';
-import { travelTips, TIP_ICONS } from '@/data/tips';
+import { TIP_ICONS } from '@/data/tips';
 import { SectionHeader } from '@/components';
+import { useLanguage } from '@/features/i18n';
 
 const Tips: React.FC = () => {
+  const { content } = useLanguage();
+  const page = content.pages.tips;
+
   return (
     <div className="wp-shell">
       <SEOHead 
-        title="Consejos de Viaje - Guía Práctica para Viajeros"
-        description="Consejos prácticos de viaje: presupuesto, equipaje, cultura, seguridad, fotografía y gastronomía para tu próxima aventura en La Convención."
-        keywords="consejos de viaje, tips viajeros, presupuesto viaje, equipaje viaje, seguridad viaje, fotografía viaje"
+        title={page.seoTitle}
+        description={page.seoDescription}
+        keywords={page.seoKeywords}
         url={`${SITE_CONFIG.url}/tips`}
       />
       <div className="wp-section">
         <div className="wp-container">
           {/* Header */}
           <SectionHeader
-            title="Consejos de Viaje"
-            subtitle="Aprende de nuestras experiencias y evita errores comunes con estos consejos prácticos para viajeros."
+            title={page.title}
+            subtitle={page.subtitle}
           />
 
           {/* Tips Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {travelTips.map((tipCategory, index) => (
+            {page.items.map((tipCategory, index) => (
               <div key={tipCategory.category} className="wp-card wp-card-interactive p-6 border-t-4 border-brand-primary animate-reveal-up" style={{ animationDelay: `${index * 0.08}s` }}>
                 <h3 className="font-heading text-2xl font-semibold text-brand-text dark:text-white mb-4 flex items-center">
                   <span className="mr-3 text-2xl">{TIP_ICONS[tipCategory.category]}</span>
@@ -44,20 +48,19 @@ const Tips: React.FC = () => {
           {/* Additional Resources */}
           <div className="mt-16 wp-card p-8 text-center border-2 border-brand-primary/40">
             <h2 className="font-heading text-3xl font-bold text-brand-text dark:text-white mb-4">
-              ¿Necesitas más ayuda?
+              {page.moreHelpTitle}
             </h2>
             <p className="text-brand-text/75 dark:text-slate-300 mb-6 max-w-2xl mx-auto">
-              Suscríbete a nuestro newsletter semanal y recibe consejos exclusivos, 
-              ofertas de viaje y guías detalladas directamente en tu correo.
+              {page.moreHelpDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
               <input
                 type="email"
-                placeholder="Tu correo electrónico"
+                placeholder={page.emailPlaceholder}
                 className="wp-input flex-1"
               />
               <button className="wp-btn-primary whitespace-nowrap">
-                Suscribirse
+                {page.subscribe}
               </button>
             </div>
           </div>

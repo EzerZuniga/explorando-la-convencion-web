@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, User, Calendar, ArrowRight } from 'lucide-react';
+import { useLanguage } from '@/features/i18n';
 import { formatDate } from '@/utils';
 import type { Post } from '@/types';
 
@@ -9,16 +10,18 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
+  const { content, locale } = useLanguage();
+
   return (
     <article
       className="group wp-card wp-card-interactive h-full flex flex-col overflow-hidden hover:border-brand-primary dark:hover:border-brand-primary"
       role="article"
-      aria-label={`Artículo: ${post.title}`}
+      aria-label={`${content.common.article}: ${post.title}`}
     >
       <Link
         to={`/post/${post.id}`}
         className="relative h-52 overflow-hidden bg-brand-primary/20 dark:bg-brand-primary block"
-        aria-label={`Ver artículo completo: ${post.title}`}
+        aria-label={`${content.common.readArticle}: ${post.title}`}
       >
         <img
           src={post.image}
@@ -53,7 +56,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           <div className="flex items-center justify-between text-xs text-brand-text/60 dark:text-slate-400">
             <div className="flex items-center gap-1.5">
               <Calendar size={13} strokeWidth={1.75} className="text-brand-text/45 dark:text-slate-500" />
-              <span>{formatDate(post.date)}</span>
+              <span>{formatDate(post.date, locale)}</span>
             </div>
             <div className="flex items-center gap-1.5 bg-brand-background dark:bg-brand-text/60 px-2.5 py-1 rounded-none">
               <Clock size={13} strokeWidth={1.75} className="text-brand-text/45 dark:text-slate-500" />
@@ -65,9 +68,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         <Link
           to={`/post/${post.id}`}
           className="mt-4 w-full wp-btn-secondary group/btn"
-          aria-label={`Leer el artículo completo: ${post.title}`}
-        >
-          <span>Leer artículo</span>
+        aria-label={`${content.common.readArticle}: ${post.title}`}
+      >
+          <span>{content.common.readArticle}</span>
           <ArrowRight
             size={18}
             strokeWidth={1.75}

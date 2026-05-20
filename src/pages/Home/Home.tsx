@@ -20,9 +20,9 @@ import {
   Utensils,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { posts } from '@/data/posts';
 import SEOHead from '@/features/seo';
 import { SITE_CONFIG } from '@/constants';
+import { useLanguage } from '@/features/i18n';
 import WeatherWidget from '@/features/weather';
 import ExchangeWidget from '@/features/exchange';
 import QuoteWidget from '@/features/quotes';
@@ -35,11 +35,17 @@ const CARD_SURFACE_CLASS =
   'bg-white dark:bg-slate-900 border border-[#E6ECEA] dark:border-slate-800 shadow-[0_14px_35px_rgba(27,67,50,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_45px_rgba(27,67,50,0.14)]';
 
 const HERO_CTA_CLASS =
-  'w-full sm:w-auto group relative inline-flex items-center justify-center gap-2 px-7 sm:px-8 py-3.5 bg-brand-primary text-brand-text text-xs sm:text-sm font-bold rounded-none transition-all duration-500 shadow-xl hover:shadow-2xl uppercase tracking-wide overflow-hidden';
+  'w-full max-w-[18rem] sm:w-auto sm:max-w-none min-h-12 group relative inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-3.5 bg-brand-primary text-brand-text text-center text-xs sm:text-sm font-bold leading-tight rounded-none transition-all duration-500 shadow-xl hover:shadow-2xl uppercase tracking-wide overflow-hidden';
 const HERO_CTA_OVERLAY_CLASS =
   'absolute inset-0 bg-brand-text/90 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out origin-center';
 const HERO_CTA_CONTENT_CLASS = 'relative z-10 group-hover:text-white transition-colors duration-500';
 const HERO_CTA_ICON_CLASS = 'relative z-10 w-5 h-5 group-hover:text-white transition-colors duration-500';
+
+const portalLinkIcons = [MapPin, Utensils, Compass, Newspaper, Camera, Heart] as const;
+const statIcons = [MapPin, Camera, Calendar] as const;
+const planningStepIcons = [CheckCircle, Compass, HelpCircle] as const;
+const portalPillarIcons = [BookOpen, Leaf, ShieldCheck] as const;
+const locationCardIcons = [MapPin, Compass, CheckCircle] as const;
 
 type PortalLink = {
   to: string;
@@ -227,13 +233,30 @@ const faqs: FaqItem[] = [
   },
 ];
 
-function HeroCta({ to, label, Icon }: { to: string; label: string; Icon: LucideIcon }) {
+function HeroScrollCta({ label, Icon, targetId }: { label: string; Icon: LucideIcon; targetId: string }) {
+  const handleClick = () => {
+    const target = document.getElementById(targetId);
+    const header = document.querySelector('header');
+
+    if (!target) {
+      return;
+    }
+
+    const headerHeight = header?.getBoundingClientRect().height ?? 0;
+    const targetTop = target.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+      top: Math.max(targetTop - headerHeight - 8, 0),
+      behavior: 'smooth',
+    });
+  };
+
   return (
-    <Link to={to} className={HERO_CTA_CLASS}>
+    <button type="button" className={HERO_CTA_CLASS} onClick={handleClick}>
       <span className={HERO_CTA_OVERLAY_CLASS}></span>
       <span className={HERO_CTA_CONTENT_CLASS}>{label}</span>
       <Icon className={HERO_CTA_ICON_CLASS} strokeWidth={1.75} />
-    </Link>
+    </button>
   );
 }
 
@@ -279,6 +302,8 @@ function TextLinkButton({ to, children }: { to: string; children: ReactNode }) {
 }
 
 function PortalLinkCard({ to, title, description, Icon }: PortalLink) {
+  const { content } = useLanguage();
+
   return (
     <Link
       to={to}
@@ -297,7 +322,7 @@ function PortalLinkCard({ to, title, description, Icon }: PortalLink) {
             {description}
           </p>
           <span className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-brand-text dark:text-white transition-colors duration-300 group-hover:text-brand-primary">
-            Explorar
+            {content.pages.home.ui.explore}
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
           </span>
         </div>
@@ -313,6 +338,8 @@ function PlanningStepCard({
   description,
   Icon,
 }: PortalLink & { stepNumber: number }) {
+  const { content } = useLanguage();
+
   return (
     <Link
       to={to}
@@ -328,7 +355,7 @@ function PlanningStepCard({
             <Icon className="h-5 w-5" strokeWidth={1.75} />
           </div>
           <span className="rounded-full bg-brand-background px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-brand-text transition-colors duration-300 group-hover:bg-brand-primary dark:bg-slate-800 dark:text-white">
-            Paso {stepNumber}
+            {content.pages.home.ui.step} {stepNumber}
           </span>
         </div>
 
@@ -340,7 +367,7 @@ function PlanningStepCard({
         </p>
 
         <div className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-brand-text transition-colors duration-300 group-hover:text-brand-primary dark:text-white">
-          Ver detalle
+          {content.pages.home.ui.viewDetail}
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
         </div>
       </div>
@@ -359,13 +386,15 @@ function CarouselControls({
   onPrevious: () => void;
   onNext: () => void;
 }) {
+  const { content } = useLanguage();
+
   return (
     <div className="flex items-center gap-3">
       <button
         type="button"
         onClick={onPrevious}
         className="w-10 h-10 inline-flex items-center justify-center border border-brand-text/20 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 text-brand-text dark:text-white shadow-sm hover:bg-brand-text hover:text-white transition-all duration-300 hover:-translate-y-0.5"
-        aria-label="Elemento anterior"
+        aria-label={content.pages.home.ui.previous}
       >
         <ChevronLeft className="w-5 h-5" strokeWidth={1.75} />
       </button>
@@ -376,7 +405,7 @@ function CarouselControls({
         type="button"
         onClick={onNext}
         className="w-10 h-10 inline-flex items-center justify-center border border-brand-text/20 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 text-brand-text dark:text-white shadow-sm hover:bg-brand-text hover:text-white transition-all duration-300 hover:-translate-y-0.5"
-        aria-label="Elemento siguiente"
+        aria-label={content.pages.home.ui.next}
       >
         <ChevronRight className="w-5 h-5" strokeWidth={1.75} />
       </button>
@@ -384,7 +413,8 @@ function CarouselControls({
   );
 }
 
-function HighlightsCarousel() {
+function HighlightsCarousel({ highlights }: { highlights: Highlight[] }) {
+  const { content } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const active = highlights[activeIndex];
 
@@ -430,7 +460,7 @@ function HighlightsCarousel() {
                 type="button"
                 onClick={() => setActiveIndex(index)}
                 className={`h-2.5 transition-all ${index === activeIndex ? 'w-8 bg-brand-primary' : 'w-2.5 bg-gray-300 dark:bg-slate-700'}`}
-                aria-label={`Ver destacado ${index + 1}`}
+                aria-label={`${content.pages.home.ui.viewHighlight} ${index + 1}`}
               />
             ))}
           </div>
@@ -440,7 +470,7 @@ function HighlightsCarousel() {
   );
 }
 
-function StatStrip() {
+function StatStrip({ stats }: { stats: Stat[] }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
       {stats.map(({ value, label, description, Icon }) => (
@@ -467,19 +497,25 @@ function StatStrip() {
   );
 }
 
-function IdentityBand() {
+function IdentityBand({
+  identity,
+  portalPillars,
+}: {
+  identity: { eyebrow: string; title: string; description: string };
+  portalPillars: Pillar[];
+}) {
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-[#123A2B] via-brand-text to-[#2F8F45] text-white shadow-[0_28px_80px_rgba(27,67,50,0.28)]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.22),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(75,181,67,0.35),transparent_36%)]"></div>
       <div className="absolute inset-x-0 top-0 h-px bg-white/35"></div>
       <div className="relative z-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 p-6 sm:p-8 lg:p-10">
         <div className="flex flex-col justify-center animate-reveal-up">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-primary mb-3">Portal informativo</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-primary mb-3">{identity.eyebrow}</p>
           <h3 className="text-xl sm:text-2xl font-bold leading-tight mb-4 text-white drop-shadow-sm">
-            Información clara para recorrer La Convención con más contexto.
+            {identity.title}
           </h3>
           <p className="text-sm sm:text-base text-white/90 leading-relaxed">
-            Reunimos rutas, consejos, cultura, publicaciones y datos útiles en una experiencia ordenada para visitantes, vecinos y personas que quieren conocer mejor la provincia.
+            {identity.description}
           </p>
         </div>
 
@@ -503,6 +539,7 @@ function IdentityBand() {
 }
 
 function PostsCarousel({ featuredPosts }: { featuredPosts: Post[] }) {
+  const { content } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const activePost = featuredPosts[activeIndex] ?? featuredPosts[0];
 
@@ -534,13 +571,13 @@ function PostsCarousel({ featuredPosts }: { featuredPosts: Post[] }) {
           <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
             {activePost.excerpt}
           </p>
-          <TextLinkButton to="/blog">Leer publicaciones</TextLinkButton>
+          <TextLinkButton to="/blog">{content.pages.home.ui.readPosts}</TextLinkButton>
         </div>
       </article>
 
       <div className="space-y-4">
         <div className="flex items-center justify-between gap-4">
-          <h3 className="text-sm font-bold text-brand-text dark:text-white uppercase tracking-wide">Publicaciones destacadas</h3>
+          <h3 className="text-sm font-bold text-brand-text dark:text-white uppercase tracking-wide">{content.pages.home.ui.featuredPosts}</h3>
           <CarouselControls
             current={activeIndex}
             total={featuredPosts.length}
@@ -568,7 +605,7 @@ function PostsCarousel({ featuredPosts }: { featuredPosts: Post[] }) {
   );
 }
 
-function FaqList() {
+function FaqList({ faqs }: { faqs: FaqItem[] }) {
   return (
     <div className="grid gap-4">
       {faqs.map(({ question, answer }) => (
@@ -609,7 +646,9 @@ function LocationInfoCard({ to, title, description, Icon }: PortalLink) {
   );
 }
 
-function LocationCard() {
+function LocationCard({ locationCards }: { locationCards: PortalLink[] }) {
+  const { content } = useLanguage();
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
       <div className="rounded-none overflow-hidden shadow-[0_22px_55px_rgba(27,67,50,0.16)] border border-brand-primary dark:border-slate-800 h-full min-h-[360px]">
@@ -621,31 +660,16 @@ function LocationCard() {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="Ubicación Quillabamba"
+          title={content.pages.home.ui.mapTitle}
           className="w-full h-full"
         ></iframe>
       </div>
 
       <div className="bg-brand-background/70 dark:bg-slate-900/70 border border-[#DDE9E2] dark:border-slate-800 p-4 sm:p-5 shadow-[0_18px_45px_rgba(27,67,50,0.08)]">
         <div className="space-y-4">
-        <LocationInfoCard
-          to="/destinations"
-          title="Ubicación"
-          description="Quillabamba, capital de la provincia de La Convención, región Cusco, Perú."
-          Icon={MapPin}
-        />
-        <LocationInfoCard
-          to="/tips"
-          title="Acceso"
-          description="Aproximadamente 4 a 5 horas por vía terrestre desde la ciudad del Cusco, según ruta y clima."
-          Icon={Compass}
-        />
-        <LocationInfoCard
-          to="/contact"
-          title="Referencia útil"
-          description="Usa el mapa como punto inicial para organizar rutas, tiempos y servicios."
-          Icon={CheckCircle}
-        />
+        {locationCards.map((item) => (
+          <LocationInfoCard key={item.title} {...item} />
+        ))}
         </div>
       </div>
     </div>
@@ -653,18 +677,26 @@ function LocationCard() {
 }
 
 function Home() {
-  const featuredPosts = posts.filter(({ featured }) => featured);
+  const { content } = useLanguage();
+  const home = content.pages.home;
+  const portalLinks = home.portalLinks.map((item, index) => ({ ...item, Icon: portalLinkIcons[index] ?? MapPin }));
+  const highlights = home.highlights;
+  const stats = home.stats.map((item, index) => ({ ...item, Icon: statIcons[index] ?? MapPin }));
+  const planningSteps = home.planningSteps.map((item, index) => ({ ...item, Icon: planningStepIcons[index] ?? CheckCircle }));
+  const portalPillars = home.portalPillars.map((item, index) => ({ ...item, Icon: portalPillarIcons[index] ?? BookOpen }));
+  const locationCards = home.locationCards.map((item, index) => ({ ...item, Icon: locationCardIcons[index] ?? MapPin }));
+  const featuredPosts = content.pages.destinations.posts.filter(({ featured }) => featured);
 
   return (
     <div className="min-h-screen bg-[var(--color-background)] dark:bg-slate-950">
       <SEOHead
-        title="Explorando la Convención - Blog de Viajes y Turismo en Perú | Guías Completas"
-        description="Descubre los mejores destinos turísticos de La Convención, Cusco y Perú. Guías de viaje, consejos prácticos, gastronomía y experiencias únicas de aventura."
-        keywords="La Convención, turismo Cusco, viajes Perú, destinos turísticos, blog de viajes, guías de viaje, aventuras, gastronomía peruana"
+        title={home.seo.title}
+        description={home.seo.description}
+        keywords={home.seo.keywords}
         url={SITE_CONFIG.url}
       />
 
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <video autoPlay muted loop playsInline poster="/images/fondohero.jpg" className="w-full h-full object-cover" aria-hidden="true">
             <source src="/video/meganto3.mp4" type="video/mp4" />
@@ -672,30 +704,29 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50"></div>
         </div>
 
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-14 sm:py-20">
           <div className="text-center space-y-6 sm:space-y-8">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight px-4 tracking-tight">
-              Descubre la magia de
+              {home.hero.titlePrefix}
               <span className="block bg-gradient-to-r from-brand-primary via-brand-primary to-brand-primary bg-clip-text text-transparent mt-2 drop-shadow-lg">
-                La Convención
+                {home.hero.titleHighlight}
               </span>
             </h1>
             <p className="text-sm sm:text-base lg:text-lg text-white/95 max-w-3xl mx-auto leading-relaxed px-4 drop-shadow-md font-light">
-              Información clara para descubrir naturaleza, cultura y sabores locales en el corazón cálido de Cusco.
+              {home.hero.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 px-4">
-              <HeroCta to="/destinations" label="Explorar Destinos" Icon={Compass} />
-              <HeroCta to="/gallery" label="Ver Galería" Icon={Camera} />
+            <div className="flex justify-center pt-4 px-4">
+              <HeroScrollCta targetId="explorar-contenido" label={home.hero.primaryCta} Icon={Compass} />
             </div>
           </div>
         </div>
       </section>
 
       <section className={`${SECTION_CLASS} bg-brand-background dark:bg-slate-950`}>
-        <div className={CONTAINER_CLASS}>
+        <div id="explorar-contenido" className={CONTAINER_CLASS}>
           <SectionHeader
-            title="Explora el portal"
-            description="Encuentra rápido las secciones principales para conocer, planificar y consultar información útil de La Convención."
+            title={home.sections.portal.title}
+            description={home.sections.portal.description}
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {portalLinks.map((item) => (
@@ -703,7 +734,7 @@ function Home() {
             ))}
           </div>
           <div className="mt-8 sm:mt-10">
-            <IdentityBand />
+            <IdentityBand identity={home.identity} portalPillars={portalPillars} />
           </div>
         </div>
       </section>
@@ -711,8 +742,8 @@ function Home() {
       <section className={`${SECTION_CLASS} bg-gradient-to-b from-white via-white to-brand-background dark:from-slate-950 dark:via-slate-900 dark:to-slate-900`}>
         <div className={CONTAINER_CLASS}>
           <SectionHeader
-            title="Información para planificar"
-            description="Datos de apoyo para revisar clima, referencia de cambio y mensajes útiles antes de organizar tu visita."
+            title={home.sections.planningInfo.title}
+            description={home.sections.planningInfo.description}
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <WeatherWidget />
@@ -725,29 +756,29 @@ function Home() {
       <section className={`${SECTION_CLASS} bg-gradient-to-br from-brand-background via-white to-[#EAF5EC] dark:from-slate-900 dark:via-slate-950 dark:to-slate-900`}>
         <div className={CONTAINER_CLASS}>
           <SectionHeader
-            title="Destacados de La Convención"
-            description="Un resumen visual con temas clave para empezar a recorrer el portal con mejor contexto."
+            title={home.sections.highlights.title}
+            description={home.sections.highlights.description}
           />
-          <HighlightsCarousel />
+          <HighlightsCarousel highlights={highlights} />
         </div>
       </section>
 
       <section className={`${SECTION_CLASS} bg-white dark:bg-slate-950`}>
         <div className={CONTAINER_CLASS}>
           <SectionHeader
-            title="La provincia en breve"
-            description="Cifras referenciales presentadas como guía inicial para entender la escala natural y cultural del territorio."
+            title={home.sections.stats.title}
+            description={home.sections.stats.description}
           />
-          <StatStrip />
+          <StatStrip stats={stats} />
         </div>
       </section>
 
       <section className={`${SECTION_CLASS} bg-gradient-to-b from-brand-background to-[#EAF5EC] dark:from-slate-900 dark:to-slate-950`}>
         <div className={CONTAINER_CLASS}>
           <SectionHeader
-            title="Últimas publicaciones"
-            description="Guías y artículos seleccionados para ampliar la información antes de tu visita."
-            action={<TextLinkButton to="/blog">Ver blog</TextLinkButton>}
+            title={home.sections.posts.title}
+            description={home.sections.posts.description}
+            action={<TextLinkButton to="/blog">{home.sections.posts.action}</TextLinkButton>}
           />
           <PostsCarousel featuredPosts={featuredPosts} />
         </div>
@@ -756,8 +787,8 @@ function Home() {
       <section className={`${SECTION_CLASS} bg-white dark:bg-slate-950`}>
         <div className={CONTAINER_CLASS}>
           <SectionHeader
-            title="Prepara tu visita"
-            description="Tres pasos simples para pasar de la inspiración a una ruta bien organizada."
+            title={home.sections.visit.title}
+            description={home.sections.visit.description}
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {planningSteps.map((step, index) => (
@@ -770,21 +801,21 @@ function Home() {
       <section className={`${SECTION_CLASS} bg-gradient-to-br from-brand-text via-[#26724f] to-brand-primary dark:from-slate-950 dark:via-brand-text dark:to-[#26724f]`}>
         <div className={CONTAINER_CLASS}>
           <SectionHeader
-            title="Preguntas frecuentes"
-            description="Respuestas rápidas para resolver dudas comunes antes de explorar las secciones del portal."
+            title={home.sections.faq.title}
+            description={home.sections.faq.description}
             tone="dark"
           />
-          <FaqList />
+          <FaqList faqs={home.faqs} />
         </div>
       </section>
 
       <section className={`${SECTION_CLASS} bg-gradient-to-b from-white to-brand-background dark:from-slate-950 dark:to-slate-900`}>
         <div className={CONTAINER_CLASS}>
           <SectionHeader
-            title="Encuéntranos"
-            description="Referencia principal para ubicar Quillabamba y planificar el acceso a la provincia."
+            title={home.sections.location.title}
+            description={home.sections.location.description}
           />
-          <LocationCard />
+          <LocationCard locationCards={locationCards} />
         </div>
       </section>
     </div>

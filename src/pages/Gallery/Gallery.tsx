@@ -2,29 +2,32 @@ import React from 'react';
 import { MapPin } from 'lucide-react';
 import SEOHead from '@/features/seo';
 import { SITE_CONFIG } from '@/constants';
-import { galleryImages } from '@/data/gallery';
 import { SectionHeader } from '@/components';
+import { useLanguage } from '@/features/i18n';
 
 const Gallery: React.FC = () => {
+  const { content } = useLanguage();
+  const page = content.pages.gallery;
+
   return (
     <div className="wp-shell">
       <SEOHead 
-        title="Galería de Fotos - La Convención en Imágenes"
-        description="Explora nuestra galería fotográfica con los paisajes más impresionantes de La Convención, Cusco y Perú."
-        keywords="galería fotos La Convención, fotografía paisajes Perú, imágenes Cusco, fotos viaje"
+        title={page.seoTitle}
+        description={page.seoDescription}
+        keywords={page.seoKeywords}
         url={`${SITE_CONFIG.url}/gallery`}
       />
       <div className="wp-section">
         <div className="wp-container">
           {/* Header */}
           <SectionHeader
-            title="Galería de Fotos"
-            subtitle="Un vistazo visual a los destinos más increíbles de La Convención."
+            title={page.title}
+            subtitle={page.subtitle}
           />
 
           {/* Gallery Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((image) => (
+            {page.images.map((image) => (
               <div key={image.id} className="wp-card wp-card-interactive overflow-hidden group border-2 border-transparent hover:border-brand-primary">
                 <div className="relative overflow-hidden">
                   <img 
@@ -36,7 +39,7 @@ const Gallery: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-brand-text/0 group-hover:bg-brand-text/35 transition-all duration-300 flex items-center justify-center">
                     <div className="text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center">
-                      <span className="text-lg font-semibold">Ver más</span>
+                      <span className="text-lg font-semibold">{content.common.viewMore}</span>
                     </div>
                   </div>
                 </div>
@@ -54,7 +57,7 @@ const Gallery: React.FC = () => {
           {/* Call to Action */}
           <div className="text-center mt-12">
             <p className="text-brand-text/75 dark:text-slate-300 mb-4">
-              ¿Quieres ver más fotos de nuestros viajes?
+              {page.ctaText}
             </p>
             <a
               href={SITE_CONFIG.social.instagram}
@@ -62,7 +65,7 @@ const Gallery: React.FC = () => {
               rel="noopener noreferrer"
               className="wp-btn-primary inline-flex"
             >
-              Síguenos en Instagram
+              {page.ctaAction}
             </a>
           </div>
         </div>

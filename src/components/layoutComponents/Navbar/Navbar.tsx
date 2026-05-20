@@ -4,7 +4,8 @@ import { User, Menu, X, MapPin, Info, Mail, LogOut, Bell, UserCircle } from 'luc
 import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
 import ThemeToggle from '@/features/theme';
 import LoginModal, { clearCurrentUser, getCurrentUser, saveCurrentUser } from '@/features/auth';
-import { NAVIGATION, SITE_CONFIG } from '@/constants';
+import { SITE_CONFIG } from '@/constants';
+import { LanguageSelector, useLanguage } from '@/features/i18n';
 import { useScrollPosition, useClickOutside } from '@/hooks';
 import type { User as UserType } from '@/types';
 
@@ -16,6 +17,8 @@ const Navbar: React.FC = () => {
   const location = useLocation();
   const scrolled = useScrollPosition(50);
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const { content } = useLanguage();
+  const { navbar } = content;
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -74,11 +77,11 @@ const Navbar: React.FC = () => {
               <div className="flex items-center gap-2 text-brand-background/90 hover:text-brand-primary/70 transition-colors">
                 <MapPin size={14} className="flex-shrink-0" />
                 <span className="hidden sm:inline">{SITE_CONFIG.contact.location}</span>
-                <span className="sm:hidden">Quillabamba</span>
+                <span className="sm:hidden">{navbar.locationShort}</span>
               </div>
               <div className="hidden md:flex items-center gap-2 text-brand-background/90 hover:text-brand-primary/70 transition-colors">
                 <Info size={14} className="flex-shrink-0" />
-                <span>{SITE_CONFIG.contact.purpose}</span>
+                <span>{navbar.purpose}</span>
               </div>
               <a
                 href={`mailto:${SITE_CONFIG.social.email}`}
@@ -90,21 +93,21 @@ const Navbar: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-4">
-              <span className="hidden sm:inline text-sm font-medium text-brand-background/80">Síguenos:</span>
+              <span className="hidden sm:inline text-sm font-medium text-brand-background/80">{navbar.followUs}</span>
               <div className="flex items-center gap-2">
                 <a href={SITE_CONFIG.social.facebook} target="_blank" rel="noopener noreferrer"
                   className="w-7 h-7 rounded-full bg-white/15 hover:bg-brand-primary flex items-center justify-center transition-all duration-200 hover:scale-110"
-                  aria-label="Facebook" title="Síguenos en Facebook">
+                  aria-label="Facebook" title={navbar.socialLabels.facebook}>
                   <FaFacebookF className="text-sm text-white" />
                 </a>
                 <a href={SITE_CONFIG.social.instagram} target="_blank" rel="noopener noreferrer"
                   className="w-7 h-7 rounded-full bg-white/15 hover:bg-brand-primary flex items-center justify-center transition-all duration-200 hover:scale-110"
-                  aria-label="Instagram" title="Síguenos en Instagram">
+                  aria-label="Instagram" title={navbar.socialLabels.instagram}>
                   <FaInstagram className="text-sm text-white" />
                 </a>
                 <a href={SITE_CONFIG.social.youtube} target="_blank" rel="noopener noreferrer"
                   className="w-7 h-7 rounded-full bg-white/15 hover:bg-brand-primary flex items-center justify-center transition-all duration-200 hover:scale-110"
-                  aria-label="YouTube" title="Síguenos en YouTube">
+                  aria-label="YouTube" title={navbar.socialLabels.youtube}>
                   <FaYoutube className="text-sm text-white" />
                 </a>
               </div>
@@ -119,16 +122,16 @@ const Navbar: React.FC = () => {
           scrolled ? 'bg-white/95 dark:bg-brand-text/95 backdrop-blur-md shadow-lg border-b border-brand-primary/20 dark:border-brand-primary' : 'bg-transparent'
         } transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]`}
         role="navigation"
-        aria-label="Navegación principal"
+        aria-label={navbar.mainNavLabel}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-          <div className="flex justify-between h-14 sm:h-16 items-center gap-2 sm:gap-4">
+          <div className="flex justify-between h-14 sm:h-16 items-center gap-1.5 sm:gap-4">
             {/* Logo */}
-            <Link to="/" className="flex items-center flex-shrink-0 group relative z-10" aria-label="Ir al inicio - Explorando La Convención">
+            <Link to="/" className="flex min-w-0 items-center flex-shrink group relative z-10" aria-label="Ir al inicio - Explorando La Convención">
               <img
                 src="/images/logos.png"
                 alt="Explorando La Convención - Turismo en Quillabamba"
-                className="h-10 sm:h-12 lg:h-12 w-auto object-contain transition-[filter,transform] duration-300 group-hover:scale-105 group-hover:brightness-110"
+                className="h-9 sm:h-12 lg:h-12 w-auto max-w-[8.5rem] sm:max-w-[12rem] lg:max-w-none object-contain transition-[filter,transform] duration-300 group-hover:scale-105 group-hover:brightness-110"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iNjAiIGZpbGw9IiMwMEE4NkIiLz48dGV4dCB4PSIxMDAiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FeHBsb3JhbmRvPC90ZXh0Pjwvc3ZnPg==';
@@ -138,14 +141,14 @@ const Navbar: React.FC = () => {
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center space-x-4">
-              {NAVIGATION.map((item) => (
+              {content.navigation.main.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   className={`px-4 py-2 text-base font-medium transition-colors duration-200 ${
                     scrolled
                       ? 'text-brand-text dark:text-slate-200 hover:text-brand-primary dark:hover:text-brand-primary/70'
-                      : 'text-white hover:text-brand-primary/25'
+                      : 'text-white hover:text-brand-primary'
                   }`}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                 >
@@ -155,6 +158,7 @@ const Navbar: React.FC = () => {
 
               <div className="flex items-center gap-3 ml-4">
                 <ThemeToggle scrolled={scrolled} />
+                <LanguageSelector scrolled={scrolled} />
                 {user ? (
                   <div className="relative" ref={userMenuRef}>
                     <button
@@ -175,17 +179,17 @@ const Navbar: React.FC = () => {
                         <Link to="/profile" onClick={() => setShowUserMenu(false)}
                           className="w-full px-4 py-3 flex items-center gap-3 hover:bg-brand-background dark:hover:bg-brand-primary transition-colors">
                           <UserCircle className="w-5 h-5 text-brand-text/75 dark:text-slate-400" />
-                          <span className="text-sm text-brand-text dark:text-white font-medium">Mi perfil</span>
+                          <span className="text-sm text-brand-text dark:text-white font-medium">{navbar.profile}</span>
                         </Link>
                         <button className="w-full px-4 py-3 flex items-center gap-3 hover:bg-brand-background dark:hover:bg-brand-primary transition-colors">
                           <Bell className="w-5 h-5 text-brand-text/75 dark:text-slate-400" />
-                          <span className="text-sm text-brand-text dark:text-white font-medium">Mis notificaciones</span>
+                          <span className="text-sm text-brand-text dark:text-white font-medium">{navbar.notifications}</span>
                         </button>
                         <div className="border-t border-brand-primary/20 dark:border-brand-primary my-2" />
                         <button onClick={handleLogout}
                           className="w-full px-4 py-3 flex items-center gap-3 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
                           <LogOut className="w-5 h-5 text-red-600 dark:text-red-400" />
-                          <span className="text-sm text-red-600 dark:text-red-400 font-medium">Cerrar sesión</span>
+                          <span className="text-sm text-red-600 dark:text-red-400 font-medium">{navbar.logout}</span>
                         </button>
                       </div>
                     )}
@@ -196,7 +200,7 @@ const Navbar: React.FC = () => {
                     className={`p-2 rounded-full transition-colors duration-200 focus:outline-none ${
                       scrolled ? 'text-brand-text dark:text-white' : 'text-white'
                     }`}
-                    aria-label="Iniciar sesión" title="Iniciar sesión"
+                    aria-label={navbar.login} title={navbar.login}
                   >
                     <User className="w-5 h-5" />
                   </button>
@@ -205,8 +209,9 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Mobile controls */}
-            <div className="lg:hidden flex items-center gap-2">
+            <div className="lg:hidden flex flex-shrink-0 items-center gap-1 sm:gap-2">
               <ThemeToggle scrolled={scrolled} />
+              <LanguageSelector scrolled={scrolled} compact />
               {user ? (
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
@@ -226,7 +231,7 @@ const Navbar: React.FC = () => {
                   className={`p-2 rounded-full transition-colors duration-200 focus:outline-none ${
                     scrolled ? 'text-brand-text dark:text-white' : 'text-white'
                   }`}
-                  aria-label="Iniciar sesión" title="Iniciar sesión"
+                  aria-label={navbar.login} title={navbar.login}
                 >
                   <User className="w-5 h-5" />
                 </button>
@@ -236,7 +241,7 @@ const Navbar: React.FC = () => {
                 className={`inline-flex items-center justify-center p-2 rounded-lg focus:outline-none transition-all duration-200 ${
                   scrolled ? 'text-brand-text dark:text-slate-200' : 'text-white'
                 }`}
-                aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+                aria-label={isOpen ? navbar.closeMenu : navbar.openMenu}
                 aria-expanded={isOpen}
               >
                 {isOpen ? <X className="w-6 h-6" strokeWidth={2.5} /> : <Menu className="w-6 h-6" strokeWidth={2.5} />}
@@ -249,32 +254,32 @@ const Navbar: React.FC = () => {
 
       {/* Mobile menu drawer */}
       {isOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label="Menú de navegación móvil">
+        <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label={navbar.mobileMenuLabel}>
           <button
             type="button"
             className="absolute inset-0 bg-black/45 backdrop-blur-sm"
-            aria-label="Cerrar menú"
+            aria-label={navbar.closeMenu}
             onClick={() => setIsOpen(false)}
           />
 
           <aside className="absolute right-0 top-0 h-full w-[min(20rem,86vw)] bg-white dark:bg-brand-text shadow-2xl border-l border-brand-primary/20 dark:border-brand-primary">
             <div className="flex h-16 items-center justify-between border-b border-brand-primary/20 dark:border-brand-primary px-5">
               <span className="text-sm font-bold uppercase tracking-wide text-brand-text dark:text-white">
-                Menú
+                {navbar.menuTitle}
               </span>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-brand-text/90 transition-colors hover:bg-brand-background focus:outline-none focus:ring-2 focus:ring-brand-primary/70 dark:text-slate-200 dark:hover:bg-brand-text/90"
-                aria-label="Cerrar menú"
+                aria-label={navbar.closeMenu}
               >
                 <X className="h-6 w-6" strokeWidth={2.5} />
               </button>
             </div>
 
-            <nav className="px-3 py-4" aria-label="Menú de navegación móvil">
+            <nav className="px-3 py-4" aria-label={navbar.mobileMenuLabel}>
               <ul className="space-y-1">
-                {NAVIGATION.map((item) => (
+                {content.navigation.main.map((item) => (
                   <li key={item.name}>
                     <Link
                       to={item.href}
@@ -304,18 +309,18 @@ const Navbar: React.FC = () => {
             <Link to="/profile" onClick={() => setShowUserMenu(false)}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-background dark:hover:bg-brand-primary text-brand-text/90 dark:text-slate-200 transition-colors duration-200">
               <UserCircle className="w-5 h-5" />
-              <span className="text-sm font-medium">Mi perfil</span>
+              <span className="text-sm font-medium">{navbar.profile}</span>
             </Link>
             <button onClick={() => setShowUserMenu(false)}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-brand-background dark:hover:bg-brand-primary text-brand-text/90 dark:text-slate-200 transition-colors duration-200">
               <Bell className="w-5 h-5" />
-              <span className="text-sm font-medium">Mis notificaciones</span>
+              <span className="text-sm font-medium">{navbar.notifications}</span>
             </button>
             <div className="border-t border-brand-primary/20 dark:border-brand-primary my-2" />
             <button onClick={() => { setShowUserMenu(false); handleLogout(); }}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400 transition-colors duration-200">
               <LogOut className="w-5 h-5" />
-              <span className="text-sm font-medium">Cerrar sesión</span>
+              <span className="text-sm font-medium">{navbar.logout}</span>
             </button>
           </div>
         </div>
