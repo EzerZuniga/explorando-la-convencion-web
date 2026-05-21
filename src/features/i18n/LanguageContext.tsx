@@ -23,8 +23,7 @@ function getInitialLanguage(): LanguageCode {
   const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
   if (isLanguageCode(savedLanguage)) return savedLanguage;
 
-  const browserLanguage = window.navigator.language.slice(0, 2);
-  return isLanguageCode(browserLanguage) ? browserLanguage : DEFAULT_LANGUAGE;
+  return DEFAULT_LANGUAGE;
 }
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {

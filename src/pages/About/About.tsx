@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   ArrowRight,
   Heart,
@@ -9,12 +9,12 @@ import {
   Star,
   Target,
   Users,
-} from 'lucide-react';
-import { Link } from 'react-router-dom';
-import SEOHead from '@/features/seo';
-import { SITE_CONFIG } from '@/constants';
-import { useLanguage } from '@/features/i18n';
-import { useCounterAnimation } from '@/hooks';
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import SEOHead from "@/features/seo";
+import { SITE_CONFIG } from "@/constants";
+import { useLanguage } from "@/features/i18n";
+import { useCounterAnimation } from "@/hooks";
 
 const ICON_MAP: Record<string, React.ElementType> = {
   MapPin,
@@ -26,29 +26,54 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Lightbulb,
 };
 
-const toRgba = (hex: string, alpha: number): string => {
-  const sanitized = hex.replace('#', '');
-  if (sanitized.length !== 6) return `rgba(27, 67, 50, ${alpha})`;
-  const r = parseInt(sanitized.slice(0, 2), 16);
-  const g = parseInt(sanitized.slice(2, 4), 16);
-  const b = parseInt(sanitized.slice(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-};
+const STAT_REVEAL_DELAYS = [
+  "[animation-delay:0ms]",
+  "[animation-delay:80ms]",
+  "[animation-delay:160ms]",
+  "[animation-delay:240ms]",
+];
+
+const MISSION_REVEAL_DELAYS = [
+  "[animation-delay:0ms]",
+  "[animation-delay:100ms]",
+];
+
+const VALUE_REVEAL_DELAYS = [
+  "[animation-delay:0ms]",
+  "[animation-delay:60ms]",
+  "[animation-delay:120ms]",
+  "[animation-delay:180ms]",
+  "[animation-delay:240ms]",
+  "[animation-delay:300ms]",
+];
+
+const TEAM_REVEAL_DELAYS = [
+  "[animation-delay:0ms]",
+  "[animation-delay:90ms]",
+  "[animation-delay:180ms]",
+  "[animation-delay:270ms]",
+  "[animation-delay:360ms]",
+  "[animation-delay:450ms]",
+];
+
+const getRevealDelayClass = (classes: string[], index: number) =>
+  classes[index] ?? classes[0];
 
 type SectionHeaderProps = {
   eyebrow?: string;
   title: string;
   subtitle?: string;
-  align?: 'left' | 'center';
+  align?: "left" | "center";
 };
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({
   eyebrow,
   title,
   subtitle,
-  align = 'center',
+  align = "center",
 }) => {
-  const alignment = align === 'left' ? 'text-left items-start' : 'text-center items-center';
+  const alignment =
+    align === "left" ? "text-left items-start" : "text-center items-center";
 
   return (
     <div className={`mb-10 flex flex-col ${alignment} animate-reveal-up`}>
@@ -71,13 +96,11 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
 };
 
 const navItems = [
-  { href: '#proposito', label: 'Propósito' },
-  { href: '#historia', label: 'Historia' },
-  { href: '#valores', label: 'Valores' },
-  { href: '#equipo', label: 'Equipo' },
+  { href: "#proposito", label: "Propósito" },
+  { href: "#historia", label: "Historia" },
+  { href: "#valores", label: "Valores" },
+  { href: "#equipo", label: "Equipo" },
 ];
-
-const TEAM_CARD_ACCENT = '#1B4332';
 
 const About: React.FC = () => {
   const { content } = useLanguage();
@@ -122,7 +145,10 @@ const About: React.FC = () => {
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-secondary">
               Guía rápida
             </p>
-            <nav className="mt-4 grid grid-cols-2 gap-2" aria-label="Secciones de Nuestro Equipo">
+            <nav
+              className="mt-4 grid grid-cols-2 gap-2"
+              aria-label="Secciones de Nuestro Equipo"
+            >
               {navItems.map((item) => (
                 <a
                   key={item.href}
@@ -144,8 +170,7 @@ const About: React.FC = () => {
             <div
               key={stat.label}
               ref={counters[i].counterRef}
-              className="animate-reveal-up px-3 py-7 text-center sm:px-5"
-              style={{ animationDelay: `${i * 80}ms`, animationFillMode: 'both' }}
+              className={`animate-reveal-up px-3 py-7 text-center [animation-fill-mode:both] sm:px-5 ${getRevealDelayClass(STAT_REVEAL_DELAYS, i)}`}
             >
               <div className="font-heading text-4xl font-bold leading-none text-white sm:text-5xl">
                 {counters[i].count}
@@ -159,7 +184,10 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      <section id="proposito" className="scroll-mt-24 bg-white py-16 dark:bg-slate-950 sm:py-20">
+      <section
+        id="proposito"
+        className="scroll-mt-24 bg-white py-16 dark:bg-slate-950 sm:py-20"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader title={page.missionVisionTitle} />
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -179,8 +207,7 @@ const About: React.FC = () => {
               return (
                 <article
                   key={item.title}
-                  className="group animate-reveal-up border border-brand-text/12 bg-brand-background/45 p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-primary/45 hover:bg-white hover:shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-900 sm:p-8"
-                  style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'both' }}
+                  className={`group animate-reveal-up border border-brand-text/12 bg-brand-background/45 p-6 shadow-sm transition duration-300 [animation-fill-mode:both] hover:-translate-y-1 hover:border-brand-primary/45 hover:bg-white hover:shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-900 sm:p-8 ${getRevealDelayClass(MISSION_REVEAL_DELAYS, index)}`}
                 >
                   <div className="mb-6 flex h-12 w-12 items-center justify-center border border-brand-text/15 bg-white text-brand-text transition duration-300 group-hover:border-brand-primary group-hover:text-brand-primary dark:border-slate-700 dark:bg-slate-950 dark:text-brand-primary">
                     <Icon className="h-5 w-5" strokeWidth={2} />
@@ -198,7 +225,10 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      <section id="historia" className="scroll-mt-24 border-y border-brand-text/10 bg-brand-background py-16 dark:border-slate-800 dark:bg-slate-900 sm:py-20">
+      <section
+        id="historia"
+        className="scroll-mt-24 border-y border-brand-text/10 bg-brand-background py-16 dark:border-slate-800 dark:bg-slate-900 sm:py-20"
+      >
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-[0.78fr_1.22fr] lg:px-8">
           <SectionHeader title={page.historyTitle} align="left" />
           <article className="animate-reveal-up border-l-4 border-brand-primary bg-white p-6 shadow-lg shadow-brand-text/8 dark:bg-slate-950 sm:p-9">
@@ -211,20 +241,27 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      <section id="valores" className="scroll-mt-24 bg-white py-16 dark:bg-slate-950 sm:py-20">
+      <section
+        id="valores"
+        className="scroll-mt-24 bg-white py-16 dark:bg-slate-950 sm:py-20"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader title={page.valuesTitle} subtitle={page.valuesSubtitle} />
+          <SectionHeader
+            title={page.valuesTitle}
+            subtitle={page.valuesSubtitle}
+          />
           <div className="grid grid-cols-1 gap-px overflow-hidden border border-brand-text/10 bg-brand-text/10 dark:border-slate-700 dark:bg-slate-700 sm:grid-cols-2 lg:grid-cols-3">
             {page.values.map((value, index) => {
               const IconComponent = ICON_MAP[value.icon];
               return (
                 <article
                   key={value.title}
-                  className="group animate-reveal-up bg-white p-6 transition duration-300 hover:bg-brand-background dark:bg-slate-900 dark:hover:bg-slate-800 sm:p-7"
-                  style={{ animationDelay: `${index * 60}ms`, animationFillMode: 'both' }}
+                  className={`group animate-reveal-up bg-white p-6 transition duration-300 [animation-fill-mode:both] hover:bg-brand-background dark:bg-slate-900 dark:hover:bg-slate-800 sm:p-7 ${getRevealDelayClass(VALUE_REVEAL_DELAYS, index)}`}
                 >
                   <div className="mb-5 flex h-11 w-11 items-center justify-center border border-brand-text/15 bg-brand-background text-brand-text transition duration-300 group-hover:border-brand-primary group-hover:bg-white group-hover:text-brand-primary dark:border-slate-700 dark:bg-slate-950 dark:text-brand-primary">
-                    {IconComponent && <IconComponent className="h-5 w-5" strokeWidth={2} />}
+                    {IconComponent && (
+                      <IconComponent className="h-5 w-5" strokeWidth={2} />
+                    )}
                   </div>
                   <h3 className="mb-2 font-heading text-xl font-bold text-brand-text dark:text-white">
                     {value.title}
@@ -239,7 +276,10 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      <section id="equipo" className="scroll-mt-24 bg-gradient-to-b from-brand-background via-white to-[#FFF3E3] py-16 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 sm:py-20">
+      <section
+        id="equipo"
+        className="scroll-mt-24 bg-gradient-to-b from-brand-background via-white to-[#FFF3E3] py-16 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 sm:py-20"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader title={page.teamTitle} subtitle={page.teamSubtitle} />
 
@@ -253,37 +293,26 @@ const About: React.FC = () => {
                 return (
                   <article
                     key={member.name}
-                    className="group relative animate-reveal-up"
-                    style={{
-                      animationDelay: `${index * 90}ms`,
-                      animationFillMode: 'both',
-                    }}
+                    className={`group relative animate-reveal-up [animation-fill-mode:both] ${getRevealDelayClass(TEAM_REVEAL_DELAYS, index)}`}
                   >
                     <div
-                      className={`relative grid items-center gap-6 overflow-hidden border bg-white p-5 backdrop-blur-sm dark:bg-slate-900 sm:p-7 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-10 lg:p-8 ${
-                        isReversed ? 'lg:grid-cols-[minmax(0,1fr)_17rem]' : ''
+                      className={`relative grid items-center gap-6 overflow-hidden border border-brand-text/30 bg-white p-5 shadow-[0_-28px_68px_-34px_rgba(27,67,50,0.5),0_34px_82px_-32px_rgba(27,67,50,0.62),0_10px_28px_-18px_rgba(15,29,24,0.35)] backdrop-blur-sm dark:bg-slate-900 sm:p-7 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-10 lg:p-8 ${
+                        isReversed ? "lg:grid-cols-[minmax(0,1fr)_17rem]" : ""
                       }`}
-                      style={{
-                        borderColor: toRgba(TEAM_CARD_ACCENT, 0.32),
-                        boxShadow: `0 -28px 68px -34px ${toRgba(TEAM_CARD_ACCENT, 0.5)}, 0 34px 82px -32px ${toRgba(TEAM_CARD_ACCENT, 0.62)}, 0 10px 28px -18px rgba(15, 29, 24, 0.35)`,
-                      }}
                     >
                       <div
-                        className="absolute inset-x-0 top-0 h-1"
-                        style={{ backgroundColor: TEAM_CARD_ACCENT }}
+                        className="absolute inset-x-0 top-0 h-1 bg-brand-text"
                         aria-hidden="true"
                       />
-                      <div className={`${isReversed ? 'lg:order-2' : ''} flex justify-center lg:justify-start`}>
+                      <div
+                        className={`${isReversed ? "lg:order-2" : ""} flex justify-center lg:justify-start`}
+                      >
                         <div className="relative h-56 w-56 shrink-0 sm:h-64 sm:w-64 lg:h-60 lg:w-60">
                           <div
-                            className="absolute inset-0 rounded-full opacity-30 blur-2xl"
-                            style={{ backgroundColor: TEAM_CARD_ACCENT }}
+                            className="absolute inset-0 rounded-full bg-brand-text opacity-30 blur-2xl"
                             aria-hidden="true"
                           />
-                          <div
-                            className="relative h-full w-full overflow-hidden rounded-full border-4 bg-brand-background p-1 shadow-[0_-16px_38px_-24px_rgba(27,67,50,0.55),0_24px_46px_-24px_rgba(27,67,50,0.65)]"
-                            style={{ borderColor: TEAM_CARD_ACCENT }}
-                          >
+                          <div className="relative h-full w-full overflow-hidden rounded-full border-4 border-brand-text bg-brand-background p-1 shadow-[0_-16px_38px_-24px_rgba(27,67,50,0.55),0_24px_46px_-24px_rgba(27,67,50,0.65)]">
                             <img
                               src={member.image}
                               alt={`Foto de ${member.name}`}
@@ -292,8 +321,7 @@ const About: React.FC = () => {
                             />
                           </div>
                           <span
-                            className="absolute bottom-4 right-2 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white text-sm font-bold text-white shadow-2xl dark:border-slate-900"
-                            style={{ backgroundColor: TEAM_CARD_ACCENT }}
+                            className="absolute bottom-4 right-2 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-brand-text text-sm font-bold text-white shadow-2xl dark:border-slate-900"
                             aria-hidden="true"
                           >
                             {member.initials}
@@ -301,8 +329,12 @@ const About: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className={`${isReversed ? 'lg:order-1 lg:text-right' : ''}`}>
-                        <div className={`mb-5 flex flex-col ${isReversed ? 'lg:items-end' : ''}`}>
+                      <div
+                        className={`${isReversed ? "lg:order-1 lg:text-right" : ""}`}
+                      >
+                        <div
+                          className={`mb-5 flex flex-col ${isReversed ? "lg:items-end" : ""}`}
+                        >
                           <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-primary">
                             Equipo local
                           </p>
@@ -318,16 +350,13 @@ const About: React.FC = () => {
                           {member.description}
                         </p>
 
-                        <div className={`mt-6 flex flex-wrap gap-2 ${isReversed ? 'lg:justify-end' : ''}`}>
+                        <div
+                          className={`mt-6 flex flex-wrap gap-2 ${isReversed ? "lg:justify-end" : ""}`}
+                        >
                           {member.skills.map((skill) => (
                             <span
                               key={skill}
-                              className="border px-3 py-1.5 text-xs font-semibold"
-                              style={{
-                                color: TEAM_CARD_ACCENT,
-                                backgroundColor: toRgba(TEAM_CARD_ACCENT, 0.1),
-                                borderColor: toRgba(TEAM_CARD_ACCENT, 0.34),
-                              }}
+                              className="border border-brand-text/35 bg-brand-text/10 px-3 py-1.5 text-xs font-semibold text-brand-text"
                             >
                               {skill}
                             </span>
@@ -335,7 +364,6 @@ const About: React.FC = () => {
                         </div>
                       </div>
                     </div>
-
                   </article>
                 );
               })}
@@ -348,10 +376,15 @@ const About: React.FC = () => {
                     Trabajo colaborativo
                   </p>
                   <p className="mt-2 max-w-3xl text-sm leading-7 text-brand-text/74 dark:text-slate-300">
-                    Cada perfil aporta una mirada distinta: tecnología, contenido, fotografía, guía local y difusión digital al servicio de La Convención.
+                    Cada perfil aporta una mirada distinta: tecnología,
+                    contenido, fotografía, guía local y difusión digital al
+                    servicio de La Convención.
                   </p>
                 </div>
-                <Users className="h-10 w-10 shrink-0 text-brand-text/40 dark:text-brand-primary" strokeWidth={1.8} />
+                <Users
+                  className="h-10 w-10 shrink-0 text-brand-text/40 dark:text-brand-primary"
+                  strokeWidth={1.8}
+                />
               </div>
             </div>
           </div>
