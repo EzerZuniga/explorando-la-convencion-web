@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: 'Explorando la Convención',
   shortName: 'ExplorandoLC',
   description: 'Descubre los mejores destinos turísticos, consejos de viaje, gastronomía peruana y guías completas. Blog de aventuras y experiencias únicas en Perú.',
-  url: 'https://explorando-la-convencion-web-eta.vercel.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://explorando-la-convencion-web-eta.vercel.app',
   author: 'Ezer B. Zuniga Chura',
   locale: 'es_PE',
   ogImage: '/og-image.jpg',

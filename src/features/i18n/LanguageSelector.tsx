@@ -22,9 +22,7 @@ export default function LanguageSelector({
 
   useClickOutside(menuRef, () => setIsOpen(false));
 
-  const buttonTextColor = scrolled
-    ? "text-brand-text dark:text-white"
-    : "text-white";
+  const buttonTextColor = scrolled ? "text-brand-text " : "text-white";
 
   return (
     <div className="relative" ref={menuRef}>
@@ -48,7 +46,7 @@ export default function LanguageSelector({
 
       {isOpen && (
         <div
-          className="absolute right-0 z-[70] mt-2 w-28 overflow-hidden rounded-lg border border-brand-primary/20 bg-white py-1.5 shadow-2xl dark:border-brand-primary dark:bg-brand-text"
+          className="absolute right-0 z-[70] mt-2 w-28 overflow-hidden rounded-lg border border-brand-primary/20 bg-white py-1.5 shadow-2xl  "
           role="menu"
         >
           {LANGUAGES.map((item) => {
@@ -66,8 +64,8 @@ export default function LanguageSelector({
                 }}
                 className={`flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-sm transition-colors ${
                   selected
-                    ? "bg-brand-primary/10 text-brand-text dark:bg-brand-primary/20 dark:text-white"
-                    : "text-brand-text/85 hover:bg-brand-background dark:text-slate-200 dark:hover:bg-brand-primary/20"
+                    ? "bg-brand-primary/10 text-brand-text  "
+                    : "text-brand-text/85 hover:bg-brand-background  "
                 }`}
                 title={`${content.languageSelector.changeTo} ${item.nativeName}`}
               >

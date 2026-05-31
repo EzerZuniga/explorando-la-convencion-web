@@ -4,38 +4,23 @@
 
 @layer base {
   :root {
-    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-heading: 'Playfair Display', Georgia, serif;
-    --color-primary: #4BB543;
-    --color-accent: #4BB543;
-    --color-background: #F5F9F6;
-    --color-surface: #FFFFFF;
-    --color-surface-muted: #F3F7F5;
-    --color-border: #E6ECEA;
+    --font-body: "Inter", system-ui, -apple-system, sans-serif;
+    --font-heading: "Playfair Display", Georgia, serif;
+    --color-primary: #4bb543;
+    --color-accent: #4bb543;
+    --color-background: #f5f9f6;
+    --color-surface: #ffffff;
+    --color-surface-muted: #f3f7f5;
+    --color-border: #e6ecea;
     --color-text: #365348;
-    --color-muted-text: #5B7D70;
-    --color-heading: #1B4332;
-    --color-link: #4BB543;
-  }
-
-  .dark {
-    --color-background: #0F1D18;
-    --color-surface: #13261F;
-    --color-surface-muted: #163F32;
-    --color-border: #2F6B56;
-    --color-text: #DFEAE5;
-    --color-muted-text: #9FB9AD;
-    --color-heading: #F5F9F6;
-    --color-link: #72DDB7;
+    --color-muted-text: #5b7d70;
+    --color-heading: #1b4332;
+    --color-link: #4bb543;
   }
 
   html {
     scroll-behavior: smooth;
     color-scheme: light;
-  }
-
-  html.dark {
-    color-scheme: dark;
   }
 
   body {
@@ -81,12 +66,12 @@
   }
 
   a:hover {
-    color: #3FA33A;
+    color: #3fa33a;
   }
 
   ::selection {
     background-color: rgba(0, 168, 107, 0.22);
-    color: #1B4332;
+    color: #1b4332;
   }
 }
 
@@ -142,7 +127,7 @@
   }
 
   .wp-link:hover {
-    color: #3FA33A;
+    color: #3fa33a;
   }
 
   .wp-btn {
@@ -155,7 +140,7 @@
   }
 
   .wp-btn-primary:hover {
-    background-color: #3FA33A;
+    background-color: #3fa33a;
   }
 
   .wp-btn-secondary {
@@ -165,7 +150,7 @@
   }
 
   .wp-btn-secondary:hover {
-    background-color: #F5F9F6;
+    background-color: #f5f9f6;
   }
 
   .wp-btn-light {
@@ -182,14 +167,6 @@
     @apply w-full rounded-none border px-4 py-3 text-sm text-brand-text transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary;
     background-color: var(--color-surface);
     border-color: var(--color-border);
-  }
-
-  .dark .wp-input,
-  .dark .wp-select,
-  .dark .wp-textarea {
-    @apply text-white;
-    background-color: rgba(19, 38, 31, 0.95);
-    border-color: #2B4A3E;
   }
 
   .wp-input::placeholder,
@@ -234,11 +211,11 @@
   }
 
   .title {
-    @apply font-heading text-3xl md:text-4xl font-extrabold text-brand-text dark:text-white mb-4;
+    @apply font-heading text-3xl md:text-4xl font-extrabold text-brand-text  mb-4;
   }
 
   .subtitle {
-    @apply text-lg md:text-xl text-brand-text dark:text-slate-300 mb-2;
+    @apply text-lg md:text-xl text-brand-text  mb-2;
   }
 
   .divider {

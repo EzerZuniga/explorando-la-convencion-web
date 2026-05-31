@@ -1,4 +1,6 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+"use client";
+
+import { Component, ErrorInfo, ReactNode } from "react";
 
 export interface ErrorBoundaryProps {
   children: ReactNode;
@@ -21,7 +23,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('ErrorBoundary caught:', error, errorInfo);
+    console.error("ErrorBoundary caught:", error, errorInfo);
   }
 
   render() {
@@ -31,15 +33,19 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-slate-950 p-8" role="alert" aria-live="assertive">
+        <div
+          className="min-h-screen flex items-center justify-center bg-gray-50  p-8"
+          role="alert"
+          aria-live="assertive"
+        >
           <div className="max-w-lg text-center">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-2xl font-bold text-gray-900  mb-4">
               Algo salió mal
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-gray-600  mb-6">
               Ha ocurrido un error inesperado. Por favor, recarga la página.
             </p>
-            <pre className="text-left bg-gray-100 dark:bg-slate-800 rounded-lg p-4 text-sm text-red-600 dark:text-red-400 overflow-auto max-h-40 mb-6">
+            <pre className="text-left bg-gray-100  rounded-lg p-4 text-sm text-red-600  overflow-auto max-h-40 mb-6">
               {this.state.error?.message}
             </pre>
             <button

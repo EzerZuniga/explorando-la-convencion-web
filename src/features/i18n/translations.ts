@@ -1413,22 +1413,22 @@ const es: TranslationContent = {
         {
           question: "¿Cuál es la mejor época para visitar La Convención?",
           answer:
-            "Se puede visitar durante gran parte del año. Para recorridos de naturaleza conviene revisar el clima y planificar con mayor cuidado en temporada de lluvias.",
+            "La Convención se puede visitar durante gran parte del año gracias a su clima cálido y a la variedad de actividades disponibles. Para caminatas, miradores, cataratas y rutas de naturaleza, conviene revisar el pronóstico antes de salir y planificar con mayor cuidado entre los meses de lluvia. Si buscas recorridos más tranquilos, prioriza días secos, salidas temprano y siempre confirma el estado de las vías locales.",
         },
         {
           question: "¿Desde dónde se suele iniciar el recorrido?",
           answer:
-            "Quillabamba funciona como punto principal de referencia por su conexión terrestre, servicios y cercanía a distintos atractivos.",
+            "Quillabamba suele funcionar como punto principal de referencia porque concentra servicios, transporte, hospedajes, alimentación y conexión hacia distintos atractivos de la provincia. Desde allí es más sencillo organizar visitas cercanas, consultar rutas locales y ajustar tiempos según el clima, el presupuesto y el tipo de experiencia que quieras realizar.",
         },
         {
           question: "¿Qué información debería revisar antes de salir?",
           answer:
-            "Clima, distancias, horarios de transporte, presupuesto, estado de rutas y recomendaciones básicas de seguridad.",
+            "Antes de salir revisa clima, distancias reales, horarios de transporte, presupuesto disponible, estado de rutas y recomendaciones básicas de seguridad. También es útil confirmar si el destino requiere guía, entrada, reserva previa o movilidad especial. Llevar agua, efectivo, batería suficiente y datos de contacto locales mejora mucho la experiencia, especialmente en recorridos fuera de la zona urbana.",
         },
         {
           question: "¿El portal solo muestra destinos turísticos?",
           answer:
-            "No. También reúne gastronomía, cultura, consejos prácticos, publicaciones y datos útiles para entender mejor la provincia.",
+            "No. El portal también reúne gastronomía, cultura, consejos prácticos, publicaciones, referencias de ubicación y datos útiles para entender mejor la provincia. La idea es que no solo encuentres lugares para visitar, sino también contexto para valorar la identidad local, planificar con criterio y descubrir experiencias vinculadas a la vida cotidiana de La Convención.",
         },
       ],
       locationCards: [

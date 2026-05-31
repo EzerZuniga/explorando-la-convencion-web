@@ -1,8 +1,8 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
 export default {
-  darkMode: "class",
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       fontFamily: {
@@ -36,6 +36,9 @@ export default {
         "reveal-up": "revealUp 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
         "modal-in": "modalFadeIn 0.3s ease-out",
       },
+      transitionTimingFunction: {
+        "smooth-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
       keyframes: {
         fadeIn: {
           from: { opacity: "0", transform: "translateY(20px)" },
@@ -56,5 +59,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [animate],
 } satisfies Config;
