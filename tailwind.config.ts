@@ -6,12 +6,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
-        body: ["Inter", "system-ui", "-apple-system", "sans-serif"],
-        display: ["Playfair Display", "Georgia", "serif"],
-        heading: ["Playfair Display", "Georgia", "serif"],
-        poppins: ["Inter", "system-ui", "-apple-system", "sans-serif"],
-        merriweather: ["Playfair Display", "Georgia", "serif"],
+        sans: ["var(--font-body)", "system-ui", "-apple-system", "sans-serif"],
+        body: ["var(--font-body)", "system-ui", "-apple-system", "sans-serif"],
+        display: ["var(--font-heading)", "Georgia", "serif"],
+        heading: ["var(--font-heading)", "Georgia", "serif"],
+        poppins: ["var(--font-body)", "system-ui", "-apple-system", "sans-serif"],
+        merriweather: ["var(--font-heading)", "Georgia", "serif"],
       },
       borderWidth: {
         3: "3px",
@@ -19,7 +19,7 @@ export default {
       colors: {
         brand: {
           text: "#1B4332",
-          background: "#F5F9F6",
+          background: "#EAF0F6",
           primary: "#4BB543",
           secondary: "#F4A261",
         },

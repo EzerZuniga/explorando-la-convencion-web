@@ -8,7 +8,7 @@
     --font-heading: "Playfair Display", Georgia, serif;
     --color-primary: #4bb543;
     --color-accent: #4bb543;
-    --color-background: #f5f9f6;
+    --color-background: #eaf0f6;
     --color-surface: #ffffff;
     --color-surface-muted: #f3f7f5;
     --color-border: #e6ecea;
@@ -29,9 +29,15 @@
     color: var(--color-text);
     min-height: 100vh;
     line-height: 1.7;
-    letter-spacing: 0.01em;
+    letter-spacing: 0;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "calt" 1;
   }
 
   h1,
@@ -44,12 +50,18 @@
     font-weight: 700;
     color: var(--color-heading);
     margin-bottom: 0.5em;
-    line-height: 1.2;
+    line-height: 1.12;
+    letter-spacing: 0;
+    text-wrap: balance;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1;
   }
 
   p,
   li {
     line-height: 1.7;
+    text-wrap: pretty;
   }
 
   button,
@@ -150,7 +162,7 @@
   }
 
   .wp-btn-secondary:hover {
-    background-color: #f5f9f6;
+    background-color: var(--color-background);
   }
 
   .wp-btn-light {

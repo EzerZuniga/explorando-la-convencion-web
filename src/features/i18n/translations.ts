@@ -1284,34 +1284,37 @@ const es: TranslationContent = {
           to: "/destinations",
           title: "Destinos",
           description:
-            "Rutas naturales, miradores, cascadas y puntos de interés.",
+            "Rutas naturales, miradores, cascadas, caminos escénicos y puntos de interés para organizar tu próxima visita.",
         },
         {
           to: "/gastronomia",
           title: "Gastronomía",
           description:
-            "Café, cacao, productos locales y sabores de selva alta.",
+            "Café, cacao, productos locales y sabores de selva alta para descubrir la identidad culinaria de la provincia.",
         },
         {
           to: "/tips",
           title: "Consejos",
           description:
-            "Clima, transporte, seguridad y recomendaciones prácticas.",
+            "Clima, transporte, seguridad, presupuesto y recomendaciones prácticas para viajar con más confianza.",
         },
         {
           to: "/blog",
           title: "Blog",
-          description: "Guías, historias y novedades para planificar mejor.",
+          description:
+            "Guías, historias, novedades y experiencias locales para planificar mejor cada recorrido por La Convención.",
         },
         {
           to: "/gallery",
           title: "Galería",
-          description: "Imágenes de paisajes, cultura, rutas y experiencias.",
+          description:
+            "Imágenes de paisajes, cultura, rutas y experiencias para inspirar tu próxima visita con más contexto.",
         },
         {
           to: "/about",
           title: "Cultura",
-          description: "Historia, identidad, festividades y memoria local.",
+          description:
+            "Historia, identidad, festividades, memoria local y valores que dan forma a la vida de la provincia.",
         },
       ],
       highlights: [

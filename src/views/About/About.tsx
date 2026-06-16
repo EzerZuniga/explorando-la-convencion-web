@@ -98,13 +98,6 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   );
 };
 
-const navItems = [
-  { href: "#proposito", label: "Propósito" },
-  { href: "#historia", label: "Historia" },
-  { href: "#valores", label: "Valores" },
-  { href: "#equipo", label: "Equipo" },
-];
-
 const About: React.FC = () => {
   const { content } = useLanguage();
   const page = content.pages.about;
@@ -132,57 +125,38 @@ const About: React.FC = () => {
           sizes="100vw"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F1D18]/95 via-brand-text/82 to-brand-text/52" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B1813]/92 via-brand-text/76 to-[#1B4332]/38" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(11,24,19,0.72),rgba(11,24,19,0.08)_48%,rgba(11,24,19,0.2))]" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-brand-text/95 to-transparent" />
 
-        <div className="relative mx-auto grid min-h-[34rem] max-w-7xl grid-cols-1 items-end gap-10 px-4 pb-10 pt-28 sm:px-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:px-8 lg:pb-14">
-          <div className="max-w-3xl animate-fade-in-up">
-            <p className="mb-4 inline-flex border-l-4 border-brand-secondary bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur">
+        <div className="relative mx-auto flex min-h-[36rem] max-w-7xl items-end px-4 pb-12 pt-32 sm:px-6 lg:px-8 lg:pb-16">
+          <div className="max-w-3xl animate-fade-in-up [animation-fill-mode:both]">
+            <p className="mb-5 inline-flex items-center border border-white/16 border-l-4 border-l-brand-secondary bg-white/12 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-white shadow-[0_16px_34px_rgba(0,0,0,0.18)] backdrop-blur-md">
               {page.heroEyebrow}
             </p>
-            <h1 className="mb-5 font-heading text-4xl font-bold leading-[1.05] text-white drop-shadow sm:text-6xl lg:text-7xl">
+            <h1 className="mb-5 max-w-4xl font-heading text-4xl font-bold leading-[1.02] text-white drop-shadow-[0_14px_34px_rgba(0,0,0,0.28)] sm:text-6xl lg:text-7xl">
               {page.heroTitle}
             </h1>
-            <p className="max-w-2xl text-lg leading-8 text-white/92 sm:text-xl">
+            <p className="max-w-2xl text-base font-medium leading-8 text-white/92 drop-shadow-[0_8px_20px_rgba(0,0,0,0.24)] sm:text-xl">
               {page.heroDescription}
             </p>
           </div>
-
-          <aside className="animate-fade-in-up border border-white/20 bg-white/12 p-5 backdrop-blur-md lg:justify-self-end">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-secondary">
-              Guía rápida
-            </p>
-            <nav
-              className="mt-4 grid grid-cols-2 gap-2"
-              aria-label="Secciones de Nuestro Equipo"
-            >
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="group flex items-center justify-between border border-white/20 bg-white/10 px-3 py-3 text-sm font-semibold text-white transition duration-300 hover:border-brand-secondary hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-brand-secondary"
-                >
-                  {item.label}
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 motion-safe:group-hover:translate-x-1" />
-                </a>
-              ))}
-            </nav>
-          </aside>
         </div>
       </section>
 
-      <section className="border-y border-brand-text/10 bg-brand-text text-white">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-y divide-white/12 px-4 sm:px-6 md:grid-cols-4 md:divide-y-0 lg:px-8">
+      <section className="border-y border-white/10 bg-brand-text text-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-white/12 px-0 sm:grid-cols-4">
           {page.stats.map((stat, i) => (
             <div
               key={stat.label}
               ref={counters[i].counterRef}
-              className={`animate-reveal-up px-3 py-7 text-center [animation-fill-mode:both] sm:px-5 ${getRevealDelayClass(STAT_REVEAL_DELAYS, i)}`}
+              className={`animate-reveal-up bg-brand-text px-4 py-7 text-center transition-colors duration-300 [animation-fill-mode:both] hover:bg-[#204F3D] sm:px-5 sm:py-8 ${getRevealDelayClass(STAT_REVEAL_DELAYS, i)}`}
             >
-              <div className="font-heading text-4xl font-bold leading-none text-white sm:text-5xl">
+              <div className="font-heading text-4xl font-bold leading-none text-white drop-shadow-[0_12px_26px_rgba(0,0,0,0.22)] sm:text-5xl">
                 {counters[i].count}
                 <span className="text-brand-secondary">{stat.suffix}</span>
               </div>
-              <p className="mx-auto mt-3 max-w-36 text-sm leading-5 text-white/82">
+              <p className="mx-auto mt-3 max-w-40 text-sm font-medium leading-5 text-white/84">
                 {stat.label}
               </p>
             </div>

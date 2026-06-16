@@ -13,14 +13,16 @@ import {
   ChevronRight,
   Clock,
   Compass,
-  Heart,
+  Coffee,
   HelpCircle,
+  Images,
+  Landmark,
   Leaf,
   MapPin,
-  Newspaper,
+  MapPinned,
+  NotebookTabs,
   ShieldCheck,
   Sparkles,
-  Utensils,
 } from "lucide-react";
 import Link from "next/link";
 import SEOHead from "@/features/seo";
@@ -35,6 +37,8 @@ const SECTION_CLASS = "py-14 sm:py-16 lg:py-20";
 const CONTAINER_CLASS = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
 const CARD_SURFACE_CLASS =
   "bg-white  border border-[#E6ECEA]  shadow-[0_14px_35px_rgba(27,67,50,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_45px_rgba(27,67,50,0.14)]";
+const PORTAL_CARD_CLASS =
+  "border border-[#D8E7DE] bg-white px-6 pb-7 pt-8 shadow-[0_42px_90px_rgba(21,32,56,0.20),0_18px_34px_rgba(27,67,50,0.10)]";
 
 const HERO_CTA_CLASS =
   "w-full max-w-[18rem] sm:w-auto sm:max-w-none min-h-12 group relative inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-3.5 bg-brand-primary text-brand-text text-center text-xs sm:text-sm font-bold leading-tight rounded-none transition-all duration-500 shadow-xl hover:shadow-2xl uppercase tracking-wide overflow-hidden";
@@ -46,12 +50,12 @@ const HERO_CTA_ICON_CLASS =
   "relative z-10 w-5 h-5 group-hover:text-white transition-colors duration-500";
 
 const portalLinkIcons = [
-  MapPin,
-  Utensils,
-  Compass,
-  Newspaper,
-  Camera,
-  Heart,
+  MapPinned,
+  Coffee,
+  ShieldCheck,
+  NotebookTabs,
+  Images,
+  Landmark,
 ] as const;
 const statIcons = [MapPin, Camera, Calendar] as const;
 const planningStepIcons = [CheckCircle, Compass, HelpCircle] as const;
@@ -174,39 +178,44 @@ function TextLinkButton({ to, children }: { to: string; children: ReactNode }) {
   );
 }
 
-function PortalLinkCard({ to, title, description, Icon }: PortalLink) {
+function PortalLinkCard({
+  to,
+  title,
+  description,
+  Icon,
+}: PortalLink) {
   const { content } = useLanguage();
 
   return (
-    <Link
-      href={to}
-      className={`group relative block h-full overflow-hidden ${CARD_SURFACE_CLASS} p-6 hover:border-brand-primary animate-reveal-up`}
+    <article
+      className={`relative h-full min-h-[16rem] overflow-hidden ${PORTAL_CARD_CLASS}`}
     >
-      <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 -translate-y-8 bg-brand-primary/10 blur-2xl transition-opacity duration-300 group-hover:opacity-100 opacity-60"></div>
-      <div className="relative z-10 flex h-full items-start gap-4">
-        <div className="w-12 h-12 flex-shrink-0 bg-brand-background  border border-brand-primary/25 flex items-center justify-center shadow-inner transition-all duration-300 group-hover:bg-brand-primary group-hover:text-brand-text group-hover:scale-105">
-          <Icon
-            className="w-5 h-5 text-brand-text  transition-colors duration-300 group-hover:text-brand-text"
-            strokeWidth={1.75}
-          />
+      <span className="absolute inset-x-0 top-0 h-1 bg-brand-primary"></span>
+      <span className="absolute left-5 top-5 h-5 w-5 bg-[#F0F2F7]"></span>
+      <span className="absolute right-6 top-8 h-8 w-8 bg-[#F3F5F9]"></span>
+      <span className="absolute bottom-16 left-5 h-7 w-7 bg-[#F3F5F9]"></span>
+      <span className="absolute bottom-10 right-7 h-5 w-5 bg-[#EEF1F6]"></span>
+
+      <div className="relative z-10 flex h-full flex-col items-center text-center">
+        <div className="mb-5 flex h-24 w-24 items-center justify-center text-[#16251F] drop-shadow-[0_10px_18px_rgba(21,32,56,0.12)]">
+          <Icon className="h-20 w-20" strokeWidth={0.95} />
         </div>
-        <div className="min-w-0 flex-1">
-          <h3 className="text-sm font-bold text-brand-text  uppercase tracking-wide mb-1">
-            {title}
-          </h3>
-          <p className="text-sm text-gray-600  leading-relaxed">
-            {description}
-          </p>
-          <span className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-brand-text  transition-colors duration-300 group-hover:text-brand-primary">
-            {content.pages.home.ui.explore}
-            <ArrowRight
-              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-              strokeWidth={1.75}
-            />
-          </span>
-        </div>
+
+        <h3 className="mb-3 text-sm font-extrabold uppercase tracking-wide text-[#172033]">
+          {title}
+        </h3>
+        <p className="mx-auto min-h-[3.2rem] max-w-[14rem] text-xs leading-relaxed text-[#677184]">
+          {description}
+        </p>
+
+        <Link
+          href={to}
+          className="mt-5 inline-flex min-h-9 min-w-28 cursor-pointer items-center justify-center border border-[#3FA33A] bg-brand-primary px-5 text-[11px] font-bold text-brand-text shadow-[0_8px_18px_rgba(75,181,67,0.26)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 focus-visible:ring-offset-white"
+        >
+          {content.pages.home.ui.explore}
+        </Link>
       </div>
-    </Link>
+    </article>
   );
 }
 
