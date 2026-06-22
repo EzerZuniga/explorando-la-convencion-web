@@ -1,9 +1,3 @@
 export { default } from './components/LoginModal';
-export {
-  clearCurrentUser,
-  getCurrentUser,
-  readStoredUsers,
-  saveCurrentUser,
-  writeStoredUsers,
-} from './services/authStorage';
-export type { StoredUser } from './services/authStorage';
+export { useAuth } from './hooks/useAuth';
+export type { UseAuthReturn } from './hooks/useAuth';

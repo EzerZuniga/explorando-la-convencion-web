@@ -1,7 +1,7 @@
 import React from "react";
 import { Wind, Droplets, ThermometerSun } from "lucide-react";
 import { useApi } from "@/hooks";
-import { getWeather } from "@/api";
+import { getWeather } from "@/lib/http";
 import { LoadingSpinner, ErrorMessage } from "@/components";
 
 const WEATHER_CARD_CLASS =
@@ -13,7 +13,7 @@ const WeatherWidget: React.FC = () => {
   if (loading) {
     return (
       <div
-        className={`${WEATHER_CARD_CLASS} bg-gradient-to-br from-brand-primary via-[#3D9840] to-brand-text p-6 text-white flex items-center justify-center`}
+        className={`${WEATHER_CARD_CLASS} bg-[#065F46] p-6 text-white flex items-center justify-center`}
       >
         <LoadingSpinner size="lg" className="border-white/30 border-t-white" />
       </div>
@@ -32,9 +32,9 @@ const WeatherWidget: React.FC = () => {
 
   return (
     <div
-      className={`${WEATHER_CARD_CLASS} bg-gradient-to-br from-brand-primary via-[#3D9840] to-brand-text p-6 text-white relative`}
+      className={`${WEATHER_CARD_CLASS} bg-[#065F46] p-6 text-white relative`}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.22),transparent_34%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent_40%)]"></div>
       <div className="relative z-10 flex h-full flex-col">
         <div className="flex items-center justify-between mb-5">
           <div>

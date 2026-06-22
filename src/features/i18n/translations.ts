@@ -48,10 +48,10 @@ type NavigationItem = {
 
 type DeepPartial<T> = {
   [Key in keyof T]?: T[Key] extends Array<unknown>
-    ? T[Key]
-    : T[Key] extends object
-      ? DeepPartial<T[Key]>
-      : T[Key];
+  ? T[Key]
+  : T[Key] extends object
+  ? DeepPartial<T[Key]>
+  : T[Key];
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -105,8 +105,8 @@ function createEnglishTranslations(base: TranslationContent) {
       ],
       footerInfo: [
         { name: "Our Team", href: "/about" },
-        { name: "Privacy policy", href: "#" },
-        { name: "Terms and conditions", href: "#" },
+        { name: "Privacy policy", href: "/privacy" },
+        { name: "Terms and conditions", href: "/terms" },
       ],
     },
     navbar: {
@@ -164,7 +164,7 @@ function createEnglishTranslations(base: TranslationContent) {
           titleHighlight: "La Convención",
           description:
             "Clear information to discover nature, culture and local flavors in the warm heart of Cusco.",
-          primaryCta: "Explore Destinations",
+          primaryCta: "Explore",
           secondaryCta: "View Gallery",
         },
         sections: {
@@ -251,7 +251,7 @@ function createEnglishTranslations(base: TranslationContent) {
             title: "Quillabamba as a starting point",
             description:
               "An ideal base to organize routes through the province, connect with local services and approach natural paths.",
-            image: "/images/destinos/pueblo-magico.jpg",
+            image: "/images/destinations/pueblo-magico.jpg",
             to: "/destinations",
             label: "View destinations",
             meta: "Routes and guidance",
@@ -260,7 +260,7 @@ function createEnglishTranslations(base: TranslationContent) {
             title: "Coffee, cacao and local flavors",
             description:
               "Emblematic products that help explain the agricultural and gastronomic identity of La Convención.",
-            image: "/images/galeria/comida-asiatica.jpg",
+            image: "/images/gallery/comida-asiatica.jpg",
             to: "/gastronomia",
             label: "Explore gastronomy",
             meta: "Regional flavors",
@@ -269,7 +269,7 @@ function createEnglishTranslations(base: TranslationContent) {
             title: "Nature to visit calmly",
             description:
               "Forests, viewpoints and green spaces best explored with previous information and respect for the environment.",
-            image: "/images/galeria/fotografia.jpg",
+            image: "/images/gallery/fotografia.jpg",
             to: "/gallery",
             label: "View gallery",
             meta: "Landscapes and culture",
@@ -549,8 +549,8 @@ function createPortugueseTranslations(base: TranslationContent) {
       ],
       footerInfo: [
         { name: "Nossa Equipe", href: "/about" },
-        { name: "Política de privacidade", href: "#" },
-        { name: "Termos e condições", href: "#" },
+        { name: "Política de privacidade", href: "/privacy" },
+        { name: "Termos e condições", href: "/terms" },
       ],
     },
     navbar: {
@@ -597,7 +597,7 @@ function createPortugueseTranslations(base: TranslationContent) {
           titlePrefix: "Descubra a magia de",
           description:
             "Informação clara para descobrir natureza, cultura e sabores locais no coração acolhedor de Cusco.",
-          primaryCta: "Explorar Destinos",
+          primaryCta: "Explorar",
           secondaryCta: "Ver Galeria",
         },
         sections: {
@@ -692,8 +692,8 @@ function createFrenchTranslations(base: TranslationContent) {
       ],
       footerInfo: [
         { name: "Notre Équipe", href: "/about" },
-        { name: "Politique de confidentialité", href: "#" },
-        { name: "Conditions générales", href: "#" },
+        { name: "Politique de confidentialité", href: "/privacy" },
+        { name: "Conditions générales", href: "/terms" },
       ],
     },
     navbar: {
@@ -1059,40 +1059,40 @@ export type TranslationContent = {
 const basePostsMeta = [
   {
     id: 1,
-    image: "/images/destinos/pueblo-magico.jpg",
+    image: "/images/destinations/pueblo-magico.jpg",
     author: "Mariela Ramos",
     date: "2024-01-15",
     featured: true,
   },
   {
     id: 2,
-    image: "/images/viajes/presupuesto.jpg",
+    image: "/images/trips/presupuesto.jpg",
     author: "Carlos Huamán",
     date: "2024-01-12",
     featured: true,
   },
   {
     id: 3,
-    image: "/images/galeria/comida-asiatica.jpg",
+    image: "/images/gallery/comida-asiatica.jpg",
     author: "Ana Paredes",
     date: "2024-01-10",
     featured: true,
   },
   {
     id: 4,
-    image: "/images/destinos/andes-trekking.jpg",
+    image: "/images/destinations/andes-trekking.jpg",
     author: "Luis Fernández",
     date: "2024-01-08",
   },
   {
     id: 5,
-    image: "/images/galeria/fotografia.jpg",
+    image: "/images/gallery/fotografia.jpg",
     author: "Sofia Chen",
     date: "2024-01-05",
   },
   {
     id: 6,
-    image: "/images/viajes/tren-europa.jpg",
+    image: "/images/trips/tren-europa.jpg",
     author: "David Miller",
     date: "2024-01-03",
   },
@@ -1101,50 +1101,50 @@ const basePostsMeta = [
 const blogPostsMeta = [
   {
     id: 1,
-    image: "/images/destinos/pueblo-magico.jpg",
+    image: "/images/destinations/pueblo-magico.jpg",
     author: "María Rodríguez",
   },
   {
     id: 2,
-    image: "/images/destinos/andes-trekking.jpg",
+    image: "/images/destinations/andes-trekking.jpg",
     author: "Carlos Mendoza",
   },
-  { id: 3, image: "/images/galeria/fotografia.jpg", author: "Ana Silva" },
+  { id: 3, image: "/images/gallery/fotografia.jpg", author: "Ana Silva" },
   {
     id: 4,
-    image: "/images/galeria/comida-asiatica.jpg",
+    image: "/images/gallery/comida-asiatica.jpg",
     author: "María Rodríguez",
   },
   {
     id: 5,
-    image: "/images/destinos/pueblo-magico.jpg",
+    image: "/images/destinations/pueblo-magico.jpg",
     author: "Carlos Mendoza",
   },
-  { id: 6, image: "/images/viajes/presupuesto.jpg", author: "Ana Silva" },
+  { id: 6, image: "/images/trips/presupuesto.jpg", author: "Ana Silva" },
 ] as const;
 
 const dishMeta = [
-  { id: 1, image: "/images/galeria/comida-asiatica.jpg" },
-  { id: 2, image: "/images/galeria/fotografia.jpg" },
-  { id: 3, image: "/images/destinos/pueblo-magico.jpg" },
-  { id: 4, image: "/images/viajes/presupuesto.jpg" },
-  { id: 5, image: "/images/galeria/comida-asiatica.jpg" },
-  { id: 6, image: "/images/destinos/andes-trekking.jpg" },
+  { id: 1, image: "/images/gallery/comida-asiatica.jpg" },
+  { id: 2, image: "/images/gallery/fotografia.jpg" },
+  { id: 3, image: "/images/destinations/pueblo-magico.jpg" },
+  { id: 4, image: "/images/trips/presupuesto.jpg" },
+  { id: 5, image: "/images/gallery/comida-asiatica.jpg" },
+  { id: 6, image: "/images/destinations/andes-trekking.jpg" },
 ] as const;
 
 const restaurantMeta = [
-  { id: 1, image: "/images/destinos/pueblo-magico.jpg", rating: 4.8 },
-  { id: 2, image: "/images/galeria/fotografia.jpg", rating: 4.9 },
-  { id: 3, image: "/images/galeria/comida-asiatica.jpg", rating: 4.7 },
+  { id: 1, image: "/images/destinations/pueblo-magico.jpg", rating: 4.8 },
+  { id: 2, image: "/images/gallery/fotografia.jpg", rating: 4.9 },
+  { id: 3, image: "/images/gallery/comida-asiatica.jpg", rating: 4.7 },
 ] as const;
 
 const galleryMeta = [
-  { id: 1, src: "/images/galeria/fotografia.jpg" },
-  { id: 2, src: "/images/galeria/playa.jpg" },
-  { id: 3, src: "/images/galeria/ciudad.jpg" },
-  { id: 4, src: "/images/galeria/desierto.jpg" },
-  { id: 5, src: "/images/galeria/bosque.jpg" },
-  { id: 6, src: "/images/galeria/aurora.jpg" },
+  { id: 1, src: "/images/gallery/fotografia.jpg" },
+  { id: 2, src: "/images/gallery/playa.jpg" },
+  { id: 3, src: "/images/gallery/ciudad.jpg" },
+  { id: 4, src: "/images/gallery/desierto.jpg" },
+  { id: 5, src: "/images/gallery/bosque.jpg" },
+  { id: 6, src: "/images/gallery/aurora.jpg" },
 ] as const;
 
 const es: TranslationContent = {
@@ -1173,8 +1173,8 @@ const es: TranslationContent = {
     ],
     footerInfo: [
       { name: "Nuestro Equipo", href: "/about" },
-      { name: "Política de privacidad", href: "#" },
-      { name: "Términos y condiciones", href: "#" },
+      { name: "Política de privacidad", href: "/privacy" },
+      { name: "Términos y condiciones", href: "/terms" },
     ],
   },
   navbar: {
@@ -1233,7 +1233,7 @@ const es: TranslationContent = {
         titleHighlight: "La Convención",
         description:
           "Información clara para descubrir naturaleza, cultura y sabores locales en el corazón cálido de Cusco.",
-        primaryCta: "Explorar Destinos",
+        primaryCta: "Explorar",
         secondaryCta: "Ver Galería",
       },
       sections: {
@@ -1322,7 +1322,7 @@ const es: TranslationContent = {
           title: "Quillabamba como punto de partida",
           description:
             "Una base ideal para organizar recorridos por la provincia, conectar con servicios locales y acercarse a rutas naturales.",
-          image: "/images/destinos/pueblo-magico.jpg",
+          image: "/images/destinations/pueblo-magico.jpg",
           to: "/destinations",
           label: "Ver destinos",
           meta: "Rutas y orientación",
@@ -1331,7 +1331,7 @@ const es: TranslationContent = {
           title: "Café, cacao y sabores locales",
           description:
             "Productos emblemáticos que ayudan a entender la identidad agrícola y gastronómica de La Convención.",
-          image: "/images/galeria/comida-asiatica.jpg",
+          image: "/images/gallery/comida-asiatica.jpg",
           to: "/gastronomia",
           label: "Explorar gastronomía",
           meta: "Sabores regionales",
@@ -1340,7 +1340,7 @@ const es: TranslationContent = {
           title: "Naturaleza para visitar con calma",
           description:
             "Bosques, miradores y espacios verdes que conviene recorrer con información previa y respeto por el entorno.",
-          image: "/images/galeria/fotografia.jpg",
+          image: "/images/gallery/fotografia.jpg",
           to: "/gallery",
           label: "Ver galería",
           meta: "Paisajes y cultura",
@@ -1832,7 +1832,7 @@ const es: TranslationContent = {
       stats: [
         { value: 3, suffix: "+", label: "Años compartiendo nuestra cultura" },
         { value: 50, suffix: "+", label: "Destinos documentados" },
-        { value: 30, suffix: "K+", label: "Visitantes al mes" },
+        { value: 30, suffix: "K+", label: "Visitantes al año" },
         { value: 5, suffix: "", label: "Personas en el equipo" },
       ],
       missionVisionTitle: "Lo que nos mueve cada día",
@@ -1900,7 +1900,7 @@ const es: TranslationContent = {
             "Estudiante de Ingeniería Informática y apasionado por la tecnología aplicada al turismo local. Creó esta plataforma para mostrar al mundo la riqueza cultural y natural de La Convención a través de soluciones digitales innovadoras. Quillabambino de nacimiento y corazón.",
           initials: "EZ",
           color: "#1B4332",
-          image: "/images/equipo/EzerB.jpg",
+          image: "/images/team/EzerB.jpg",
           skills: [
             "Desarrollo Web",
             "Diseño UI/UX",
@@ -1915,7 +1915,7 @@ const es: TranslationContent = {
             "Estudiante de Administración y Negocios Internacionales. Lidera la gestión estratégica y creación de guías que dan vida al portal, aplicando su visión empresarial para posicionar nuestra cultura en el mercado global. Orgullosamente quillabambina.",
           initials: "KM",
           color: "#4BB543",
-          image: "/images/equipo/keyla.jpg",
+          image: "/images/team/keyla.jpg",
           skills: [
             "Gestión Estratégica",
             "Redacción",
@@ -1929,7 +1929,7 @@ const es: TranslationContent = {
             "Estudiante de Arquitectura con un ojo artístico único. Captura la esencia de La Convención a través de imágenes que resaltan la armonía entre el paisaje natural y la identidad urbana de nuestra región. Quillabambino de raíces y pasión.",
           initials: "DT",
           color: "#4BB543",
-          image: "/images/equipo/diego.jpg",
+          image: "/images/team/diego.jpg",
           skills: ["Fotografía", "Edición de Video", "Arquitectura"],
         },
         {
@@ -1939,7 +1939,7 @@ const es: TranslationContent = {
             "Estudiante de Derecho y guía oficial certificada. Combina su formación legal con su amor por la tierra para promover un turismo responsable, seguro y profundamente respetuoso con nuestro patrimonio. Natural de Quillabamba.",
           initials: "LQ",
           color: "#4BB543",
-          image: "/images/equipo/lucia.jpg",
+          image: "/images/team/lucia.jpg",
           skills: ["Guiado Turístico", "Derecho", "Turismo Responsable"],
         },
         {
@@ -1949,7 +1949,7 @@ const es: TranslationContent = {
             "Estudiante de Ingeniería de Sistemas. Se encarga de la conectividad y el crecimiento digital del proyecto, optimizando nuestras plataformas para que la voz de La Convención llegue a cada rincón del mundo. Quillabambino digital.",
           initials: "RA",
           color: "#35594D",
-          image: "/images/equipo/rodrigo.jpg",
+          image: "/images/team/rodrigo.jpg",
           skills: [
             "Ingeniería de Sistemas",
             "Redes Sociales",

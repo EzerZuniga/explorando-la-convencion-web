@@ -1,7 +1,7 @@
 import React from "react";
 import { Quote, RefreshCw } from "lucide-react";
 import { useApi } from "@/hooks";
-import { getRandomQuote } from "@/api";
+import { getRandomQuote } from "@/lib/http";
 import { LoadingSpinner, ErrorMessage } from "@/components";
 
 const QUOTE_CARD_CLASS =
@@ -13,9 +13,9 @@ const QuoteWidget: React.FC = () => {
   if (loading) {
     return (
       <div
-        className={`${QUOTE_CARD_CLASS} bg-gradient-to-br from-brand-secondary/15 via-white to-brand-background    p-6 flex items-center justify-center`}
+        className={`${QUOTE_CARD_CLASS} bg-[#4C1D95] p-6 flex items-center justify-center`}
       >
-        <LoadingSpinner size="md" />
+        <LoadingSpinner size="md" className="border-white/30 border-t-white" />
       </div>
     );
   }
@@ -32,28 +32,39 @@ const QuoteWidget: React.FC = () => {
 
   return (
     <div
-      className={`${QUOTE_CARD_CLASS} bg-gradient-to-br from-brand-secondary/12 via-white to-brand-background    p-6 relative`}
+      className={`${QUOTE_CARD_CLASS} bg-[#4C1D95] p-6 text-white relative`}
     >
-      <div className="absolute right-0 top-0 h-24 w-24 bg-brand-secondary/10 blur-2xl"></div>
-      <div className="w-11 h-11 bg-white/80  border border-brand-secondary/35 flex items-center justify-center shadow-inner mb-5">
-        <Quote className="w-5 h-5 text-brand-secondary " strokeWidth={1.75} />
-      </div>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-10 -mt-10"></div>
+      <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full blur-xl -ml-8 -mb-8"></div>
+      
+      <div className="relative z-10 flex h-full flex-col">
+        <div className="flex items-center justify-between mb-6">
+          <div className="w-10 h-10 bg-white/10 border border-white/20 flex items-center justify-center backdrop-blur-sm rounded-full shadow-inner">
+            <Quote className="w-4 h-4 text-white" strokeWidth={2} />
+          </div>
+          <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">Inspiración</span>
+        </div>
 
-      <div className="relative z-10 flex h-[calc(100%-4rem)] flex-col">
-        <blockquote className="text-base sm:text-lg text-brand-text  italic leading-relaxed mb-5">
+        <blockquote className="text-lg sm:text-xl font-medium text-white/95 leading-snug mb-6 flex-grow">
           &ldquo;{data.content}&rdquo;
         </blockquote>
-        <div className="mt-auto flex items-center justify-between gap-4 border-t border-brand-secondary/25 pt-4">
-          <p className="text-sm font-semibold text-brand-secondary ">
-            - {data.author}
-          </p>
+
+        <div className="mt-auto flex items-center justify-between gap-4 pt-4 border-t border-white/15">
+          <div className="flex items-center gap-3">
+            <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center border border-white/10">
+              <span className="text-[11px] font-bold text-white">{data.author.charAt(0)}</span>
+            </div>
+            <p className="text-sm font-semibold text-white/90">
+              {data.author}
+            </p>
+          </div>
           <button
             onClick={refetch}
-            className="p-2 rounded-none text-gray-500 hover:text-brand-secondary   hover:bg-brand-secondary/20  transition-colors"
+            className="p-2 rounded-full text-white/60 hover:text-white hover:bg-white/20 transition-all duration-200"
             aria-label="Nueva frase"
             title="Nueva frase"
           >
-            <RefreshCw className="w-4 h-4" strokeWidth={1.75} />
+            <RefreshCw className="w-4 h-4" strokeWidth={2} />
           </button>
         </div>
       </div>

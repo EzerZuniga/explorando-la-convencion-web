@@ -1,11 +1,11 @@
 import React from "react";
 import { DollarSign, ArrowRightLeft } from "lucide-react";
 import { useApi } from "@/hooks";
-import { getExchangeRates } from "@/api";
+import { getExchangeRates } from "@/lib/http";
 import { LoadingSpinner, ErrorMessage } from "@/components";
 
 const EXCHANGE_CARD_CLASS =
-  "h-full min-h-[285px] overflow-hidden border border-[#DDE9E2]  bg-white  shadow-[0_18px_42px_rgba(27,67,50,0.10)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary hover:shadow-[0_26px_58px_rgba(27,67,50,0.16)]";
+  "h-full min-h-[285px] overflow-hidden border border-[#DDE9E2]  shadow-[0_18px_42px_rgba(27,67,50,0.10)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary hover:shadow-[0_26px_58px_rgba(27,67,50,0.16)]";
 
 const CURRENCY_FLAGS: Record<string, string> = {
   USD: "🇺🇸",
@@ -32,9 +32,9 @@ const ExchangeWidget: React.FC = () => {
   if (loading) {
     return (
       <div
-        className={`${EXCHANGE_CARD_CLASS} p-6 flex items-center justify-center`}
+        className={`${EXCHANGE_CARD_CLASS} bg-[#0F172A] p-6 flex items-center justify-center`}
       >
-        <LoadingSpinner size="md" />
+        <LoadingSpinner size="md" className="border-white/30 border-t-white" />
       </div>
     );
   }
@@ -42,7 +42,7 @@ const ExchangeWidget: React.FC = () => {
   if (error || !data) {
     return (
       <div
-        className={`${EXCHANGE_CARD_CLASS} p-6 flex items-center justify-center`}
+        className={`${EXCHANGE_CARD_CLASS} bg-white p-6 flex items-center justify-center`}
       >
         <ErrorMessage
           message="No se pudo cargar el tipo de cambio"
@@ -55,50 +55,59 @@ const ExchangeWidget: React.FC = () => {
   const displayCurrencies = ["PEN", "EUR", "BRL", "COP"] as const;
 
   return (
-    <div className={`${EXCHANGE_CARD_CLASS} p-6`}>
-      <div className="flex items-center gap-3 mb-5">
-        <div className="w-11 h-11 bg-brand-background  border border-brand-primary/30 rounded-none flex items-center justify-center shadow-inner">
-          <DollarSign className="w-5 h-5 text-brand-text " strokeWidth={1.75} />
+    <div
+      className={`${EXCHANGE_CARD_CLASS} bg-[#0F172A] p-6 text-white relative`}
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.04),transparent_40%)]"></div>
+      <div className="relative z-10 flex h-full flex-col">
+        <div className="flex items-center justify-between mb-5">
+          <div>
+            <h3 className="text-sm font-bold text-white uppercase tracking-wide">
+              Tipo de Cambio
+            </h3>
+            <p className="text-xs text-white/75 mt-1">Base referencial: 1 USD</p>
+          </div>
+          <div className="w-11 h-11 bg-white/10 border border-white/20 flex items-center justify-center backdrop-blur-sm">
+            <DollarSign className="w-5 h-5 text-white" strokeWidth={1.75} />
+          </div>
         </div>
-        <div>
-          <h3 className="text-sm font-bold text-brand-text  uppercase tracking-wide">
-            Tipo de Cambio
-          </h3>
-          <p className="text-xs text-gray-500  mt-1">Base referencial: 1 USD</p>
-        </div>
-      </div>
 
-      <div className="space-y-3">
-        {displayCurrencies.map((code) => (
-          <div
-            key={code}
-            className="flex items-center justify-between gap-4 rounded-none bg-brand-background/60  px-3 py-2.5 border border-transparent transition-colors hover:border-brand-primary/40"
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-lg">{CURRENCY_FLAGS[code]}</span>
-              <div>
-                <span className="text-sm font-medium text-gray-900 ">
-                  {code}
+        <div className="space-y-2 flex-grow">
+          {displayCurrencies.map((code) => (
+            <div
+              key={code}
+              className="flex items-center justify-between gap-4 bg-white/5 px-4 py-2 border border-white/10 transition-colors hover:bg-white/10"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl drop-shadow-md">{CURRENCY_FLAGS[code]}</span>
+                <div>
+                  <span className="text-sm font-bold text-white block leading-tight">
+                    {code}
+                  </span>
+                  <span className="text-[10px] text-white/60 uppercase tracking-wider block">
+                    {CURRENCY_NAMES[code].split(' ')[0]}
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <ArrowRightLeft
+                  className="w-3 h-3 text-white/40"
+                  strokeWidth={1.75}
+                />
+                <span className="text-sm font-bold text-white">
+                  {data.rates[code]?.toFixed(code === "COP" ? 0 : 2)}
                 </span>
-                <p className="text-xs text-gray-500 ">{CURRENCY_NAMES[code]}</p>
               </div>
             </div>
-            <div className="flex items-center gap-1.5">
-              <ArrowRightLeft
-                className="w-3 h-3 text-gray-400"
-                strokeWidth={1.75}
-              />
-              <span className="text-sm font-bold text-gray-900 ">
-                {data.rates[code]?.toFixed(code === "COP" ? 0 : 2)}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <p className="text-xs text-gray-400  mt-4 text-center">
-        Actualizado: {data.lastUpdated}
-      </p>
+        <div className="mt-4 pt-4 border-t border-white/15">
+          <p className="text-xs text-white/50 text-center font-medium tracking-wide">
+            Actualizado: {data.lastUpdated}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

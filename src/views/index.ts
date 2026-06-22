@@ -8,3 +8,4 @@ export { default as Gastronomia } from './Gastronomia';
 export { default as Tips } from './Tips';
 export { default as Profile } from './Profile';
 export { default as NotFound } from './NotFound';
+export { default as AuthPage } from './Auth';

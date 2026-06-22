@@ -1,8 +1,20 @@
 import Contact from "@/views/Contact";
-import { createPageMetadata } from "@/config/metadata";
+import { createPageMetadata, createPageJsonLd } from "@/config/metadata";
+import { safeJsonLd } from "@/utils/json-ld";
 
 export const metadata = createPageMetadata("/contact");
 
 export default function ContactPage() {
-  return <Contact />;
+  const jsonLd = createPageJsonLd("/contact");
+  return (
+    <>
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+        />
+      )}
+      <Contact />
+    </>
+  );
 }

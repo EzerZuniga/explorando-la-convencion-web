@@ -14,12 +14,11 @@ import {
 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { EMAIL_REGEX } from "@/constants";
-import { signIn, signUp } from "@/lib/auth-client";
+import { signIn, signUp } from "@/lib/auth/client";
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLogin: (email: string, name: string, picture?: string) => void;
 }
 
 type AuthFormData = {
@@ -43,11 +42,7 @@ const INITIAL_FORM: AuthFormData = {
   confirmPassword: "",
 };
 
-const LoginModal: React.FC<LoginModalProps> = ({
-  isOpen,
-  onClose,
-  onLogin,
-}) => {
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   const [isRegistering, setIsRegistering] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -114,8 +109,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
       if (!EMAIL_REGEX.test(normalized.email)) {
         nextErrors.email = "Ingresa un correo electrónico válido.";
       }
-      if (normalized.password.length < 6) {
-        nextErrors.password = "La contraseña debe tener al menos 6 caracteres.";
+      if (normalized.password.length < 8) {
+        nextErrors.password = "La contraseña debe tener al menos 8 caracteres.";
       }
       if (normalized.password !== normalized.confirmPassword) {
         nextErrors.confirmPassword = "Las contraseñas no coinciden.";
@@ -145,8 +140,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
           type: "success",
           text: "¡Registro exitoso! Ahora inicia sesión con tu correo.",
         });
-      } catch (error) {
-        console.error("Register failed", error);
+      } catch {
         setStatus({
           type: "error",
           text: "No se pudo crear la cuenta. Inténtalo nuevamente.",
@@ -178,10 +172,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
           password: normalized.password,
           callbackURL: "/",
         });
-        onLogin(normalized.email, normalized.email.split("@")[0]);
         onClose();
-      } catch (error) {
-        console.error("Login failed", error);
+      } catch {
         setStatus({
           type: "error",
           text: "Las credenciales ingresadas no son válidas.",

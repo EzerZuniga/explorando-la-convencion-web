@@ -1,21 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
-import Script from "next/script";
-import { AppProviders } from "@/providers/AppProviders";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { AppProviders } from "./providers";
 import { createPageMetadata, websiteJsonLd } from "@/config/metadata";
+import { safeJsonLd } from "@/utils/json-ld";
 import "@/styles/globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-heading",
-  weight: ["600", "700", "800", "900"],
+  weight: ["600", "700"],
   display: "swap",
 });
 
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Explorando la Convención",
   },
   verification: {
-    google: "G9dN7hW7NumhFxjHTuvc02yFv_OoPmRBNEOQyc3Ehwg",
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   other: {
     "geo.region": "PE",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1A2F28",
+  themeColor: "#1B5E20",
 };
 
 export default function RootLayout({
@@ -56,14 +56,22 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es-PE">
-      <body className={`${inter.variable} ${playfair.variable}`}>
-        <AppProviders>{children}</AppProviders>
-        <Script
-          id="website-json-ld"
+      {/* Preconnect to external APIs used by widgets — reduces TTFB */}
+      <head>
+        <link rel="preconnect" href="https://api.open-meteo.com" />
+        <link rel="dns-prefetch" href="https://api.open-meteo.com" />
+        <link rel="preconnect" href="https://open.er-api.com" />
+        <link rel="dns-prefetch" href="https://open.er-api.com" />
+        <link rel="dns-prefetch" href="https://dummyjson.com" />
+        <link rel="dns-prefetch" href="https://restcountries.com" />
+      </head>
+      <body className={`${inter.variable} ${plusJakartaSans.variable}`}>
+        {/* Website JSON-LD: server-rendered, no hydration cost */}
+        <script
           type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(websiteJsonLd()) }}
         />
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

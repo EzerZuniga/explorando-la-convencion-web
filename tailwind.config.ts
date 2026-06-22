@@ -18,10 +18,10 @@ export default {
       },
       colors: {
         brand: {
-          text: "#1B4332",
-          background: "#EAF0F6",
-          primary: "#4BB543",
-          secondary: "#F4A261",
+          text: "var(--color-heading)",
+          background: "var(--color-background)",
+          primary: "var(--color-primary)",
+          secondary: "var(--color-secondary)",
         },
         danger: {
           500: "#B05A52",
@@ -35,6 +35,7 @@ export default {
         "fade-in-up": "fadeInUp 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
         "reveal-up": "revealUp 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
         "modal-in": "modalFadeIn 0.3s ease-out",
+        marquee: "marquee 30s linear infinite",
       },
       transitionTimingFunction: {
         "smooth-out": "cubic-bezier(0.22, 1, 0.36, 1)",
@@ -55,6 +56,10 @@ export default {
         modalFadeIn: {
           from: { opacity: "0", transform: "scale(0.9)" },
           to: { opacity: "1", transform: "scale(1)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
     },

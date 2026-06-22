@@ -156,7 +156,7 @@ export function websiteJsonLd() {
       url: SITE_CONFIG.url,
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/images/logoconven.png"),
+        url: absoluteUrl("/images/brand/logo.png"),
         width: 1486,
         height: 515,
       },
@@ -184,5 +184,175 @@ export function websiteJsonLd() {
 }
 
 export function routeLastModified() {
-  return new Date("2024-11-04T00:00:00.000Z");
+  return new Date();
+}
+
+// ─── Per-page structured data ───────────────────────────────────────────────
+
+const organizationRef = {
+  "@type": "Organization",
+  "@id": `${SITE_CONFIG.url}/#organization`,
+  name: SITE_CONFIG.name,
+  url: SITE_CONFIG.url,
+  logo: absoluteUrl("/images/brand/logo.png"),
+  sameAs: [
+    SITE_CONFIG.social.facebook,
+    SITE_CONFIG.social.instagram,
+    SITE_CONFIG.social.youtube,
+  ],
+};
+
+/**
+ * Returns a page-level JSON-LD object for the given route, or null for
+ * pages that should not be indexed / don't have meaningful structured data.
+ */
+export function createPageJsonLd(
+  path: PublicRoute,
+): Record<string, unknown> | null {
+  const seo = routeSeo[path];
+  if (seo.noIndex) return null;
+
+  const url = absoluteUrl(path);
+
+  switch (path) {
+    case "/about":
+      return {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        url,
+        name: seo.title,
+        description: seo.description,
+        inLanguage: "es-PE",
+        publisher: organizationRef,
+        mainEntity: {
+          ...organizationRef,
+          "@type": "Organization",
+          foundingDate: "2024",
+          founder: { "@type": "Person", name: SITE_CONFIG.author },
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Quillabamba",
+            addressRegion: "Cusco",
+            addressCountry: "PE",
+          },
+        },
+      };
+
+    case "/blog":
+      return {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        url,
+        name: seo.title,
+        description: seo.description,
+        inLanguage: "es-PE",
+        publisher: organizationRef,
+        genre: ["Travel", "Tourism", "Food", "Culture"],
+        about: { "@type": "Place", name: "La Convención, Cusco, Perú" },
+      };
+
+    case "/contact":
+      return {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        url,
+        name: seo.title,
+        description: seo.description,
+        inLanguage: "es-PE",
+        mainEntity: {
+          "@type": "LocalBusiness",
+          name: SITE_CONFIG.name,
+          email: SITE_CONFIG.contact.email,
+          url: SITE_CONFIG.url,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: SITE_CONFIG.contact.address,
+            addressLocality: "Quillabamba",
+            addressRegion: "Cusco",
+            addressCountry: "PE",
+          },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: -12.87,
+            longitude: -72.69,
+          },
+        },
+      };
+
+    case "/destinations":
+      return {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        url,
+        name: seo.title,
+        description: seo.description,
+        inLanguage: "es-PE",
+        publisher: organizationRef,
+        about: {
+          "@type": "TouristDestination",
+          name: "La Convención",
+          touristType: ["Aventura", "Naturaleza", "Cultura"],
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: -12.87,
+            longitude: -72.69,
+          },
+          containedInPlace: {
+            "@type": "AdministrativeArea",
+            name: "Cusco",
+            containedInPlace: { "@type": "Country", name: "Perú" },
+          },
+        },
+      };
+
+    case "/gastronomia":
+      return {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        url,
+        name: seo.title,
+        description: seo.description,
+        inLanguage: "es-PE",
+        publisher: organizationRef,
+        about: {
+          "@type": "FoodEstablishment",
+          servesCuisine: ["Peruana", "Amazónica", "Andina"],
+          areaServed: {
+            "@type": "AdministrativeArea",
+            name: "La Convención, Cusco, Perú",
+          },
+        },
+      };
+
+    case "/gallery":
+      return {
+        "@context": "https://schema.org",
+        "@type": "ImageGallery",
+        url,
+        name: seo.title,
+        description: seo.description,
+        inLanguage: "es-PE",
+        publisher: organizationRef,
+        about: { "@type": "Place", name: "La Convención, Cusco, Perú" },
+      };
+
+    case "/tips":
+      return {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        url,
+        name: seo.title,
+        description: seo.description,
+        inLanguage: "es-PE",
+        publisher: organizationRef,
+        about: {
+          "@type": "TouristDestination",
+          name: "La Convención",
+          touristType: ["Aventura", "Mochilero", "Viajero"],
+        },
+      };
+
+    default:
+      return null;
+  }
 }

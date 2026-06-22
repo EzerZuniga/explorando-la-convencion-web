@@ -5,22 +5,29 @@
 @layer base {
   :root {
     --font-body: "Inter", system-ui, -apple-system, sans-serif;
-    --font-heading: "Playfair Display", Georgia, serif;
-    --color-primary: #4bb543;
-    --color-accent: #4bb543;
-    --color-background: #eaf0f6;
+    --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+    --color-primary: #25d366;
+    --color-secondary: #F59E0B;
+    --color-accent: #25d366;
+    --color-background: #F8FAFC;
     --color-surface: #ffffff;
-    --color-surface-muted: #f3f7f5;
-    --color-border: #e6ecea;
-    --color-text: #365348;
-    --color-muted-text: #5b7d70;
-    --color-heading: #1b4332;
-    --color-link: #4bb543;
+    --color-surface-muted: #F1F5F9;
+    --color-border: #E2E8F0;
+    --color-text: #334155;
+    --color-muted-text: #64748B;
+    --color-heading: #0F172A;
+    --color-link: #25d366;
   }
 
   html {
-    scroll-behavior: smooth;
     color-scheme: light;
+  }
+
+  /* Only enable smooth scrolling for users who haven't opted out of animation */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -51,7 +58,7 @@
     color: var(--color-heading);
     margin-bottom: 0.5em;
     line-height: 1.12;
-    letter-spacing: 0;
+    letter-spacing: -0.025em; /* Mejor práctica: tracking más ajustado en títulos */
     text-wrap: balance;
     font-feature-settings:
       "kern" 1,
@@ -78,12 +85,12 @@
   }
 
   a:hover {
-    color: #3fa33a;
+    color: #1da851;
   }
 
   ::selection {
-    background-color: rgba(0, 168, 107, 0.22);
-    color: #1b4332;
+    background-color: rgba(37, 211, 102, 0.25);
+    color: #0F172A;
   }
 }
 
@@ -139,7 +146,7 @@
   }
 
   .wp-link:hover {
-    color: #3fa33a;
+    color: #1da851;
   }
 
   .wp-btn {
@@ -152,7 +159,7 @@
   }
 
   .wp-btn-primary:hover {
-    background-color: #3fa33a;
+    background-color: #1da851;
   }
 
   .wp-btn-secondary {
@@ -233,4 +240,14 @@
   .divider {
     @apply w-16 h-1 bg-brand-primary rounded-none mx-auto my-6;
   }
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee-infinite {
+    animation: marquee-scroll 40s linear infinite;
+  }
 }
+
