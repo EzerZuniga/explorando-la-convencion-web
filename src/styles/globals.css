@@ -6,17 +6,40 @@
   :root {
     --font-body: "Inter", system-ui, -apple-system, sans-serif;
     --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
-    --color-primary: #25d366;
-    --color-secondary: #F59E0B;
-    --color-accent: #25d366;
-    --color-background: #F8FAFC;
-    --color-surface: #ffffff;
-    --color-surface-muted: #F1F5F9;
-    --color-border: #E2E8F0;
-    --color-text: #334155;
-    --color-muted-text: #64748B;
-    --color-heading: #0F172A;
-    --color-link: #25d366;
+
+    /* ── Brand ───────────────────────────────────────────────── */
+    --color-primary:        #25D366;  /* Verde — CTAs, iconos activos, accents     */
+    --color-primary-light:  #E6FFDA;  /* Verde tint — badges, success, highlights  */
+    --color-primary-dark:   #1DA851;  /* Verde hover / pressed                     */
+    --color-secondary:      #F59E0B;  /* Ámbar — stats, secondary accents          */
+
+    /* ── Dark surfaces ──────────────────────────────────────── */
+    --color-dark:           #111B21;  /* Negro profundo — topbar, dark cards       */
+    --color-dark-2:         #1C1E21;  /* Carbón — footer, overlays                 */
+    --color-dark-green:     #33463F;  /* Verde oscuro — hover on dark, muted       */
+
+    /* ── Blue ───────────────────────────────────────────────── */
+    --color-blue:           #0373E9;  /* Azul vivo — links en texto, info          */
+    --color-blue-muted:     #385898;  /* Azul muted — tags, categorías, badges     */
+
+    /* ── Neutrals ───────────────────────────────────────────── */
+    --color-heading:        #111B21;  /* Headings                                  */
+    --color-text:           #1C1E21;  /* Cuerpo — crispro, cerca del negro         */
+    --color-muted-text:     #5E5E5E;  /* Texto secundario                          */
+    --color-placeholder:    #808080;  /* Placeholders, disabled                    */
+
+    /* ── Surfaces ───────────────────────────────────────────── */
+    --color-background:     #F0F4F9;  /* Fondo de página — cool blue-gray          */
+    --color-surface:        #ffffff;  /* Cards, paneles                            */
+    --color-surface-warm:   #FCF5EB;  /* Cards cálidas — quotes, tips              */
+    --color-surface-muted:  #F0F4F9;  /* Consistent con background                */
+    --color-border:         #E2E8F0;  /* Bordes                                    */
+    --color-border-muted:   #EDF2F7;  /* Bordes suaves                             */
+
+    /* ── Semantic ───────────────────────────────────────────── */
+    --color-link:           #0373E9;  /* Links — azul contrasta bien en light bg   */
+    --color-link-hover:     #25D366;  /* Hover sobre links — verde primario        */
+    --color-accent:         #1DA851;  /* Accent — hover buttons, active ring       */
   }
 
   html {
@@ -85,12 +108,12 @@
   }
 
   a:hover {
-    color: #1da851;
+    color: var(--color-primary);
   }
 
   ::selection {
     background-color: rgba(37, 211, 102, 0.25);
-    color: #0F172A;
+    color: #111B21;
   }
 }
 
@@ -146,7 +169,7 @@
   }
 
   .wp-link:hover {
-    color: #1da851;
+    color: var(--color-primary);
   }
 
   .wp-btn {
@@ -155,11 +178,11 @@
 
   .wp-btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
-    background-color: var(--color-accent);
+    background-color: var(--color-dark);
   }
 
   .wp-btn-primary:hover {
-    background-color: #1da851;
+    background-color: var(--color-dark-green);
   }
 
   .wp-btn-secondary {

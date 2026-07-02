@@ -5,15 +5,15 @@ import { getWeather } from "@/lib/http";
 import { LoadingSpinner, ErrorMessage } from "@/components";
 
 const WEATHER_CARD_CLASS =
-  "h-full min-h-[285px] overflow-hidden border border-brand-primary/25 shadow-[0_18px_42px_rgba(27,67,50,0.14)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_58px_rgba(27,67,50,0.2)]";
+  "h-full min-h-[285px] overflow-hidden border border-brand-primary/25 shadow-[0_18px_42px_rgba(37,211,102,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_58px_rgba(37,211,102,0.20)]";
 
 const WeatherWidget: React.FC = () => {
-  const { data, loading, error, refetch } = useApi(getWeather, []);
+  const { data, loading, error, refetch } = useApi(getWeather);
 
   if (loading) {
     return (
       <div
-        className={`${WEATHER_CARD_CLASS} bg-[#065F46] p-6 text-white flex items-center justify-center`}
+        className={`${WEATHER_CARD_CLASS} bg-brand-dark-green p-6 text-white flex items-center justify-center`}
       >
         <LoadingSpinner size="lg" className="border-white/30 border-t-white" />
       </div>
@@ -32,7 +32,7 @@ const WeatherWidget: React.FC = () => {
 
   return (
     <div
-      className={`${WEATHER_CARD_CLASS} bg-[#065F46] p-6 text-white relative`}
+      className={`${WEATHER_CARD_CLASS} bg-brand-dark-green p-6 text-white relative`}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent_40%)]"></div>
       <div className="relative z-10 flex h-full flex-col">

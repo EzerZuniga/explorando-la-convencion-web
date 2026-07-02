@@ -4,14 +4,12 @@ import { cn } from "@/utils";
 export interface SectionHeaderProps {
   title: string;
   subtitle?: string;
-  accentColor?: string;
   className?: string;
 }
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({
   title,
   subtitle,
-  accentColor = "#25D366",
   className = "",
 }) => {
   return (

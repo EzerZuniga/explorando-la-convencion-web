@@ -7,8 +7,6 @@ export const Terms: React.FC = () => {
     <LegalPageLayout
       title="Términos y Condiciones"
       lastUpdated="Octubre 2024"
-      seoDescription="Términos y condiciones de uso del portal Explorando La Convención."
-      slug="terms"
     >
       <section>
         <h2 className="text-2xl font-heading font-bold text-brand-text mb-4">1. Aceptación de los términos</h2>

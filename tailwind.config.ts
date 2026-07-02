@@ -10,18 +10,25 @@ export default {
         body: ["var(--font-body)", "system-ui", "-apple-system", "sans-serif"],
         display: ["var(--font-heading)", "Georgia", "serif"],
         heading: ["var(--font-heading)", "Georgia", "serif"],
-        poppins: ["var(--font-body)", "system-ui", "-apple-system", "sans-serif"],
-        merriweather: ["var(--font-heading)", "Georgia", "serif"],
       },
       borderWidth: {
         3: "3px",
       },
       colors: {
         brand: {
-          text: "var(--color-heading)",
-          background: "var(--color-background)",
-          primary: "var(--color-primary)",
-          secondary: "var(--color-secondary)",
+          text:            "var(--color-heading)",
+          background:      "var(--color-background)",
+          primary:         "var(--color-primary)",
+          "primary-light": "var(--color-primary-light)",
+          "primary-dark":  "var(--color-primary-dark)",
+          secondary:       "var(--color-secondary)",
+          accent:          "var(--color-accent)",
+          dark:            "var(--color-dark)",
+          "dark-2":        "var(--color-dark-2)",
+          "dark-green":    "var(--color-dark-green)",
+          blue:            "var(--color-blue)",
+          "blue-muted":    "var(--color-blue-muted)",
+          "surface-warm":  "var(--color-surface-warm)",
         },
         danger: {
           500: "#B05A52",
@@ -36,6 +43,8 @@ export default {
         "reveal-up": "revealUp 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
         "modal-in": "modalFadeIn 0.3s ease-out",
         marquee: "marquee 30s linear infinite",
+        "glow-green": "glowGreen 2.5s ease-in-out infinite",
+        "topbar-in": "topbarIn 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
       },
       transitionTimingFunction: {
         "smooth-out": "cubic-bezier(0.22, 1, 0.36, 1)",
@@ -60,6 +69,14 @@ export default {
         marquee: {
           "0%": { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-50%)" },
+        },
+        glowGreen: {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(37, 211, 102, 0)" },
+          "50%": { boxShadow: "0 0 22px 6px rgba(37, 211, 102, 0.28)" },
+        },
+        topbarIn: {
+          from: { opacity: "0", transform: "translateY(-100%)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
       },
     },

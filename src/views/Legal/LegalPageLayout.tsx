@@ -5,16 +5,12 @@ import React from "react";
 interface LegalPageLayoutProps {
   title: string;
   lastUpdated: string;
-  seoDescription: string;
-  slug: string;
   children: React.ReactNode;
 }
 
 export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
   title,
   lastUpdated,
-  seoDescription,
-  slug,
   children,
 }) => {
   return (

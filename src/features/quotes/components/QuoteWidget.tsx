@@ -5,15 +5,15 @@ import { getRandomQuote } from "@/lib/http";
 import { LoadingSpinner, ErrorMessage } from "@/components";
 
 const QUOTE_CARD_CLASS =
-  "h-full min-h-[285px] overflow-hidden border border-brand-secondary/35  shadow-[0_18px_42px_rgba(27,67,50,0.10)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_58px_rgba(27,67,50,0.16)]";
+  "h-full min-h-[285px] overflow-hidden border border-brand-primary/20  shadow-[0_18px_42px_rgba(37,211,102,0.10)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_58px_rgba(37,211,102,0.18)]";
 
 const QuoteWidget: React.FC = () => {
-  const { data, loading, error, refetch } = useApi(getRandomQuote, []);
+  const { data, loading, error, refetch } = useApi(getRandomQuote);
 
   if (loading) {
     return (
       <div
-        className={`${QUOTE_CARD_CLASS} bg-[#4C1D95] p-6 flex items-center justify-center`}
+        className={`${QUOTE_CARD_CLASS} bg-brand-dark-green p-6 flex items-center justify-center`}
       >
         <LoadingSpinner size="md" className="border-white/30 border-t-white" />
       </div>
@@ -32,7 +32,7 @@ const QuoteWidget: React.FC = () => {
 
   return (
     <div
-      className={`${QUOTE_CARD_CLASS} bg-[#4C1D95] p-6 text-white relative`}
+      className={`${QUOTE_CARD_CLASS} bg-brand-dark-green p-6 text-white relative`}
     >
       <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-10 -mt-10"></div>
       <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full blur-xl -ml-8 -mb-8"></div>

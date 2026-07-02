@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession, signOut as authSignOut, signIn as authSignIn } from "@/lib/auth/client";
+import { useSession, signOut as authSignOut, signIn as authSignIn } from "next-auth/react";
 import type { User } from "@/types";
 
 export interface UseAuthReturn {
@@ -8,31 +8,34 @@ export interface UseAuthReturn {
   isLoading: boolean;
   isAuthenticated: boolean;
   signOut: () => Promise<void>;
-  openSignIn: typeof authSignIn.social;
-  rawSession: ReturnType<typeof useSession>["data"];
+  signIn: (provider: string) => Promise<void>;
 }
 
 export function useAuth(): UseAuthReturn {
-  const { data: session, isPending } = useSession();
+  const { data: session, status } = useSession();
 
   const user: User | null = session?.user
     ? {
-        email: session.user.email,
-        name: session.user.name,
+        email: session.user.email ?? "",
+        name: session.user.name ?? "",
         picture: session.user.image ?? undefined,
+        provider: session.user.provider,
       }
     : null;
 
   const handleSignOut = async () => {
-    await authSignOut();
+    await authSignOut({ callbackUrl: "/" });
+  };
+
+  const handleSignIn = async (provider: string) => {
+    await authSignIn(provider);
   };
 
   return {
     user,
-    isLoading: isPending,
+    isLoading: status === "loading",
     isAuthenticated: !!session?.user,
     signOut: handleSignOut,
-    openSignIn: authSignIn.social,
-    rawSession: session,
+    signIn: handleSignIn,
   };
 }

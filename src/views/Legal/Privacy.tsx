@@ -7,8 +7,6 @@ export const Privacy: React.FC = () => {
     <LegalPageLayout
       title="Política de Privacidad"
       lastUpdated="Octubre 2024"
-      seoDescription="Política de privacidad y protección de datos personales de Explorando La Convención."
-      slug="privacy"
     >
       <section>
         <h2 className="text-2xl font-heading font-bold text-brand-text mb-4">1. Introducción</h2>

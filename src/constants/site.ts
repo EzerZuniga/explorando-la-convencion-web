@@ -16,8 +16,7 @@ export const SITE_CONFIG = {
   },
   contact: {
     email: 'info@explorandolaconvencion.pe',
-    phone: '+1 (555) 123-4567',
-    address: 'Av. Principal 123, Quillabamba, La Convención, Cusco, Perú',
+    address: 'Quillabamba, La Convención, Cusco, Perú',
     location: 'La Convención, Cusco',
     purpose: 'Portal informativo turístico',
   },

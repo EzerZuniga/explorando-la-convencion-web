@@ -26,12 +26,14 @@ const CSP = [
     "https://api.open-meteo.com",
     "https://open.er-api.com",
     "https://dummyjson.com",
-    "https://restcountries.com",
+    // OAuth token exchanges
+    "https://accounts.google.com",
+    "https://appleid.apple.com",
     // Dev mode HMR websocket
     ...(isDev ? ["ws://localhost:3000"] : []),
   ].join(" "),
-  // Allow Google Maps embed
-  "frame-src 'self' https://www.google.com https://maps.google.com",
+  // Allow OAuth provider frames and Google Maps embed
+  "frame-src 'self' https://www.google.com https://maps.google.com https://accounts.google.com https://appleid.apple.com",
   "frame-ancestors 'self'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -76,6 +78,8 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "res.cloudinary.com" },
       { protocol: "https", hostname: "avatars.githubusercontent.com" },
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      // Apple CDN para avatares de usuarios de Apple
+      { protocol: "https", hostname: "*.apple.com" },
     ],
   },
 

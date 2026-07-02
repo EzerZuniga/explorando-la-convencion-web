@@ -21,41 +21,6 @@ export interface WeatherData {
   unit: string;
 }
 
-export interface UnsplashPhoto {
-  id: string;
-  urls: {
-    regular: string;
-    small: string;
-    thumb: string;
-  };
-  alt_description: string | null;
-  user: {
-    name: string;
-    links: { html: string };
-  };
-  links: { html: string };
-}
-
-export interface UnsplashSearchResponse {
-  total: number;
-  total_pages: number;
-  results: UnsplashPhoto[];
-}
-
-export interface CountryInfo {
-  name: { common: string; official: string };
-  capital: string[];
-  population: number;
-  region: string;
-  subregion: string;
-  languages: Record<string, string>;
-  currencies: Record<string, { name: string; symbol: string }>;
-  flags: { png: string; svg: string; alt: string };
-  latlng: [number, number];
-  area: number;
-  timezones: string[];
-}
-
 export interface QuoteData {
   id: string;
   content: string;

@@ -206,7 +206,7 @@ function PortalLinkCard({
 
         <Link
           href={to}
-          className="mt-auto inline-flex min-h-10 min-w-[130px] items-center justify-center rounded-full bg-brand-primary px-6 text-xs font-bold uppercase tracking-wide text-white shadow-sm transition-all duration-300 hover:bg-[#158C40] hover:text-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
+          className="mt-auto inline-flex min-h-10 min-w-[130px] items-center justify-center rounded-full bg-brand-primary px-6 text-xs font-bold uppercase tracking-wide text-brand-dark shadow-sm transition-all duration-300 hover:bg-brand-dark-green hover:text-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
         >
           {content.pages.home.ui.explore}
         </Link>
@@ -414,18 +414,18 @@ function IdentityBand({
   portalPillars: Pillar[];
 }) {
   return (
-    <section className="relative w-full bg-[#1b8c42] text-white my-16 sm:my-28">
+    <section className="relative w-full bg-brand-dark-green text-white my-16 sm:my-28">
       {/* Top Cloud Wave */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-10 pointer-events-none" style={{ transform: "translateY(-99%)" }}>
         <svg className="relative block w-full h-[60px] sm:h-[120px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120H0Z" fill="#1b8c42" />
+          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120H0Z" fill="#33463F" />
         </svg>
       </div>
 
       {/* Bottom Cloud Wave */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10 pointer-events-none" style={{ transform: "translateY(99%) rotate(180deg)" }}>
         <svg className="relative block w-full h-[60px] sm:h-[120px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120H0Z" fill="#1b8c42" />
+          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120H0Z" fill="#33463F" />
         </svg>
       </div>
 
@@ -445,9 +445,9 @@ function IdentityBand({
             {identity.description}
           </p>
           <div>
-            <button className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent border-2 border-white text-white text-sm font-bold uppercase tracking-wide rounded-full overflow-hidden transform-gpu transition-shadow duration-500 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#1b8c42]">
+            <button className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent border-2 border-white text-white text-sm font-bold uppercase tracking-wide rounded-full overflow-hidden transform-gpu transition-shadow duration-500 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-dark-green">
               <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-white rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.2,1,0.2,1)] origin-center transform-gpu"></span>
-              <span className="relative z-10 group-hover:text-[#1b8c42] transition-colors duration-500">Descubrir Más</span>
+              <span className="relative z-10 group-hover:text-brand-dark-green transition-colors duration-500">Descubrir Más</span>
             </button>
           </div>
         </motion.div>
@@ -461,13 +461,13 @@ function IdentityBand({
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: i * 0.15, ease: "easeOut" }}
               whileHover={{ y: -8 }}
-              className="group relative bg-[#0B131E] rounded-[1.75rem] p-6 sm:p-7 shadow-2xl transition-all duration-300 border border-white/5 hover:border-[#1b8c42]/50 overflow-hidden flex flex-col h-full"
+              className="group relative bg-brand-dark rounded-[1.75rem] p-6 sm:p-7 shadow-2xl transition-all duration-300 border border-white/5 hover:border-brand-primary/25 overflow-hidden flex flex-col h-full"
             >
               {/* Subtle hover glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1b8c42]/0 to-transparent group-hover:from-[#1b8c42]/15 transition-colors duration-500 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/0 to-transparent group-hover:from-brand-primary/15 transition-colors duration-500 pointer-events-none"></div>
               
               <div className="relative z-10">
-                <div className="w-12 h-12 rounded-2xl bg-[#1A2639] text-[#25D366] flex items-center justify-center mb-6 border border-white/5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 shadow-inner">
+                <div className="w-12 h-12 rounded-2xl bg-brand-dark-2 text-brand-primary flex items-center justify-center mb-6 border border-white/5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 shadow-inner">
                   <Icon className="w-5 h-5" strokeWidth={2} />
                 </div>
                 <h4 className="text-[15px] font-bold uppercase tracking-wide mb-3 text-white transition-colors duration-300">
@@ -777,7 +777,7 @@ function Home() {
       </section>
 
       <section
-        className={`${SECTION_CLASS} bg-gradient-to-br from-brand-background via-white to-[#EAF5EC]   `}
+        className={`${SECTION_CLASS} bg-gradient-to-br from-brand-background via-white to-brand-primary-light   `}
       >
         <div className={CONTAINER_CLASS}>
           <ScrollReveal>
@@ -803,7 +803,7 @@ function Home() {
       </section>
 
       <section
-        className={`${SECTION_CLASS} bg-gradient-to-b from-brand-background to-[#EAF5EC]  `}
+        className={`${SECTION_CLASS} bg-gradient-to-b from-brand-background to-brand-primary-light  `}
       >
         <div className={CONTAINER_CLASS}>
           <ScrollReveal>
@@ -841,7 +841,7 @@ function Home() {
         </div>
       </section>
 
-      <section className={`${SECTION_CLASS} bg-[#26724f]`}>
+      <section className={`${SECTION_CLASS} bg-brand-dark-green`}>
         <div className={CONTAINER_CLASS}>
           <ScrollReveal>
             <SectionHeader

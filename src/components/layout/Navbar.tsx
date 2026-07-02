@@ -69,10 +69,10 @@ const Navbar: React.FC = () => {
     <header className="w-full fixed top-0 z-50">
       {/* Top bar */}
       <div
-        className={`hidden lg:block w-full overflow-hidden bg-brand-text transition-[max-height,opacity] duration-500 ease-smooth-out ${
+        className={`hidden lg:block w-full overflow-hidden bg-brand-dark transition-[max-height,opacity] duration-500 ease-smooth-out ${
           scrolled
             ? "max-h-0 opacity-0 pointer-events-none"
-            : "max-h-12 opacity-100"
+            : "max-h-12 opacity-100 animate-topbar-in"
         }`}
         aria-hidden={scrolled}
       >

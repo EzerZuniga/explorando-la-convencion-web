@@ -10,12 +10,7 @@ interface UseApiReturn<T> extends UseApiState<T> {
   refetch: () => void;
 }
 
-export function useApi<T>(
-  fetcher: () => Promise<T>,
-  _deps: unknown[] = [],
-): UseApiReturn<T> {
-  void _deps;
-
+export function useApi<T>(fetcher: () => Promise<T>): UseApiReturn<T> {
   const [state, setState] = useState<UseApiState<T>>({
     data: null,
     loading: true,

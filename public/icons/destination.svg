@@ -1,0 +1,129 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="128"
+    height="128"
+    viewBox="0 0 128 128"
+    fill="none">
+
+    <!-- Clouds -->
+    <path
+        d="M20 28
+        C20 23 24 20 29 20
+        C31 16 35 14 40 15
+        C45 15 49 18 50 23
+        C55 23 59 26 59 31
+        C59 36 55 39 49 39
+        H29
+        C24 39 20 35 20 31Z"
+        fill="#E8EEF3"/>
+
+    <path
+        d="M78 18
+        C78 14 82 11 87 11
+        C89 8 93 6 97 7
+        C102 7 106 10 107 15
+        C112 15 116 18 116 23
+        C116 28 112 31 106 31
+        H87
+        C82 31 78 27 78 23Z"
+        fill="#E8EEF3"/>
+
+    <!-- Mountains -->
+    <path
+        d="M12 88
+        L40 48
+        L68 88"
+        stroke="#243746"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+    <path
+        d="M46 88
+        L82 34
+        L116 88"
+        stroke="#243746"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+    <!-- Mountain snow -->
+    <path
+        d="M82 34
+        L75 46
+        L82 42
+        L89 46
+        Z"
+        fill="#DDE7EF"/>
+
+    <!-- Road -->
+    <path
+        d="
+        M56 88
+        C60 78 54 72 58 64
+        C62 56 72 54 72 46"
+        stroke="#2ECC71"
+        stroke-width="4"
+        stroke-linecap="round"
+        fill="none"/>
+
+    <!-- Trees -->
+    <path
+        d="
+        M18 88
+        L22 78
+        L26 88
+        Z"
+        fill="#2ECC71"/>
+
+    <rect
+        x="21"
+        y="88"
+        width="2"
+        height="6"
+        fill="#243746"/>
+
+    <path
+        d="
+        M102 88
+        L106 76
+        L110 88
+        Z"
+        fill="#2ECC71"/>
+
+    <rect
+        x="105"
+        y="88"
+        width="2"
+        height="6"
+        fill="#243746"/>
+
+    <!-- Location Pin -->
+    <path
+        d="
+        M64 14
+        C56 14 50 20 50 28
+        C50 42 64 55 64 55
+        C64 55 78 42 78 28
+        C78 20 72 14 64 14Z"
+        stroke="#2ECC71"
+        stroke-width="4"
+        fill="white"/>
+
+    <circle
+        cx="64"
+        cy="28"
+        r="5"
+        fill="#2ECC71"/>
+
+    <!-- Ground -->
+    <line
+        x1="8"
+        y1="94"
+        x2="120"
+        y2="94"
+        stroke="#243746"
+        stroke-width="3"
+        stroke-linecap="round"/>
+
+</svg>

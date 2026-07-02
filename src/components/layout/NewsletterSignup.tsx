@@ -37,7 +37,7 @@ export default function NewsletterSignup() {
 
   return (
     <section
-      className="bg-[#007664] px-4 py-12 text-white sm:px-6 sm:py-14 lg:px-8"
+      className="bg-brand-dark-green px-4 py-12 text-white sm:px-6 sm:py-14 lg:px-8"
       aria-labelledby="newsletter-signup-title"
     >
       <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
@@ -87,7 +87,7 @@ export default function NewsletterSignup() {
             className="group relative inline-flex h-14 w-full sm:w-auto items-center justify-center overflow-hidden rounded-full border-2 border-white px-8 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-all duration-500 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-white/30 disabled:cursor-not-allowed disabled:opacity-70"
           >
             <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-white rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.2,1,0.2,1)] origin-center transform-gpu"></span>
-            <span className="relative z-10 flex items-center justify-center gap-3 transition-colors duration-500 group-hover:text-[#007664]">
+            <span className="relative z-10 flex items-center justify-center gap-3 transition-colors duration-500 group-hover:text-brand-primary">
               <Send className="h-5 w-5" aria-hidden="true" />
               {isSubmitting ? page.subscribing : page.subscribe}
             </span>

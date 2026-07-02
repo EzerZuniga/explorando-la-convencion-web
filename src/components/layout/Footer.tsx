@@ -1,6 +1,6 @@
 "use client";
 
-import { Facebook, Instagram, Youtube, Twitter, Github } from "lucide-react";
+import { Facebook, Instagram, Youtube, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { SITE_CONFIG } from "@/constants";
@@ -11,7 +11,7 @@ export default function Footer() {
   const { footer } = content;
 
   return (
-    <footer className="bg-[#303136] text-brand-background text-sm">
+    <footer className="bg-[#111B21] text-brand-background text-sm">
       <div
         aria-hidden="true"
         className="h-5 w-full bg-[url('/images/ui/divider.png')] bg-repeat-x bg-top bg-[length:auto_20px]"

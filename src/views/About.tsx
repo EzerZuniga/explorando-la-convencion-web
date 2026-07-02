@@ -121,7 +121,7 @@ const About: React.FC = () => {
         />
         {/* Soft, lighter overlays to make the image clearly visible */}
         <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111B21]/90 via-[#111B21]/20 to-transparent" />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-32 pt-32 text-center sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl animate-fade-in-up [animation-fill-mode:both]">
@@ -164,7 +164,7 @@ const About: React.FC = () => {
               <div
                 key={stat.label}
                 ref={counters[i].counterRef}
-                className={`group flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-[#0F172A]/95 p-6 text-center shadow-xl backdrop-blur-lg transition-transform duration-300 hover:-translate-y-1 hover:border-brand-secondary/30 hover:bg-[#152033]/95 animate-reveal-up [animation-fill-mode:both] ${getRevealDelayClass(STAT_REVEAL_DELAYS, i)}`}
+                className={`group flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-[#111B21]/95 p-6 text-center shadow-xl backdrop-blur-lg transition-transform duration-300 hover:-translate-y-1 hover:border-brand-secondary/30 hover:bg-[#1a2535]/95 animate-reveal-up [animation-fill-mode:both] ${getRevealDelayClass(STAT_REVEAL_DELAYS, i)}`}
               >
                 <div className="relative mb-2 flex items-baseline gap-1 font-heading text-[clamp(2.5rem,5vw,3.5rem)] font-bold text-white">
                   <span>{counters[i].count}</span>
@@ -227,7 +227,7 @@ const About: React.FC = () => {
 
       <section
         id="historia"
-        className="scroll-mt-24 relative bg-brand-primary pb-32 pt-28 sm:pb-48 sm:pt-40"
+        className="scroll-mt-24 relative bg-brand-dark-green pb-32 pt-28 sm:pb-48 sm:pt-40"
       >
         {/* Top Decorative Cloud/Wave Transition */}
         <div className="pointer-events-none absolute top-0 left-0 z-0 w-full -translate-y-[1px] overflow-hidden leading-none">
@@ -277,7 +277,7 @@ const About: React.FC = () => {
                 return (
                   <article 
                     key={index} 
-                    className={`group relative overflow-hidden rounded-2xl bg-[#0F172A] p-8 shadow-2xl border border-white/5 transition-all duration-500 hover:-translate-y-2 hover:border-brand-primary/30 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] animate-reveal-up [animation-fill-mode:both]`}
+                    className={`group relative overflow-hidden rounded-2xl bg-[#111B21] p-8 shadow-2xl border border-white/5 transition-all duration-500 hover:-translate-y-2 hover:border-brand-primary/30 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] animate-reveal-up [animation-fill-mode:both]`}
                     style={{ animationDelay: `${(index + 1) * 150}ms` }}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -452,7 +452,7 @@ const About: React.FC = () => {
         {/* Bottom Wave Divider */}
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none rotate-180 translate-y-[1px]">
           <svg className="relative block w-[calc(100%+1.3px)] h-[40px] sm:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-[#007664]"></path>
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-[#111B21]"></path>
           </svg>
         </div>
 

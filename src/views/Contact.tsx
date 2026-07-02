@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Phone, MapPin, Globe } from "lucide-react";
+import { Mail, MapPin, Globe } from "lucide-react";
 import { EMAIL_REGEX, SITE_CONFIG } from "@/constants";
 import { SectionHeader } from "@/components";
 import { useLanguage } from "@/features/i18n";
@@ -152,20 +152,6 @@ const Contact: React.FC = () => {
                       <h3 className="font-semibold text-brand-text ">Email</h3>
                       <p className="text-brand-text/75 ">
                         {SITE_CONFIG.contact.email}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start">
-                    <div className="w-10 h-10 bg-brand-primary/10  rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                      <Phone className="w-5 h-5 text-brand-primary " />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-brand-text ">
-                        {page.labels.phone}
-                      </h3>
-                      <p className="text-brand-text/75 ">
-                        {SITE_CONFIG.contact.phone}
                       </p>
                     </div>
                   </div>

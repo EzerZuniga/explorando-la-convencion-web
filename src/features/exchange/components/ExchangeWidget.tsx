@@ -5,7 +5,7 @@ import { getExchangeRates } from "@/lib/http";
 import { LoadingSpinner, ErrorMessage } from "@/components";
 
 const EXCHANGE_CARD_CLASS =
-  "h-full min-h-[285px] overflow-hidden border border-[#DDE9E2]  shadow-[0_18px_42px_rgba(27,67,50,0.10)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary hover:shadow-[0_26px_58px_rgba(27,67,50,0.16)]";
+  "h-full min-h-[285px] overflow-hidden border border-brand-primary/20  shadow-[0_18px_42px_rgba(37,211,102,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary hover:shadow-[0_26px_58px_rgba(37,211,102,0.16)]";
 
 const CURRENCY_FLAGS: Record<string, string> = {
   USD: "🇺🇸",
@@ -26,13 +26,12 @@ const CURRENCY_NAMES: Record<string, string> = {
 const ExchangeWidget: React.FC = () => {
   const { data, loading, error, refetch } = useApi(
     () => getExchangeRates("USD"),
-    [],
   );
 
   if (loading) {
     return (
       <div
-        className={`${EXCHANGE_CARD_CLASS} bg-[#0F172A] p-6 flex items-center justify-center`}
+        className={`${EXCHANGE_CARD_CLASS} bg-[#111B21] p-6 flex items-center justify-center`}
       >
         <LoadingSpinner size="md" className="border-white/30 border-t-white" />
       </div>
@@ -56,7 +55,7 @@ const ExchangeWidget: React.FC = () => {
 
   return (
     <div
-      className={`${EXCHANGE_CARD_CLASS} bg-[#0F172A] p-6 text-white relative`}
+      className={`${EXCHANGE_CARD_CLASS} bg-[#111B21] p-6 text-white relative`}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.04),transparent_40%)]"></div>
       <div className="relative z-10 flex h-full flex-col">

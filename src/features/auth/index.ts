@@ -1,3 +1,2 @@
-export { default } from './components/LoginModal';
-export { useAuth } from './hooks/useAuth';
-export type { UseAuthReturn } from './hooks/useAuth';
+export { useAuth } from "./hooks/useAuth";
+export type { UseAuthReturn } from "./hooks/useAuth";

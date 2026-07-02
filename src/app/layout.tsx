@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1B5E20",
+  themeColor: "#25D366",
 };
 
 export default function RootLayout({
@@ -63,7 +63,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://open.er-api.com" />
         <link rel="dns-prefetch" href="https://open.er-api.com" />
         <link rel="dns-prefetch" href="https://dummyjson.com" />
-        <link rel="dns-prefetch" href="https://restcountries.com" />
+        <link rel="dns-prefetch" href="https://accounts.google.com" />
+        <link rel="dns-prefetch" href="https://appleid.apple.com" />
       </head>
       <body className={`${inter.variable} ${plusJakartaSans.variable}`}>
         {/* Website JSON-LD: server-rendered, no hydration cost */}
