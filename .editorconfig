@@ -1,0 +1,21 @@
+# EditorConfig — https://editorconfig.org
+# Garantiza consistencia de estilo entre editores y sistemas operativos.
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{ts,tsx,js,jsx,json,css,scss,md,yaml,yml}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab

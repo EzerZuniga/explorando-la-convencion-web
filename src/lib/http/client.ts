@@ -12,7 +12,7 @@ class ApiError extends Error {
     public data?: unknown,
   ) {
     super(message);
-    this.name = 'ApiError';
+    this.name = "ApiError";
   }
 }
 
@@ -48,8 +48,8 @@ async function request<T>(url: string, config: RequestConfig = {}): Promise<T> {
     return (await response.json()) as T;
   } catch (error) {
     if (error instanceof ApiError) throw error;
-    if ((error as Error).name === 'AbortError') {
-      throw new ApiError(408, 'Request timed out');
+    if ((error as Error).name === "AbortError") {
+      throw new ApiError(408, "Request timed out");
     }
     throw new ApiError(0, (error as Error).message);
   } finally {
@@ -59,14 +59,14 @@ async function request<T>(url: string, config: RequestConfig = {}): Promise<T> {
 
 export const apiClient = {
   get: <T>(url: string, config?: RequestConfig) =>
-    request<T>(url, { ...config, method: 'GET' }),
+    request<T>(url, { ...config, method: "GET" }),
 
   post: <T>(url: string, body: unknown, config?: RequestConfig) =>
     request<T>(url, {
       ...config,
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(body),
-      headers: { 'Content-Type': 'application/json', ...config?.headers },
+      headers: { "Content-Type": "application/json", ...config?.headers },
     }),
 };
 

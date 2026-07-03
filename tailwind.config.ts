@@ -42,7 +42,6 @@ export default {
         "fade-in-up": "fadeInUp 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
         "reveal-up": "revealUp 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
         "modal-in": "modalFadeIn 0.3s ease-out",
-        marquee: "marquee 30s linear infinite",
         "glow-green": "glowGreen 2.5s ease-in-out infinite",
         "topbar-in": "topbarIn 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
         "hero-zoom": "heroZoom 9s ease-out forwards",
@@ -67,10 +66,6 @@ export default {
         modalFadeIn: {
           from: { opacity: "0", transform: "scale(0.9)" },
           to: { opacity: "1", transform: "scale(1)" },
-        },
-        marquee: {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-50%)" },
         },
         glowGreen: {
           "0%, 100%": { boxShadow: "0 0 0 0 rgba(37, 211, 102, 0)" },

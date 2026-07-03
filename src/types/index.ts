@@ -11,6 +11,9 @@ export interface Post {
   featured?: boolean;
 }
 
+/** Vista previa de un Post (sin contenido completo). Usada en listas y widgets. */
+export type BlogPost = Omit<Post, "content" | "featured">;
+
 export interface User {
   email: string;
   name: string;
@@ -46,15 +49,4 @@ export interface Restaurant {
   location: string;
   rating: number;
   specialty: string;
-}
-
-export interface BlogPost {
-  id: number;
-  title: string;
-  excerpt: string;
-  image: string;
-  author: string;
-  date: string;
-  category: string;
-  readTime: string;
 }

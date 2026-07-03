@@ -24,7 +24,7 @@ export const FOOTER_NAVIGATION = {
   ],
   info: [
     { name: 'Nuestro Equipo', href: '/about' },
-    { name: 'Política de privacidad', href: '#' },
-    { name: 'Términos y condiciones', href: '#' },
+    { name: 'Política de privacidad', href: '/privacy' },
+    { name: 'Términos y condiciones', href: '/terms' },
   ],
 } as const;

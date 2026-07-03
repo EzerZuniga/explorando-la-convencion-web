@@ -10,16 +10,19 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error(error);
+    // En producción, reemplazar con un servicio de monitoreo (Sentry, Datadog…)
+    if (process.env.NODE_ENV !== "production") {
+      console.error(error);
+    }
   }, [error]);
 
   return (
-    <main className="min-h-screen bg-gray-50  p-8 flex items-center justify-center">
+    <main className="min-h-screen bg-gray-50 p-8 flex items-center justify-center">
       <div className="max-w-lg text-center">
-        <h1 className="text-2xl font-bold text-gray-900  mb-4">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">
           Algo salió mal
         </h1>
-        <p className="text-gray-600  mb-6">
+        <p className="text-gray-600 mb-6">
           Ha ocurrido un error inesperado. Por favor, intenta nuevamente.
         </p>
         <button

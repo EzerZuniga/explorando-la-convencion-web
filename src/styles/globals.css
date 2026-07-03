@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -6,47 +6,38 @@
   :root {
     --font-body: "Inter", system-ui, -apple-system, sans-serif;
     --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+    --color-primary: #25d366;
+    --color-primary-light: #e6ffda;
+    --color-primary-dark: #1da851;
+    --color-secondary: #f59e0b;
 
-    /* ── Brand ───────────────────────────────────────────────── */
-    --color-primary: #25d366; /* Verde — CTAs, iconos activos, accents     */
-    --color-primary-light: #e6ffda; /* Verde tint — badges, success, highlights  */
-    --color-primary-dark: #1da851; /* Verde hover / pressed                     */
-    --color-secondary: #f59e0b; /* Ámbar — stats, secondary accents          */
+    --color-dark: #111b21;
+    --color-dark-2: #1c1e21;
+    --color-dark-green: #33463f;
 
-    /* ── Dark surfaces ──────────────────────────────────────── */
-    --color-dark: #111b21; /* Negro profundo — topbar, dark cards       */
-    --color-dark-2: #1c1e21; /* Carbón — footer, overlays                 */
-    --color-dark-green: #33463f; /* Verde oscuro — hover on dark, muted       */
+    --color-blue: #0373e9;
+    --color-blue-muted: #385898;
 
-    /* ── Blue ───────────────────────────────────────────────── */
-    --color-blue: #0373e9; /* Azul vivo — links en texto, info          */
-    --color-blue-muted: #385898; /* Azul muted — tags, categorías, badges     */
+    --color-heading: #111b21;
+    --color-text: #1c1e21;
+    --color-muted-text: #5e5e5e;
+    --color-placeholder: #808080;
 
-    /* ── Neutrals ───────────────────────────────────────────── */
-    --color-heading: #111b21; /* Headings                                  */
-    --color-text: #1c1e21; /* Cuerpo — crispro, cerca del negro         */
-    --color-muted-text: #5e5e5e; /* Texto secundario                          */
-    --color-placeholder: #808080; /* Placeholders, disabled                    */
+    --color-background: #f0f4f9;
+    --color-surface: #ffffff;
+    --color-surface-warm: #fcf5eb;
+    --color-surface-muted: #f0f4f9;
+    --color-border: #e2e8f0;
+    --color-border-muted: #edf2f7;
 
-    /* ── Surfaces ───────────────────────────────────────────── */
-    --color-background: #f0f4f9; /* Fondo de página — cool blue-gray          */
-    --color-surface: #ffffff; /* Cards, paneles                            */
-    --color-surface-warm: #fcf5eb; /* Cards cálidas — quotes, tips              */
-    --color-surface-muted: #f0f4f9; /* Consistent con background                */
-    --color-border: #e2e8f0; /* Bordes                                    */
-    --color-border-muted: #edf2f7; /* Bordes suaves                             */
-
-    /* ── Semantic ───────────────────────────────────────────── */
-    --color-link: #0373e9; /* Links — azul contrasta bien en light bg   */
-    --color-link-hover: #25d366; /* Hover sobre links — verde primario        */
-    --color-accent: #1da851; /* Accent — hover buttons, active ring       */
+    --color-link: #0373e9;
+    --color-link-hover: #25d366;
+    --color-accent: #1da851;
   }
 
   html {
     color-scheme: light;
   }
-
-  /* Only enable smooth scrolling for users who haven't opted out of animation */
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
@@ -57,9 +48,8 @@
     font-family: var(--font-body);
     background-color: var(--color-background);
     color: var(--color-text);
-    min-height: 100vh;
+    min-height: 100svh;
     line-height: 1.7;
-    letter-spacing: 0;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -81,7 +71,7 @@
     color: var(--color-heading);
     margin-bottom: 0.5em;
     line-height: 1.12;
-    letter-spacing: -0.025em; /* Mejor práctica: tracking más ajustado en títulos */
+    letter-spacing: -0.025em;
     text-wrap: balance;
     font-feature-settings:
       "kern" 1,
@@ -98,22 +88,28 @@
   input,
   textarea,
   select {
-    font-family: var(--font-body);
+    font-family: inherit;
   }
 
   a {
     color: var(--color-link);
-    transition: color 0.2s;
     text-decoration: none;
+    transition: color 0.2s ease;
   }
 
   a:hover {
     color: var(--color-primary);
   }
 
+  a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
   ::selection {
-    background-color: rgba(37, 211, 102, 0.25);
-    color: #111b21;
+    background-color: color-mix(in srgb, var(--color-primary) 25%, transparent);
+    color: var(--color-heading);
   }
 }
 
@@ -125,7 +121,7 @@
   }
 
   .wp-shell {
-    min-height: 100vh;
+    min-height: 100svh;
     background-color: var(--color-background);
     color: var(--color-text);
   }
@@ -139,7 +135,6 @@
 
   .wp-section {
     @apply py-12 px-4 sm:px-6 lg:px-8;
-    background-color: var(--color-background);
   }
 
   .wp-card {
@@ -213,67 +208,10 @@
 
   .wp-input::placeholder,
   .wp-textarea::placeholder {
-    color: var(--color-muted-text);
+    color: var(--color-placeholder);
   }
 
   .wp-textarea {
     @apply min-h-[130px] resize-y;
-  }
-
-  .btn-primary {
-    @apply bg-brand-primary hover:bg-brand-primary text-white font-semibold py-2 px-5 rounded-full shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary;
-  }
-
-  .btn-secondary {
-    @apply bg-white hover:bg-brand-background text-brand-text font-medium py-2 px-5 rounded-full shadow-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary border border-brand-primary;
-  }
-
-  .card {
-    @apply rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border;
-    background-color: var(--color-surface);
-    border-color: var(--color-border);
-  }
-
-  .card-header {
-    @apply px-6 py-4 bg-brand-background border-b font-bold text-brand-text text-lg;
-    border-color: var(--color-border);
-  }
-
-  .card-body {
-    @apply px-6 py-4 text-brand-text;
-  }
-
-  .card-footer {
-    @apply px-6 py-4 bg-brand-background border-t text-right;
-    border-color: var(--color-border);
-  }
-
-  .section-padding {
-    @apply py-12 px-4 sm:px-6 lg:px-8;
-  }
-
-  .title {
-    @apply font-heading text-3xl md:text-4xl font-extrabold text-brand-text  mb-4;
-  }
-
-  .subtitle {
-    @apply text-lg md:text-xl text-brand-text  mb-2;
-  }
-
-  .divider {
-    @apply w-16 h-1 bg-brand-primary rounded-full mx-auto my-6;
-  }
-
-  @keyframes marquee-scroll {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  .animate-marquee-infinite {
-    animation: marquee-scroll 40s linear infinite;
   }
 }
