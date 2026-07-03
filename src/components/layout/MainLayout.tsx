@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import NewsletterSignup from "./NewsletterSignup";
+import NewsletterConditional from "./NewsletterConditional";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
@@ -17,7 +17,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       >
         {children}
       </main>
-      <NewsletterSignup />
+      <NewsletterConditional />
       <Footer />
     </div>
   );

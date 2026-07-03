@@ -8,38 +8,38 @@
     --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
 
     /* ── Brand ───────────────────────────────────────────────── */
-    --color-primary:        #25D366;  /* Verde — CTAs, iconos activos, accents     */
-    --color-primary-light:  #E6FFDA;  /* Verde tint — badges, success, highlights  */
-    --color-primary-dark:   #1DA851;  /* Verde hover / pressed                     */
-    --color-secondary:      #F59E0B;  /* Ámbar — stats, secondary accents          */
+    --color-primary: #25d366; /* Verde — CTAs, iconos activos, accents     */
+    --color-primary-light: #e6ffda; /* Verde tint — badges, success, highlights  */
+    --color-primary-dark: #1da851; /* Verde hover / pressed                     */
+    --color-secondary: #f59e0b; /* Ámbar — stats, secondary accents          */
 
     /* ── Dark surfaces ──────────────────────────────────────── */
-    --color-dark:           #111B21;  /* Negro profundo — topbar, dark cards       */
-    --color-dark-2:         #1C1E21;  /* Carbón — footer, overlays                 */
-    --color-dark-green:     #33463F;  /* Verde oscuro — hover on dark, muted       */
+    --color-dark: #111b21; /* Negro profundo — topbar, dark cards       */
+    --color-dark-2: #1c1e21; /* Carbón — footer, overlays                 */
+    --color-dark-green: #33463f; /* Verde oscuro — hover on dark, muted       */
 
     /* ── Blue ───────────────────────────────────────────────── */
-    --color-blue:           #0373E9;  /* Azul vivo — links en texto, info          */
-    --color-blue-muted:     #385898;  /* Azul muted — tags, categorías, badges     */
+    --color-blue: #0373e9; /* Azul vivo — links en texto, info          */
+    --color-blue-muted: #385898; /* Azul muted — tags, categorías, badges     */
 
     /* ── Neutrals ───────────────────────────────────────────── */
-    --color-heading:        #111B21;  /* Headings                                  */
-    --color-text:           #1C1E21;  /* Cuerpo — crispro, cerca del negro         */
-    --color-muted-text:     #5E5E5E;  /* Texto secundario                          */
-    --color-placeholder:    #808080;  /* Placeholders, disabled                    */
+    --color-heading: #111b21; /* Headings                                  */
+    --color-text: #1c1e21; /* Cuerpo — crispro, cerca del negro         */
+    --color-muted-text: #5e5e5e; /* Texto secundario                          */
+    --color-placeholder: #808080; /* Placeholders, disabled                    */
 
     /* ── Surfaces ───────────────────────────────────────────── */
-    --color-background:     #F0F4F9;  /* Fondo de página — cool blue-gray          */
-    --color-surface:        #ffffff;  /* Cards, paneles                            */
-    --color-surface-warm:   #FCF5EB;  /* Cards cálidas — quotes, tips              */
-    --color-surface-muted:  #F0F4F9;  /* Consistent con background                */
-    --color-border:         #E2E8F0;  /* Bordes                                    */
-    --color-border-muted:   #EDF2F7;  /* Bordes suaves                             */
+    --color-background: #f0f4f9; /* Fondo de página — cool blue-gray          */
+    --color-surface: #ffffff; /* Cards, paneles                            */
+    --color-surface-warm: #fcf5eb; /* Cards cálidas — quotes, tips              */
+    --color-surface-muted: #f0f4f9; /* Consistent con background                */
+    --color-border: #e2e8f0; /* Bordes                                    */
+    --color-border-muted: #edf2f7; /* Bordes suaves                             */
 
     /* ── Semantic ───────────────────────────────────────────── */
-    --color-link:           #0373E9;  /* Links — azul contrasta bien en light bg   */
-    --color-link-hover:     #25D366;  /* Hover sobre links — verde primario        */
-    --color-accent:         #1DA851;  /* Accent — hover buttons, active ring       */
+    --color-link: #0373e9; /* Links — azul contrasta bien en light bg   */
+    --color-link-hover: #25d366; /* Hover sobre links — verde primario        */
+    --color-accent: #1da851; /* Accent — hover buttons, active ring       */
   }
 
   html {
@@ -113,7 +113,7 @@
 
   ::selection {
     background-color: rgba(37, 211, 102, 0.25);
-    color: #111B21;
+    color: #111b21;
   }
 }
 
@@ -143,13 +143,13 @@
   }
 
   .wp-card {
-    @apply rounded-none border shadow-sm transition-all duration-300;
+    @apply rounded-2xl border shadow-[0_2px_4px_rgba(0,0,0,0.04),0_6px_20px_rgba(0,0,0,0.09)];
     background-color: var(--color-surface);
     border-color: var(--color-border);
   }
 
   .wp-card-interactive {
-    @apply motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl;
+    @apply transition-colors duration-150;
   }
 
   .wp-title {
@@ -173,11 +173,11 @@
   }
 
   .wp-btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2;
   }
 
   .wp-btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2;
     background-color: var(--color-dark);
   }
 
@@ -186,7 +186,7 @@
   }
 
   .wp-btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold transition-all duration-200 border text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 border text-brand-text focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2;
     background-color: var(--color-surface);
     border-color: var(--color-border);
   }
@@ -196,7 +196,7 @@
   }
 
   .wp-btn-light {
-    @apply inline-flex items-center justify-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 border border-white/60 bg-white/15 text-white backdrop-blur-sm;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 border border-white/60 bg-white/15 text-white backdrop-blur-sm;
   }
 
   .wp-btn-light:hover {
@@ -206,7 +206,7 @@
   .wp-input,
   .wp-select,
   .wp-textarea {
-    @apply w-full rounded-none border px-4 py-3 text-sm text-brand-text transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary;
+    @apply w-full rounded-xl border px-4 py-3 text-sm text-brand-text transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary;
     background-color: var(--color-surface);
     border-color: var(--color-border);
   }
@@ -221,15 +221,15 @@
   }
 
   .btn-primary {
-    @apply bg-brand-primary hover:bg-brand-primary text-white font-semibold py-2 px-5 rounded-none shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary;
+    @apply bg-brand-primary hover:bg-brand-primary text-white font-semibold py-2 px-5 rounded-full shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary;
   }
 
   .btn-secondary {
-    @apply bg-white hover:bg-brand-background text-brand-text font-medium py-2 px-5 rounded-none shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary border border-brand-primary;
+    @apply bg-white hover:bg-brand-background text-brand-text font-medium py-2 px-5 rounded-full shadow-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary border border-brand-primary;
   }
 
   .card {
-    @apply rounded-none shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border;
+    @apply rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border;
     background-color: var(--color-surface);
     border-color: var(--color-border);
   }
@@ -261,16 +261,19 @@
   }
 
   .divider {
-    @apply w-16 h-1 bg-brand-primary rounded-none mx-auto my-6;
+    @apply w-16 h-1 bg-brand-primary rounded-full mx-auto my-6;
   }
 
   @keyframes marquee-scroll {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .animate-marquee-infinite {
     animation: marquee-scroll 40s linear infinite;
   }
 }
-

@@ -5,7 +5,7 @@ import { getWeather } from "@/lib/http";
 import { LoadingSpinner, ErrorMessage } from "@/components";
 
 const WEATHER_CARD_CLASS =
-  "h-full min-h-[285px] overflow-hidden border border-brand-primary/25 shadow-[0_18px_42px_rgba(37,211,102,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_58px_rgba(37,211,102,0.20)]";
+  "h-full min-h-[285px] rounded-2xl overflow-hidden border border-brand-primary/25 shadow-[0_18px_42px_rgba(37,211,102,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_58px_rgba(37,211,102,0.20)]";
 
 const WeatherWidget: React.FC = () => {
   const { data, loading, error, refetch } = useApi(getWeather);
@@ -64,7 +64,7 @@ const WeatherWidget: React.FC = () => {
         </p>
 
         <div className="mt-auto grid grid-cols-3 gap-3 pt-5 border-t border-white/25">
-          <div className="flex flex-col items-center gap-1 rounded-none bg-white/10 p-3">
+          <div className="flex flex-col items-center gap-1 rounded-xl bg-white/10 p-3">
             <ThermometerSun
               className="w-4 h-4 text-white/70"
               strokeWidth={1.75}
@@ -72,12 +72,12 @@ const WeatherWidget: React.FC = () => {
             <span className="text-xs text-white/70">Temp.</span>
             <span className="text-sm font-semibold">{data.temperature}°</span>
           </div>
-          <div className="flex flex-col items-center gap-1 rounded-none bg-white/10 p-3">
+          <div className="flex flex-col items-center gap-1 rounded-xl bg-white/10 p-3">
             <Droplets className="w-4 h-4 text-white/70" strokeWidth={1.75} />
             <span className="text-xs text-white/70">Humedad</span>
             <span className="text-sm font-semibold">{data.humidity}%</span>
           </div>
-          <div className="flex flex-col items-center gap-1 rounded-none bg-white/10 p-3">
+          <div className="flex flex-col items-center gap-1 rounded-xl bg-white/10 p-3">
             <Wind className="w-4 h-4 text-white/70" strokeWidth={1.75} />
             <span className="text-xs text-white/70">Viento</span>
             <span className="text-sm font-semibold">{data.windSpeed} km/h</span>

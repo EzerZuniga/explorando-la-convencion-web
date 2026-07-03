@@ -51,7 +51,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
         <div className="space-y-2.5">
           <div className="flex items-center text-sm text-brand-text/90 ">
-            <div className="flex items-center justify-center w-7 h-7 rounded-none bg-brand-primary/10  mr-2.5">
+            <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-brand-primary/10  mr-2.5">
               <User
                 size={14}
                 strokeWidth={1.75}
@@ -70,7 +70,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
               />
               <span>{formatDate(post.date, locale)}</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-brand-background  px-2.5 py-1 rounded-none">
+            <div className="flex items-center gap-1.5 bg-brand-background  px-2.5 py-1 rounded-full">
               <Clock
                 size={13}
                 strokeWidth={1.75}

@@ -45,6 +45,8 @@ export default {
         marquee: "marquee 30s linear infinite",
         "glow-green": "glowGreen 2.5s ease-in-out infinite",
         "topbar-in": "topbarIn 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+        "hero-zoom": "heroZoom 9s ease-out forwards",
+        "slide-down": "slideDown 0.55s cubic-bezier(0.22, 1, 0.36, 1)",
       },
       transitionTimingFunction: {
         "smooth-out": "cubic-bezier(0.22, 1, 0.36, 1)",
@@ -76,6 +78,14 @@ export default {
         },
         topbarIn: {
           from: { opacity: "0", transform: "translateY(-100%)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        heroZoom: {
+          "0%": { transform: "scale(1.07)" },
+          "100%": { transform: "scale(1)" },
+        },
+        slideDown: {
+          from: { opacity: "0", transform: "translateY(-14px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
       },

@@ -37,28 +37,28 @@ export default function NewsletterSignup() {
 
   return (
     <section
-      className="bg-brand-dark-green px-4 py-12 text-white sm:px-6 sm:py-14 lg:px-8"
+      className="bg-brand-dark-green px-4 py-8 text-white sm:px-6 sm:py-10 lg:px-8"
       aria-labelledby="newsletter-signup-title"
     >
       <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-white/12 text-white ring-1 ring-white/20">
-          <MailPlus className="h-6 w-6" aria-hidden="true" />
+        <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/12 text-white ring-1 ring-white/20">
+          <MailPlus className="h-5 w-5" aria-hidden="true" />
         </div>
 
         <h2
           id="newsletter-signup-title"
-          className="mb-4 max-w-3xl font-heading text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-tight text-white"
+          className="mb-2 max-w-3xl font-heading text-[clamp(1.15rem,2.5vw,1.75rem)] font-bold leading-tight text-white"
         >
           {page.newsletterTitle}
         </h2>
 
-        <p className="mb-8 max-w-2xl text-[clamp(0.9rem,1.5vw,1.1rem)] font-medium leading-relaxed text-white/90">
+        <p className="mb-4 max-w-xl text-sm font-medium leading-relaxed text-white/85">
           {page.newsletterDescription}
         </p>
 
         <form
           onSubmit={handleSubmit}
-          className="flex w-full max-w-2xl flex-col gap-4 sm:flex-row sm:gap-4 mt-6"
+          className="flex w-full max-w-xl flex-col gap-3 sm:flex-row"
           noValidate
         >
           <div className="relative flex-1">
@@ -77,18 +77,18 @@ export default function NewsletterSignup() {
               autoComplete="email"
               aria-describedby={status ? "newsletter-status" : undefined}
               aria-invalid={status?.type === "error"}
-              className="w-full h-14 rounded-full border-2 border-white/20 bg-white/10 px-6 text-base font-medium text-white placeholder:text-white/60 shadow-inner outline-none backdrop-blur-sm transition-all focus:border-white focus:bg-white/20 focus:ring-4 focus:ring-white/10"
+              className="w-full h-11 rounded-full border-2 border-white/20 bg-white/10 px-5 text-sm font-medium text-white placeholder:text-white/60 shadow-inner outline-none backdrop-blur-sm transition-all focus:border-white focus:bg-white/20 focus:ring-4 focus:ring-white/10"
             />
           </div>
           <button
             type="submit"
             disabled={isSubmitting}
             aria-busy={isSubmitting}
-            className="group relative inline-flex h-14 w-full sm:w-auto items-center justify-center overflow-hidden rounded-full border-2 border-white px-8 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-all duration-500 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-white/30 disabled:cursor-not-allowed disabled:opacity-70"
+            className="group relative inline-flex h-11 w-full sm:w-auto items-center justify-center overflow-hidden rounded-full border-2 border-white px-6 text-xs font-bold uppercase tracking-wider text-white shadow-lg transition-all duration-500 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-white/30 disabled:cursor-not-allowed disabled:opacity-70"
           >
             <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-white rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.2,1,0.2,1)] origin-center transform-gpu"></span>
             <span className="relative z-10 flex items-center justify-center gap-3 transition-colors duration-500 group-hover:text-brand-primary">
-              <Send className="h-5 w-5" aria-hidden="true" />
+              <Send className="h-4 w-4" aria-hidden="true" />
               {isSubmitting ? page.subscribing : page.subscribe}
             </span>
           </button>
