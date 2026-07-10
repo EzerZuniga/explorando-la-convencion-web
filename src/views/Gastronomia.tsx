@@ -255,7 +255,7 @@ const Gastronomia: React.FC = () => {
                   type="button"
                   className="group relative inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-brand-dark text-white text-sm font-semibold rounded-full overflow-hidden shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
                 >
-                  <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-brand-primary rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] origin-center" />
+                  <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-brand-primary rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-700 ease-ripple origin-center" />
                   <Leaf size={14} strokeWidth={2} className="relative z-10 group-hover:text-brand-dark transition-colors duration-500" />
                   <span className="relative z-10 group-hover:text-brand-dark transition-colors duration-500">
                     {page.coffeeAction}
@@ -360,7 +360,7 @@ const Gastronomia: React.FC = () => {
                   type="button"
                   className="flex-shrink-0 group relative inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-brand-dark text-white text-sm font-semibold rounded-full overflow-hidden shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
                 >
-                  <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-brand-primary rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] origin-center" />
+                  <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-brand-primary rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-700 ease-ripple origin-center" />
                   <ArrowRight size={15} strokeWidth={2} className="relative z-10 group-hover:text-brand-dark transition-colors duration-500" />
                   <span className="relative z-10 group-hover:text-brand-dark transition-colors duration-500">
                     {page.ctaAction}

@@ -263,7 +263,7 @@ const About: React.FC = () => {
                 href="/contacto"
                 className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border-2 border-white px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-md transition-shadow duration-500 hover:shadow-lg"
               >
-                <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-white rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.2,1,0.2,1)] origin-center transform-gpu"></span>
+                <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-white rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-ripple origin-center transform-gpu"></span>
                 <span className="relative z-10 transition-colors duration-500 group-hover:text-brand-primary">
                   CONTÁCTENOS
                 </span>
@@ -490,7 +490,7 @@ const About: React.FC = () => {
                   href="/contact"
                   className="group relative inline-flex w-full sm:w-auto items-center justify-center overflow-hidden rounded-full border-2 border-brand-secondary px-8 py-4 text-sm font-bold uppercase tracking-wider text-brand-secondary shadow-md transition-shadow duration-500 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:ring-offset-2"
                 >
-                  <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-brand-secondary rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.2,1,0.2,1)] origin-center transform-gpu"></span>
+                  <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-brand-secondary rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-ripple origin-center transform-gpu"></span>
                   <span className="relative z-10 flex items-center justify-center gap-3 transition-colors duration-500 group-hover:text-white">
                     <Mail className="h-5 w-5" />
                     {page.ctaAction}

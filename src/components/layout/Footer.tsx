@@ -120,7 +120,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 aspect-square w-[250%] origin-center scale-0 rounded-[50%] bg-brand-primary transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover:scale-100 transform-gpu" />
+                  <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 aspect-square w-[250%] origin-center scale-0 rounded-[50%] bg-brand-primary transition-transform duration-700 ease-ripple group-hover:scale-100 transform-gpu" />
                   <Icon
                     size={20}
                     className="relative z-10 text-white transition-all duration-500 group-hover:scale-110 group-hover:text-white"

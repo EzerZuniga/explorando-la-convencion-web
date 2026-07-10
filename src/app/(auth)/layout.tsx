@@ -5,5 +5,5 @@ import type { ReactNode } from "react";
  * The login page fills the entire viewport with its own split-screen design.
  */
 export default function AuthLayout({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+  return children;
 }

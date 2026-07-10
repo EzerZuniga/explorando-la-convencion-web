@@ -1,23 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { AppProviders } from "./providers";
 import { createPageMetadata, websiteJsonLd } from "@/config/metadata";
-import { safeJsonLd } from "@/utils/json-ld";
+import { JsonLd } from "@/components/seo/JsonLd";
 import "@/styles/globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  weight: ["400", "700"],
-  display: "swap",
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  weight: ["600", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   ...createPageMetadata("/"),
@@ -66,12 +51,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://accounts.google.com" />
         <link rel="dns-prefetch" href="https://appleid.apple.com" />
       </head>
-      <body className={`${inter.variable} ${plusJakartaSans.variable}`}>
+      <body>
         {/* Website JSON-LD: server-rendered, no hydration cost */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: safeJsonLd(websiteJsonLd()) }}
-        />
+        <JsonLd data={websiteJsonLd()} />
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

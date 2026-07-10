@@ -42,7 +42,7 @@ const PORTAL_CARD_CLASS =
 const HERO_CTA_CLASS =
   "w-full max-w-[18rem] sm:w-auto sm:max-w-none min-h-12 group relative inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 bg-brand-primary text-brand-text text-center text-xs sm:text-sm font-bold leading-tight rounded-full transition-shadow duration-500 shadow-lg hover:shadow-xl uppercase tracking-wide overflow-hidden transform-gpu";
 const HERO_CTA_OVERLAY_CLASS =
-  "absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-brand-text rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.2,1,0.2,1)] origin-center transform-gpu";
+  "absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-brand-text rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-ripple origin-center transform-gpu";
 const HERO_CTA_CONTENT_CLASS =
   "relative z-10 group-hover:text-white transition-colors duration-500";
 const HERO_CTA_ICON_CLASS =
@@ -446,7 +446,7 @@ function IdentityBand({
           </p>
           <div>
             <button className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent border-2 border-white text-white text-sm font-bold uppercase tracking-wide rounded-full overflow-hidden transform-gpu transition-shadow duration-500 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-dark-green">
-              <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-white rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.2,1,0.2,1)] origin-center transform-gpu"></span>
+              <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square bg-white rounded-[50%] scale-0 group-hover:scale-100 transition-transform duration-1000 ease-ripple origin-center transform-gpu"></span>
               <span className="relative z-10 group-hover:text-brand-dark-green transition-colors duration-500">Descubrir Más</span>
             </button>
           </div>

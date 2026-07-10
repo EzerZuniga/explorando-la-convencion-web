@@ -1,6 +1,6 @@
 import Gastronomia from "@/views/Gastronomia";
 import { createPageMetadata, createPageJsonLd } from "@/config/metadata";
-import { safeJsonLd } from "@/utils/json-ld";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata = createPageMetadata("/gastronomia");
 
@@ -8,12 +8,7 @@ export default function GastronomiaPage() {
   const jsonLd = createPageJsonLd("/gastronomia");
   return (
     <>
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
-        />
-      )}
+      <JsonLd data={jsonLd} />
       <Gastronomia />
     </>
   );
