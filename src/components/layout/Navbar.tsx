@@ -174,7 +174,7 @@ const Navbar: React.FC = () => {
         className={`${
           isTransparent
             ? "bg-transparent"
-            : "bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border-b border-slate-100"
+            : "bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]"
         } transition-all duration-500 ease-smooth-out`}
         aria-label={navbar.mainNavLabel}
       >
